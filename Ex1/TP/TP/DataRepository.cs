@@ -100,19 +100,19 @@ namespace TP
             }
             else
             {
-                throw new ArgumentException($"There isn't car with {client.Id} id in reposotry");
+                throw new ArgumentException($"There isn't client with {client.Id} id in reposotry");
             }
         }
 
         public void DeleteFacture(Facture facture)
         {
-            if (dataContext.Factures.Contains(facture)
+            if (dataContext.Factures.Contains(facture))
             {
                 dataContext.Cars.Remove(facture.Id);
             }
             else
             {
-                throw new ArgumentException($"There isn't car with {facture.Id} id in reposotry");
+                throw new ArgumentException($"There isn't facture with {facture.Id} id in reposotry");
             }
         }
 
@@ -124,68 +124,119 @@ namespace TP
             }
             else
             {
-                throw new ArgumentException($"There isn't car with {stock.Id} id in reposotry");
+                throw new ArgumentException($"There isn't stock with {stock.Id} id in reposotry");
             }
         }
 
         public IEnumerable<Car> GetAllCars()
         {
-            throw new NotImplementedException();
+           return dataContext.Cars.Values;
         }
 
         public IEnumerable<Client> GetAllClients()
         {
-            throw new NotImplementedException();
+            return dataContext.Clients;
         }
 
         public IEnumerable<Facture> GetAllFactures()
         {
-            throw new NotImplementedException();
+            return dataContext.Factures;
         }
 
-        public IEnumerable<Car> GetAllStockss()
+        public IEnumerable<Stock> GetAllStockss()
         {
-            throw new NotImplementedException();
+            return dataContext.Stocks;
         }
 
         public Car GetCar(Guid id)
         {
-            throw new NotImplementedException();
+ 
+            return dataContext.Cars[id];
         }
 
         public Client GetClient(Guid id)
         {
-            throw new NotImplementedException();
+            int pom = 0;
+            for (int i = 0; i <= dataContext.Clients.Count; i++)
+            { 
+                if (dataContext.Clients[i].Id.Equals(id))
+                {
+                    pom = i;
+                }
+            }
+            return dataContext.Clients[pom];
         }
 
-        public Car GetFacture(Guid id)
+        public Facture GetFacture(Guid id)
         {
-            throw new NotImplementedException();
+            int pom = 0;
+            for (int i = 0; i <= dataContext.Factures.Count; i++)
+            {
+                if (dataContext.Factures[i].Id.Equals(id))
+                {
+                    pom = i;
+                }
+            }
+            return dataContext.Factures[pom];
         }
 
-        public Car GetStock(Guid id)
+        public Stock GetStock(Guid id)
         {
-            throw new NotImplementedException();
+            int pom = 0;
+            for (int i = 0; i <= dataContext.Stocks.Count; i++)
+            {
+                if (dataContext.Stocks[i].Id.Equals(id))
+                {
+                    pom = i;
+                }
+            }
+            return dataContext.Stocks[pom];
         }
 
         public void UpdateCar(Guid id, Car car)
         {
-            throw new NotImplementedException();
+            if (dataContext.Cars.ContainsKey(id))
+            {
+                dataContext.Cars[id] = car;
+            }
+           
         }
 
         public void UpdateClient(Guid id, Client client)
         {
-            throw new NotImplementedException();
+
+            for (int i = 0; i <= dataContext.Clients.Count; i++)
+            {
+                if (dataContext.Clients[i].Id.Equals(id))
+                {
+                    dataContext.Clients[i] = client;
+                }
+            }
         }
 
         public void UpdateFacture(Guid id, Facture facture)
         {
-            throw new NotImplementedException();
+            int pom = 0;
+            for (int i = 0; i <= dataContext.Factures.Count; i++)
+            {
+                if (dataContext.Factures[i].Id.Equals(id))
+                {
+                    dataContext.Factures[i] = facture;
+                }
+            }
+
         }
 
         public void UpdateStock(Guid id, Stock stock)
         {
-            throw new NotImplementedException();
+
+            for (int i = 0; i <= dataContext.Stocks.Count; i++)
+            {
+                if (dataContext.Stocks[i].Id.Equals(id))
+                {
+                    dataContext.Stocks[i] = stock;
+                }
+            }
         }
     }
 }

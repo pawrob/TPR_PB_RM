@@ -23,15 +23,15 @@ namespace TP
 
         //facture
         public void AddFacture(Facture facture);
-        public Car GetFacture(Guid id);//czy int ?
+        public Facture GetFacture(Guid id);//czy int ?
         public IEnumerable<Facture> GetAllFactures();
         public void UpdateFacture(Guid id, Facture facture);
         public void DeleteFacture(Facture facture);
 
         //stock
         public void AddStock(Stock stock);
-        public Car GetStock(Guid id);//czy int ?
-        public IEnumerable<Car> GetAllStockss();
+        public Stock GetStock(Guid id);//czy int ?
+        public IEnumerable<Stock> GetAllStockss();
         public void UpdateStock(Guid id, Stock stock);
         public void DeleteStock(Stock stock);
     }

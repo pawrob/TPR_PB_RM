@@ -16,9 +16,9 @@ namespace TP.Objects
         public FuelType Fueltype { get; set; }
         public Transmission Transmission { get; set; }
 
-        public Car(Guid id, string make, string model, string variant, int horsepower, string color, VehicleType vehicleType, FuelType fueltype, Transmission transmission)
+        public Car(string make, string model, string variant, int horsepower, string color, VehicleType vehicleType, FuelType fueltype, Transmission transmission)
         {
-            Id = id;
+            Id = Guid.NewGuid();
             Make = make;
             Model = model;
             Variant = variant;
