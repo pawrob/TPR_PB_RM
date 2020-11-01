@@ -3,11 +3,11 @@ using TP.Objects;
 
 namespace TP
 {
-    class Program
+    class main
     {
         static void Main(string[] args)
         {
-            Client c1 = new Client("karol","Wojtyła",111111);
+            Client c1 = new Client("Jan","Kowalski",111111);
           
             Car Car1 = new Car("Alfa Romeo", "Brera", "Italia Independent", 210, "Matte Grey", VehicleType.Coupe, FuelType.Diesel, Transmission.Manual);
             Stock s1 = new Stock(Car1, 100);

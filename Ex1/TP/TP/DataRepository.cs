@@ -10,9 +10,9 @@ namespace TP
 
         private DataContext dataContext = new DataContext();
 
-        public DataRepository(DataContext dataContext)
+        public DataRepository()
         {
-            this.dataContext = dataContext;
+            
         }
 
         public void AddCar(Car car)
@@ -157,7 +157,7 @@ namespace TP
         public Client GetClient(Guid id)
         {
             int pom = 0;
-            for (int i = 0; i <= dataContext.Clients.Count; i++)
+            for (int i = 0; i < dataContext.Clients.Count; i++)
             { 
                 if (dataContext.Clients[i].Id.Equals(id))
                 {

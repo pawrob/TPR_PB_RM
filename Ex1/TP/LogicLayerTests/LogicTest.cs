@@ -1,15 +1,13 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace TP_Unit_Tests
+namespace LogicLayerTests
 {
     [TestClass]
-    public class UnitTest1
+    public class LogicLayerUnitTests
     {
         [TestMethod]
         public void TestMethod1()
         {
-            int x = 5;
-            Assert.IsTrue(x == 5, "TestMethod1 has failed");
         }
     }
 }
