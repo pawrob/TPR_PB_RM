@@ -150,27 +150,43 @@ namespace TP
 
         public Car GetCar(Guid id)
         {
- 
-            return dataContext.Cars[id];
+            if (dataContext.Cars.Count != 0)
+            {
+                return dataContext.Cars[id];
+            }
+            else
+            {
+                return null;
+            }  
         }
 
         public Client GetClient(Guid id)
         {
-            int pom = 0;
-            for (int i = 0; i < dataContext.Clients.Count; i++)
-            { 
-                if (dataContext.Clients[i].Id.Equals(id))
+            if (dataContext.Clients.Count != 0)
+            {
+                int pom = 0;
+                for (int i = 0; i < dataContext.Clients.Count; i++)
                 {
-                    pom = i;
+                    if (dataContext.Clients[i].Id.Equals(id))
+                    {
+                        pom = i;
+                    }
                 }
+                return dataContext.Clients[pom];
             }
-            return dataContext.Clients[pom];
+            else
+            {
+                return null;
+            }
+            
         }
 
         public Facture GetFacture(Guid id)
         {
-            int pom = 0;
-            for (int i = 0; i <= dataContext.Factures.Count; i++)
+            if (dataContext.Factures.Count != 0)
+            {
+                int pom = 0;
+            for (int i = 0; i < dataContext.Factures.Count; i++)
             {
                 if (dataContext.Factures[i].Id.Equals(id))
                 {
@@ -179,18 +195,31 @@ namespace TP
             }
             return dataContext.Factures[pom];
         }
+            else
+            {
+                return null;
+            }
+        }
 
         public Stock GetStock(Guid id)
         {
-            int pom = 0;
-            for (int i = 0; i <= dataContext.Stocks.Count; i++)
+            if (dataContext.Stocks.Count != 0)
             {
-                if (dataContext.Stocks[i].Id.Equals(id))
+                int pom = 0;
+                for (int i = 0; i < dataContext.Stocks.Count; i++)
                 {
-                    pom = i;
+                    if (dataContext.Stocks[i].Id.Equals(id))
+                    {
+                        pom = i;
+                    }
                 }
+                return dataContext.Stocks[pom];
             }
-            return dataContext.Stocks[pom];
+         
+             else
+            {
+                return null;
+            }
         }
 
         public void UpdateCar(Guid id, Car car)

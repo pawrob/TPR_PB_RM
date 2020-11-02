@@ -2,6 +2,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TP.Objects;
 using TP;
 using System.Linq;
+using System;
 
 namespace DataLayerTests
 {
@@ -19,7 +20,7 @@ namespace DataLayerTests
             Assert.IsTrue(c1.Equals(dp.GetClient(c1.Id)));
 
         }
-        /*[TestMethod]
+        [TestMethod]
         public void RemoveClientTest()
         {
             
@@ -29,10 +30,10 @@ namespace DataLayerTests
             Assert.IsTrue(c2.Equals(dp.GetClient(c2.Id)));
 
             dp.DeleteClient(c2);
-            Assert.IsFalse(c2.Equals(dp.GetClient(c2.Id)));
+            Assert.IsNull(dp.GetClient(c2.Id));
 
         }
-        [TestMethod]
+        /*[TestMethod]
         public void UpdateClientTest()
         {
             Client c1 = new Client("Jan", "Kowalski", 111111);
@@ -64,7 +65,7 @@ namespace DataLayerTests
             Assert.IsTrue(Car1.Equals(dp.GetCar(Car1.Id)));
 
         }
-        /*[TestMethod]
+        [TestMethod]
         public void RemoveCarTest()
         {
 
@@ -73,20 +74,20 @@ namespace DataLayerTests
             Assert.IsTrue(Car2.Equals(dp.GetCar(Car2.Id)));
 
             dp.DeleteCar(Car2);
-            Assert.IsFalse(Car2.Equals(dp.GetCar(Car2.Id)));
+            Assert.IsNull(dp.GetCar(Car2.Id));
 
         }
-        [TestMethod]
-        public void UpdateCarTest()
-        {
-            Car Car1 = new Car("Alfa Romeo", "Brera", "Italia Independent", 210, "Matte Grey", VehicleType.Coupe, FuelType.Diesel, Transmission.Manual);
-            Car Car2 = new Car("Skoda", "Fabia", "Style", 210, "Silver Metalic", VehicleType.Small_car, FuelType.Petrol, Transmission.Manual);
-            dp.AddCar(Car1);
-            dp.UpdateCar(Car1.Id, Car2);
-            Assert.IsTrue(Car1.Id == Car2.Id);
-
-
-        }*/
+         [TestMethod]
+         public void UpdateCarTest()
+         {
+             Car Car1 = new Car("Alfa Romeo", "Brera", "Italia Independent", 210, "Matte Grey", VehicleType.Coupe, FuelType.Diesel, Transmission.Manual);
+             Car Car2 = new Car("Skoda", "Fabia", "Style", 210, "Silver Metalic", VehicleType.Small_car, FuelType.Petrol, Transmission.Manual);
+             dp.AddCar(Car1);
+             dp.UpdateCar(Car1.Id, Car2);
+             Console.WriteLine(Car1);
+             Console.WriteLine(Car2);
+            /*Assert.IsTrue(Car1.Equals(Car2));*/
+        }
         [TestMethod]
         public void GetCarTest()
         {
