@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using TP.Objects;
+using System.Linq;
 
 namespace TP
 {
@@ -15,6 +16,7 @@ namespace TP
             dataContext = new DataContext();
         }
 
+        // ADD METHODS
         public void AddCar(Car car)
         {
             try
@@ -64,22 +66,23 @@ namespace TP
             }
         }
 
-        public void AddStock(Stock stock)
+        public void AddWarehouseItem(WarehouseItem warehouseItem)
         {
             try
             {
-                dataContext.Stocks.Add(stock);
+                dataContext.WarehouseItems.Add(warehouseItem);
             }
             catch (ArgumentNullException e)
             {
-                throw new ArgumentNullException($"Stock with Id {stock.Id} do not exist.", e);
+                throw new ArgumentNullException($"Warehouse item with Id {warehouseItem.Id} do not exist.", e);
             }
             catch (ArgumentException e)
             {
-                throw new ArgumentException($"Stock with Id {stock.Id} already exists.", e);
+                throw new ArgumentException($"Warehouse item with Id {warehouseItem.Id} already exists.", e);
             }
         }
 
+        //DELETE METHODS
         public void DeleteCar(Car car)
         {
             if (dataContext.Cars.ContainsKey(car.Id))
@@ -88,7 +91,7 @@ namespace TP
             }
             else
             {
-                throw new ArgumentException($"There isn't car with {car.Id} id in reposotry");
+                throw new ArgumentException($"There isn't car with {car.Id} id in warehouse");
             }
         }
 
@@ -100,7 +103,7 @@ namespace TP
             }
             else
             {
-                throw new ArgumentException($"There isn't client with {client.Id} id in reposotry");
+                throw new ArgumentException($"There isn't client with {client.Id} id in warehouse");
             }
         }
 
@@ -112,22 +115,22 @@ namespace TP
             }
             else
             {
-                throw new ArgumentException($"There isn't facture with {facture.Id} id in reposotry");
+                throw new ArgumentException($"There isn't facture with {facture.Id} id in warehouse");
             }
         }
 
-        public void DeleteStock(Stock stock)
+        public void DeleteWarehouseItem(WarehouseItem warehouseItem)
         {
-            if (dataContext.Cars.ContainsKey(stock.Id))
+            if (dataContext.Cars.ContainsKey(warehouseItem.Id))
             {
-                dataContext.Cars.Remove(stock.Id);
+                dataContext.Cars.Remove(warehouseItem.Id);
             }
             else
             {
-                throw new ArgumentException($"There isn't stock with {stock.Id} id in reposotry");
+                throw new ArgumentException($"There isn't item with {warehouseItem.Id} id in warehouse");
             }
         }
-
+        //GET ALL METHODS
         public IEnumerable<Car> GetAllCars()
         {
            return dataContext.Cars.Values;
@@ -143,11 +146,12 @@ namespace TP
             return dataContext.Factures;
         }
 
-        public IEnumerable<Stock> GetAllStockss()
+        public IEnumerable<WarehouseItem> GetAllWarehouseItems()
         {
-            return dataContext.Stocks;
+            return dataContext.WarehouseItems;
         }
 
+        // GET METHODS
         public Car GetCar(Guid id)
         {
             if (dataContext.Cars.Count != 0)
@@ -156,7 +160,7 @@ namespace TP
             }
             else
             {
-                return null;
+                throw new ArgumentNullException($"There isn't car with {id} id in warehouse");
             }  
         }
 
@@ -164,114 +168,80 @@ namespace TP
         {
             if (dataContext.Clients.Count != 0)
             {
-                int pom = 0;
-                for (int i = 0; i < dataContext.Clients.Count; i++)
-                {
-                    if (dataContext.Clients[i].Id.Equals(id))
-                    {
-                        pom = i;
-                    }
-                }
-                return dataContext.Clients[pom];
+                return dataContext.Clients.Find(client => client.Id.Equals(id));
             }
             else
             {
-                return null;
-            }
-            
+                throw new ArgumentNullException($"There isn't client with {id} id");
+            }   
         }
 
         public Facture GetFacture(Guid id)
         {
             if (dataContext.Factures.Count != 0)
             {
-                int pom = 0;
-            for (int i = 0; i < dataContext.Factures.Count; i++)
-            {
-                if (dataContext.Factures[i].Id.Equals(id))
-                {
-                    pom = i;
-                }
+
+                return dataContext.Factures.First(f => f.Id.Equals(id));
             }
-            return dataContext.Factures[pom];
-        }
             else
             {
-                return null;
+                throw new ArgumentNullException($"There isn't facture with {id} id");
             }
         }
 
-        public Stock GetStock(Guid id)
+        public WarehouseItem GetWarehouseItem(Guid id)
         {
-            if (dataContext.Stocks.Count != 0)
+
+            if (dataContext.WarehouseItems.Count != 0)
             {
-                int pom = 0;
-                for (int i = 0; i < dataContext.Stocks.Count; i++)
-                {
-                    if (dataContext.Stocks[i].Id.Equals(id))
-                    {
-                        pom = i;
-                    }
-                }
-                return dataContext.Stocks[pom];
+                return dataContext.WarehouseItems.Find(item => item.Id.Equals(id));
             }
-         
-             else
+            else
             {
-                return null;
+                throw new ArgumentNullException($"There isn't warehouse item with {id} id");
             }
         }
 
+
+        //UPDATE METHODS
         public void UpdateCar(Guid id, Car car)
         {
             if (!dataContext.Cars.ContainsKey(id))
             {
-                throw new ArgumentException("Car with this ID doesn't exist");
+                throw new ArgumentException($"Car with {id} id doesn't exist");
             }
             dataContext.Cars[id] = car;
-
-
         }
 
 
         public void UpdateClient(Guid id, Client client)
         {
             Client foundClient = dataContext.Clients.Find(client => client.Id.Equals(id));
-
             if (foundClient == null)
             {
-                throw new ArgumentException("Author with this ID doesn't exist");
+                throw new ArgumentException($"Client with {id} id doesn't exist");
             }
-
-             dataContext.Clients[dataContext.Clients.IndexOf(foundClient)] = client;
+            dataContext.Clients[dataContext.Clients.IndexOf(foundClient)] = client;
         }
 
-       /* public void UpdateFacture(Guid id, Facture facture)
+        public void UpdateFacture(Guid id, Facture facture)
         {
+            Facture foundFacture = dataContext.Factures.First(f => f.Id.Equals(id)); 
+            if (foundFacture == null)
+            {
+                throw new ArgumentException($"Facture with {id} id doesn't exist");
+            }
+            dataContext.Factures[dataContext.Factures.IndexOf(foundFacture)] = facture;
+        }
 
-
-            Facture foundStock = dataContext.Factures.(x => x.Title == title)
-                = dataContext.Factures.Any(stock => stock.Id == id);
-            
+        public void UpdateWarehouseItem(Guid id, WarehouseItem warehouseItem)
+        {
+            WarehouseItem foundStock = dataContext.WarehouseItems.Find(stock => stock.Id.Equals(id));
             if (foundStock == null)
             {
-                throw new ArgumentException("Stock with this ID doesn't exist");
+                throw new ArgumentException($"Item with {id} id doesn't exist");
             }
-
-            dataContext.Stocks[dataContext.Stocks.IndexOf(foundStock)] = stock;
-        }*/
-
-        public void UpdateStock(Guid id, Stock stock)
-        {
-
-            Stock foundStock = dataContext.Stocks.Find(stock => stock.Id.Equals(id));
-
-            if (foundStock == null)
-            {
-                throw new ArgumentException("Stock with this ID doesn't exist");
-            }
-
-            dataContext.Stocks[dataContext.Stocks.IndexOf(foundStock)] = stock;
+            dataContext.WarehouseItems[dataContext.WarehouseItems.IndexOf(foundStock)] = warehouseItem;
         }
     }
 }

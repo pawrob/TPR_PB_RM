@@ -7,9 +7,22 @@ namespace TP
 {
     public class DataContext
     {
-        public List<Client> Clients = new List<Client>();
-        public Dictionary<Guid,Car> Cars = new Dictionary<Guid,Car>();
-        public ObservableCollection<Facture> Factures = new ObservableCollection<Facture>();
-        public List<Stock> Stocks = new List<Stock>();
+        private List<Client> clients;
+        private Dictionary<Guid, Car> cars;
+        private ObservableCollection<Facture> factures;
+        private List<WarehouseItem> warehouse;
+
+        public DataContext()
+        {
+            clients = new List<Client>();
+            cars = new Dictionary<Guid, Car>();
+            factures = new ObservableCollection<Facture>();
+            warehouse = new List<WarehouseItem>();
+        }
+
+        public List<Client> Clients { get => clients; }
+        public Dictionary<Guid, Car> Cars { get => cars; }
+        public ObservableCollection<Facture> Factures { get => factures; }
+        public List<WarehouseItem> WarehouseItems { get => warehouse; }
     }
 }

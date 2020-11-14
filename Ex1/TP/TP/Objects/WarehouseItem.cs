@@ -4,14 +4,14 @@ using System.Text;
 
 namespace TP.Objects
 {
-    public class Stock
+    public class WarehouseItem
     {
        
         public Guid Id  { get; set; }
         public Car Car { get; set; }
         public decimal Price { get; set; }
 
-        public Stock(Car car, decimal price)
+        public WarehouseItem(Car car, decimal price)
         {
             this.Id = Guid.NewGuid();
             this.Car = car;
@@ -24,7 +24,7 @@ namespace TP.Objects
         }
         public override bool Equals(object obj)
         {
-            return obj is Stock stock &&
+            return obj is WarehouseItem stock &&
                    Id.Equals(stock.Id) &&
                    EqualityComparer<Car>.Default.Equals(Car, stock.Car) &&
                    Price == stock.Price;

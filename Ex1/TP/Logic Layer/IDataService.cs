@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace TP
+namespace Logic_Layer
 {
-    interface IDataService
+    public interface IDataService
     {
+
     }
 }
