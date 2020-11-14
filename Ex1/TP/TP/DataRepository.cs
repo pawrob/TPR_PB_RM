@@ -224,14 +224,16 @@ namespace TP
 
         public void UpdateCar(Guid id, Car car)
         {
-            if (dataContext.Cars.ContainsKey(id))
+            if (!dataContext.Cars.ContainsKey(id))
             {
-                dataContext.Cars[id] = car;
+                throw new ArgumentException("Car with this ID doesn't exist");
             }
-           
+            dataContext.Cars[id] = car;
+
+
         }
 
-        public void UpdateClient(Guid id, Client client)
+/*        public void UpdateClient(Guid id, Client client)
         {
 
             for (int i = 0; i <= dataContext.Clients.Count; i++)
@@ -241,6 +243,18 @@ namespace TP
                     dataContext.Clients[i] = client;
                 }
             }
+        }*/
+
+        public void UpdateClient(Guid id, Client author)
+        {
+            Client updatedClient = dataContext.Clients.Find(a => a.Id.Equals(id));
+
+            if (updatedClient == null)
+            {
+                throw new ArgumentException("Author with this ID doesn't exist");
+            }
+
+             dataContext.Clients[dataContext.Clients.IndexOf(updatedClient)] = author;
         }
 
         public void UpdateFacture(Guid id, Facture facture)
@@ -253,7 +267,6 @@ namespace TP
                     dataContext.Factures[i] = facture;
                 }
             }
-
         }
 
         public void UpdateStock(Guid id, Stock stock)
