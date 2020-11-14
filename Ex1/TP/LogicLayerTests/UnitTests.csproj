@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\TP\Data Layer.csproj" />
+    <ProjectReference Include="..\TP\DataLayer.csproj" />
   </ItemGroup>
 
 </Project>
