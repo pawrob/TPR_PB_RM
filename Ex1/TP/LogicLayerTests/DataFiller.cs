@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
@@ -9,14 +11,22 @@ using TP.Objects;
 
 namespace UnitTests
 {
+    [TestClass]
     public class DataFiller
     {
-        XmlSerializer serializer = new XmlSerializer(typeof(Client));
-        Client C1;
+        //private string jsonString;
+        private const string fileName = (@"..\..\..\..\data.json");
 
-        using(var reader = File.OpenText(@"..\data.xml"))
+        [TestMethod]
+        public void LoadJson()
         {
-           c = (Client) serializer.Deserialize(reader);
+            using (StreamReader r = new StreamReader(fileName))
+            {
+                string json = r.ReadToEnd();
+                List<Client> items = JsonConvert.DeserializeObject<List<Client>>(json);
+                string Something = string.Join(",", items);
+                Console.Write(Something);
+            }
         }
     }
 }
