@@ -8,11 +8,11 @@ namespace TP
     public class DataRepository : IDataRepository
     {
 
-        private DataContext dataContext = new DataContext();
+        private DataContext dataContext;
 
         public DataRepository()
         {
-            
+            dataContext = new DataContext();
         }
 
         public void AddCar(Car car)

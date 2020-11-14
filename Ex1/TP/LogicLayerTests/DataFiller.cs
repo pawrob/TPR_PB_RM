@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace TP
+namespace UnitTests
 {
-    public class DataFiller
+    class DataFiller
     {
-
     }
 }
