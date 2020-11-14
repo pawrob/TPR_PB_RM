@@ -30,7 +30,7 @@ namespace DataLayerTests
             Assert.IsTrue(c2.Equals(dp.GetClient(c2.Id)));
 
             dp.DeleteClient(c2);
-            Assert.IsNull(dp.GetClient(c2.Id));
+            Assert.ThrowsException<ArgumentNullException>(() => dp.GetClient(c2.Id));
 
         }
         [TestMethod]
@@ -50,8 +50,6 @@ namespace DataLayerTests
             Client c1 = new Client("Jan", "Kowalski", 111111);
             dp.AddClient(c1);
             Assert.IsTrue(dp.GetClient(c1.Id) == c1);
-
-
         }
 
 
@@ -75,8 +73,7 @@ namespace DataLayerTests
             Assert.IsTrue(Car2.Equals(dp.GetCar(Car2.Id)));
 
             dp.DeleteCar(Car2);
-            Assert.IsNull(dp.GetCar(Car2.Id));
-
+            Assert.ThrowsException<ArgumentNullException>(() => dp.GetCar(Car2.Id));
         }
          [TestMethod]
          public void UpdateCarTest()
@@ -87,7 +84,7 @@ namespace DataLayerTests
              dp.UpdateCar(Car1.Id, Car2);
              Console.WriteLine(Car1);
              Console.WriteLine(Car2);
-            Assert.AreEqual(Car2, dp.GetAllCars().First());
+             Assert.AreEqual(Car2, dp.GetAllCars().First());
         }
         [TestMethod]
         public void GetCarTest()
