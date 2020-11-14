@@ -12,6 +12,8 @@ namespace TP_LL
 
         private IDataRepository dataRepository;
 
+        static void Main() { }
+
         public DataService(IDataRepository dataRepository)
         {
             this.dataRepository = dataRepository;
@@ -47,7 +49,7 @@ namespace TP_LL
             return dataRepository.GetAllCars();
         }
 
-        public IEnumerable<Client> GetAllclients()
+        public IEnumerable<Client> GetAllClients()
         {
             return dataRepository.GetAllClients();
         }
@@ -96,7 +98,7 @@ namespace TP_LL
             dataRepository.DeleteFacture(facture);
         }
 
-        public void DeleteWareHouseItem(WarehouseItem warehouseItem)
+        public void DeleteWarehouseItem(WarehouseItem warehouseItem)
         {
             dataRepository.DeleteWarehouseItem(warehouseItem);
         }

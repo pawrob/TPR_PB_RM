@@ -10,14 +10,15 @@ namespace DataLayerTests
     public class DataLayerUnitTests
     {
 
-        DataRepository dp = new DataRepository();
+        DataRepository dataRepository = new DataRepository();
+
         [TestMethod]
         public void AddClientTest()
         {
 
             Client c1 = new Client("Jan", "Kowalski", 111111);
-            dp.AddClient(c1);
-            Assert.IsTrue(c1.Equals(dp.GetClient(c1.Id)));
+            dataRepository.AddClient(c1);
+            Assert.IsTrue(c1.Equals(dataRepository.GetClient(c1.Id)));
 
         }
         [TestMethod]
@@ -25,12 +26,12 @@ namespace DataLayerTests
         {
             
             Client c2 = new Client("Karol", "Kowalski",222222);
-            dp.AddClient(c2);
+            dataRepository.AddClient(c2);
 
-            Assert.IsTrue(c2.Equals(dp.GetClient(c2.Id)));
+            Assert.IsTrue(c2.Equals(dataRepository.GetClient(c2.Id)));
 
-            dp.DeleteClient(c2);
-            Assert.ThrowsException<ArgumentNullException>(() => dp.GetClient(c2.Id));
+            dataRepository.DeleteClient(c2);
+            Assert.ThrowsException<ArgumentNullException>(() => dataRepository.GetClient(c2.Id));
 
         }
         [TestMethod]
@@ -38,9 +39,9 @@ namespace DataLayerTests
         {
             Client c1 = new Client("Jan", "Kowalski", 111111);
             Client c2 = new Client("Karol", "Kowalski", 222222);
-            dp.AddClient(c1);
-            dp.UpdateClient(c1.Id, c2);
-            Assert.IsTrue(dp.GetClient(c2.Id) == c2);
+            dataRepository.AddClient(c1);
+            dataRepository.UpdateClient(c1.Id, c2);
+            Assert.IsTrue(dataRepository.GetClient(c2.Id) == c2);
 
 
         }
@@ -48,8 +49,8 @@ namespace DataLayerTests
         public void GetClientTest()
         {
             Client c1 = new Client("Jan", "Kowalski", 111111);
-            dp.AddClient(c1);
-            Assert.IsTrue(dp.GetClient(c1.Id) == c1);
+            dataRepository.AddClient(c1);
+            Assert.IsTrue(dataRepository.GetClient(c1.Id) == c1);
         }
 
 
@@ -59,8 +60,8 @@ namespace DataLayerTests
         {
 
             Car Car1 = new Car("Alfa Romeo", "Brera", "Italia Independent", 210, "Matte Grey", VehicleType.Coupe, FuelType.Diesel, Transmission.Manual);
-            dp.AddCar(Car1);
-            Assert.IsTrue(Car1.Equals(dp.GetCar(Car1.Id)));
+            dataRepository.AddCar(Car1);
+            Assert.IsTrue(Car1.Equals(dataRepository.GetCar(Car1.Id)));
 
 
         }
@@ -69,31 +70,124 @@ namespace DataLayerTests
         {
 
             Car Car2 = new Car("Skoda", "Fabia", "Style", 210, "Silver Metalic", VehicleType.Small_car, FuelType.Petrol, Transmission.Manual);
-            dp.AddCar(Car2);
-            Assert.IsTrue(Car2.Equals(dp.GetCar(Car2.Id)));
+            dataRepository.AddCar(Car2);
+            Assert.IsTrue(Car2.Equals(dataRepository.GetCar(Car2.Id)));
 
-            dp.DeleteCar(Car2);
-            Assert.ThrowsException<ArgumentNullException>(() => dp.GetCar(Car2.Id));
+            dataRepository.DeleteCar(Car2);
+            Assert.ThrowsException<ArgumentNullException>(() => dataRepository.GetCar(Car2.Id));
         }
          [TestMethod]
          public void UpdateCarTest()
          {
              Car Car1 = new Car("Alfa Romeo", "Brera", "Italia Independent", 210, "Matte Grey", VehicleType.Coupe, FuelType.Diesel, Transmission.Manual);
              Car Car2 = new Car("Skoda", "Fabia", "Style", 210, "Silver Metalic", VehicleType.Small_car, FuelType.Petrol, Transmission.Manual);
-             dp.AddCar(Car1);
-             dp.UpdateCar(Car1.Id, Car2);
-             Console.WriteLine(Car1);
-             Console.WriteLine(Car2);
-             Assert.AreEqual(Car2, dp.GetAllCars().First());
+             dataRepository.AddCar(Car1);
+             dataRepository.UpdateCar(Car1.Id, Car2);
+
+             Assert.AreEqual(Car2, dataRepository.GetAllCars().First());
         }
         [TestMethod]
         public void GetCarTest()
         {
             Car Car1 = new Car("Alfa Romeo", "Brera", "Italia Independent", 210, "Matte Grey", VehicleType.Coupe, FuelType.Diesel, Transmission.Manual);
-            dp.AddCar(Car1);
-            Assert.IsTrue(dp.GetCar(Car1.Id) == Car1);
+            dataRepository.AddCar(Car1);
+            Assert.IsTrue(dataRepository.GetCar(Car1.Id) == Car1);
 
 
+        }
+        [TestMethod]
+        public void AddFactureTest()
+        {
+            Car Car1 = new Car("Alfa Romeo", "Brera", "Italia Independent", 210, "Matte Grey", VehicleType.Coupe, FuelType.Diesel, Transmission.Manual);
+            Client c1 = new Client("Jan", "Kowalski", 111111);
+            WarehouseItem wi1 = new WarehouseItem(Car1,10000);
+            Facture f1 = new Facture(c1, wi1);
+            dataRepository.AddFacture(f1);
+            Assert.AreEqual(dataRepository.GetFacture(f1.Id), f1);
+        }
+        [TestMethod]
+        public void RemoveFactureTest()
+        {
+           /* Car Car1 = new Car("Alfa Romeo", "Brera", "Italia Independent", 210, "Matte Grey", VehicleType.Coupe, FuelType.Diesel, Transmission.Manual);
+            Client c1 = new Client("Jan", "Kowalski", 111111);
+            WarehouseItem wi1 = new WarehouseItem(Car1, 10000);
+            Facture f1 = new Facture(c1, wi1);
+            dataRepository.AddFacture(f1);
+            Assert.AreEqual(dataRepository.GetFacture(f1.Id), f1);
+            dataRepository.DeleteFacture(f1);
+            Assert.AreEqual(0, dataRepository.GetAllFactures().Count());*/
+
+        }
+        [TestMethod]
+        public void UpdateFactureTest()
+        {
+            Car Car1 = new Car("Alfa Romeo", "Brera", "Italia Independent", 210, "Matte Grey", VehicleType.Coupe, FuelType.Diesel, Transmission.Manual);
+            Client c1 = new Client("Jan", "Kowalski", 111111);
+            WarehouseItem wi1 = new WarehouseItem(Car1, 10000);
+            Facture f1 = new Facture(c1, wi1);
+            dataRepository.AddFacture(f1);
+            Car Car2 = new Car("Skoda", "Fabia", "Style", 210, "Silver Metalic", VehicleType.Small_car, FuelType.Petrol, Transmission.Manual);
+            WarehouseItem wi2 = new WarehouseItem(Car2, 210000);
+            Facture f2 = new Facture(c1, wi2);
+            dataRepository.UpdateFacture(f1.Id, f2);
+
+            Assert.AreEqual(f2, dataRepository.GetAllFactures().First());
+        }
+        [TestMethod]
+        public void GetFactureTest()
+        {
+            Car Car1 = new Car("Alfa Romeo", "Brera", "Italia Independent", 210, "Matte Grey", VehicleType.Coupe, FuelType.Diesel, Transmission.Manual);
+            Client c1 = new Client("Jan", "Kowalski", 111111);
+            WarehouseItem wi1 = new WarehouseItem(Car1, 10000);
+            Facture f1 = new Facture(c1, wi1);
+            dataRepository.AddFacture(f1);
+            Assert.IsTrue(dataRepository.GetFacture(f1.Id) == f1);
+        }
+
+        [TestMethod]
+        public void AddWarehouseItemTest()
+        {
+            Assert.AreEqual(0, dataRepository.GetAllWarehouseItems().Count());
+            Car Car1 = new Car("Alfa Romeo", "Brera", "Italia Independent", 210, "Matte Grey", VehicleType.Coupe, FuelType.Diesel, Transmission.Manual);
+            Client c1 = new Client("Jan", "Kowalski", 111111);
+            WarehouseItem wi1 = new WarehouseItem(Car1, 10000);
+            dataRepository.AddWarehouseItem(wi1);
+            Assert.AreEqual(1, dataRepository.GetAllWarehouseItems().Count()); 
+        }
+        [TestMethod]
+        public void RemoveWarehouseItemTest()
+        {
+           /* Assert.AreEqual(0, dataRepository.GetAllWarehouseItems().Count());
+            Car Car1 = new Car("Alfa Romeo", "Brera", "Italia Independent", 210, "Matte Grey", VehicleType.Coupe, FuelType.Diesel, Transmission.Manual);
+            Client c1 = new Client("Jan", "Kowalski", 111111);
+            WarehouseItem wi1 = new WarehouseItem(Car1, 10000);
+            dataRepository.AddWarehouseItem(wi1);
+            Assert.AreEqual(1, dataRepository.GetAllWarehouseItems().Count());
+            dataRepository.DeleteWarehouseItem(wi1);
+            Assert.AreEqual(0, dataRepository.GetAllWarehouseItems().Count());*/
+        }
+        [TestMethod]
+        public void UpdateWarehouseItemTest()
+        {
+            Car Car1 = new Car("Alfa Romeo", "Brera", "Italia Independent", 210, "Matte Grey", VehicleType.Coupe, FuelType.Diesel, Transmission.Manual);
+            Client c1 = new Client("Jan", "Kowalski", 111111);
+            WarehouseItem wi1 = new WarehouseItem(Car1, 10000);
+            dataRepository.AddWarehouseItem(wi1);
+            Car Car2 = new Car("Skoda", "Fabia", "Style", 210, "Silver Metalic", VehicleType.Small_car, FuelType.Petrol, Transmission.Manual);
+            WarehouseItem wi2 = new WarehouseItem(Car2, 210000);
+
+            dataRepository.UpdateWarehouseItem(wi1.Id, wi2);
+
+            Assert.AreEqual(wi2, dataRepository.GetAllWarehouseItems().First());
+        }
+        [TestMethod]
+        public void GetWarehouseItemTest()
+        {
+            Car Car1 = new Car("Alfa Romeo", "Brera", "Italia Independent", 210, "Matte Grey", VehicleType.Coupe, FuelType.Diesel, Transmission.Manual);
+            Client c1 = new Client("Jan", "Kowalski", 111111);
+            WarehouseItem wi1 = new WarehouseItem(Car1, 10000);
+            dataRepository.AddWarehouseItem(wi1);
+            Assert.AreEqual(dataRepository.GetWarehouseItem(wi1.Id), wi1);
         }
     }
 }

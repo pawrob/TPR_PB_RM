@@ -11,7 +11,7 @@ namespace TP_LL
         //Client
         void AddClient(string firstName, string lastName, long phoneNumber);
         void DeleteClient(Client client);
-        IEnumerable<Client> GetAllclients();
+        IEnumerable<Client> GetAllClients();
         Client GetClient(Guid id);
         void updateClient(Guid id, Client client);
 
@@ -31,7 +31,7 @@ namespace TP_LL
 
         //WarehouseItem
         void AddWarehouseItem(Car car, decimal price);
-        void DeleteWareHouseItem(WarehouseItem warehouseItem);
+        void DeleteWarehouseItem(WarehouseItem warehouseItem);
         IEnumerable<WarehouseItem> GetAllWarehouseItems();
         WarehouseItem GetWarehouseItem(Guid id);
         void updateWarehouseItem(Guid id, WarehouseItem warehouseItem);
