@@ -233,52 +233,45 @@ namespace TP
 
         }
 
-/*        public void UpdateClient(Guid id, Client client)
+
+        public void UpdateClient(Guid id, Client client)
         {
+            Client foundClient = dataContext.Clients.Find(client => client.Id.Equals(id));
 
-            for (int i = 0; i <= dataContext.Clients.Count; i++)
-            {
-                if (dataContext.Clients[i].Id.Equals(id))
-                {
-                    dataContext.Clients[i] = client;
-                }
-            }
-        }*/
-
-        public void UpdateClient(Guid id, Client author)
-        {
-            Client updatedClient = dataContext.Clients.Find(a => a.Id.Equals(id));
-
-            if (updatedClient == null)
+            if (foundClient == null)
             {
                 throw new ArgumentException("Author with this ID doesn't exist");
             }
 
-             dataContext.Clients[dataContext.Clients.IndexOf(updatedClient)] = author;
+             dataContext.Clients[dataContext.Clients.IndexOf(foundClient)] = client;
         }
 
-        public void UpdateFacture(Guid id, Facture facture)
+       /* public void UpdateFacture(Guid id, Facture facture)
         {
-            int pom = 0;
-            for (int i = 0; i <= dataContext.Factures.Count; i++)
+
+
+            Facture foundStock = dataContext.Factures.(x => x.Title == title)
+                = dataContext.Factures.Any(stock => stock.Id == id);
+            
+            if (foundStock == null)
             {
-                if (dataContext.Factures[i].Id.Equals(id))
-                {
-                    dataContext.Factures[i] = facture;
-                }
+                throw new ArgumentException("Stock with this ID doesn't exist");
             }
-        }
+
+            dataContext.Stocks[dataContext.Stocks.IndexOf(foundStock)] = stock;
+        }*/
 
         public void UpdateStock(Guid id, Stock stock)
         {
 
-            for (int i = 0; i <= dataContext.Stocks.Count; i++)
+            Stock foundStock = dataContext.Stocks.Find(stock => stock.Id.Equals(id));
+
+            if (foundStock == null)
             {
-                if (dataContext.Stocks[i].Id.Equals(id))
-                {
-                    dataContext.Stocks[i] = stock;
-                }
+                throw new ArgumentException("Stock with this ID doesn't exist");
             }
+
+            dataContext.Stocks[dataContext.Stocks.IndexOf(foundStock)] = stock;
         }
     }
 }

@@ -25,7 +25,7 @@ namespace TP
         public void AddFacture(Facture facture);
         public Facture GetFacture(Guid id);//czy int ?
         public IEnumerable<Facture> GetAllFactures();
-        public void UpdateFacture(Guid id, Facture facture);
+        /*public void UpdateFacture(Guid id, Facture facture);*/
         public void DeleteFacture(Facture facture);
 
         //stock
