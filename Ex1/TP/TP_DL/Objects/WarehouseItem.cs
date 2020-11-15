@@ -13,9 +13,9 @@ namespace TP.Objects
 
         public WarehouseItem(Car car, decimal price)
         {
-            this.Id = Guid.NewGuid();
             this.Car = car;
             this.Price = price;
+            this.Id = Guid.NewGuid();
         }
 
         public override string ToString()
