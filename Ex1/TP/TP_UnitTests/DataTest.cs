@@ -16,7 +16,7 @@ namespace TP_UnitTests
         [TestMethod]
         public void ObjectsDataFiller()
         {
-            DataFiller df1 = new DataFiller();
+            DataManualFiller df1 = new DataManualFiller();
             dataRepository.DataFiller = df1;
             dataRepository.FillData();
             Assert.AreEqual(1, dataRepository.GetAllClients().Count());
@@ -65,7 +65,7 @@ namespace TP_UnitTests
 
 
 
-/*        [TestMethod]
+        [TestMethod]
         public void AddCarTest()
         {
 
@@ -86,15 +86,15 @@ namespace TP_UnitTests
             dataRepository.DeleteCar(Car2);
             Assert.ThrowsException<ArgumentNullException>(() => dataRepository.GetCar(Car2.Id));
         }
-         [TestMethod]
-         public void UpdateCarTest()
-         {
-             Car Car1 = new Car("Alfa Romeo", "Brera", "Italia Independent", 210, "Matte Grey", VehicleType.Coupe, FuelType.Diesel, Transmission.Manual);
-             Car Car2 = new Car("Skoda", "Fabia", "Style", 210, "Silver Metalic", VehicleType.Small_car, FuelType.Petrol, Transmission.Manual);
-             dataRepository.AddCar(Car1);
-             dataRepository.UpdateCar(Car1.Id, Car2);
+        [TestMethod]
+        public void UpdateCarTest()
+        {
+            Car Car1 = new Car("Alfa Romeo", "Brera", "Italia Independent", 210, "Matte Grey", VehicleType.Coupe, FuelType.Diesel, Transmission.Manual);
+            Car Car2 = new Car("Skoda", "Fabia", "Style", 210, "Silver Metalic", VehicleType.Small_car, FuelType.Petrol, Transmission.Manual);
+            dataRepository.AddCar(Car1);
+            dataRepository.UpdateCar(Car1.Id, Car2);
 
-             Assert.AreEqual(Car2, dataRepository.GetAllCars().First());
+            Assert.AreEqual(Car2, dataRepository.GetAllCars().First());
         }
         [TestMethod]
         public void GetCarTest()
@@ -102,7 +102,7 @@ namespace TP_UnitTests
             Car Car1 = new Car("Alfa Romeo", "Brera", "Italia Independent", 210, "Matte Grey", VehicleType.Coupe, FuelType.Diesel, Transmission.Manual);
             dataRepository.AddCar(Car1);
             Assert.IsTrue(dataRepository.GetCar(Car1.Id) == Car1);
-        }*/
+        }
         [TestMethod]
         public void AddFactureTest()
         {

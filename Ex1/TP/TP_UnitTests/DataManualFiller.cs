@@ -11,10 +11,10 @@ using TP_DL.Objects;
 
 namespace TP_UnitTests
 {
-    public class DataFiller : IDataFiller
+    public class DataManualFiller : IDataFiller
     {
 
-        public DataFiller(){}
+        public DataManualFiller(){}
 
         public void InsertData(DataContext dataContext)
         {

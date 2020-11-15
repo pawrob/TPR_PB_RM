@@ -11,7 +11,7 @@ using TP_DL.Objects;
 
 namespace TP_UnitTests
 {
-    class DataInsert : IDataFiller
+    class DataXMLFiller : IDataFiller
     {
         public Dictionary<string, string> Parse(XmlNode child)
         {
