@@ -35,7 +35,11 @@ namespace LogicLayerTests
         [TestMethod]
         public void UpdateClientTest()
         {
-           
+            dataService.AddClient("Andrzej", "Nowak", 123456789);
+            Assert.AreEqual(1, dataService.GetAllClients().Count());
+            Client c1 = new Client("Marian", "Kowalski", 987654321);
+            dataService.updateClient(dataService.GetAllClients().First().Id, c1);
+            Assert.AreEqual(dataService.GetAllClients().First(), c1);
 
 
         }
@@ -69,7 +73,10 @@ namespace LogicLayerTests
         [TestMethod]
         public void UpdateCarTest()
         {
-           
+            dataService.AddCar("Skoda", "Fabia", "Style", 210, "Silver Metalic", VehicleType.Small_car, FuelType.Petrol, Transmission.Manual);
+            dataService.AddCar("Alfa Romeo", "Brera", "Italia Independent", 210, "Matte Grey", VehicleType.Coupe, FuelType.Diesel, Transmission.Manual);
+            dataService.updateCar(dataService.GetAllCars().First().Id, dataService.GetAllCars().Last());
+            Assert.AreEqual(dataService.GetAllCars().First(), dataService.GetAllCars().Last());
         }
         [TestMethod]
         public void GetCarTest()
@@ -88,19 +95,29 @@ namespace LogicLayerTests
         [TestMethod]
         public void RemoveFactureTest()
         {
-/*            Assert.AreEqual(0, dataService.GetAllFactures().Count());
+            Assert.AreEqual(0, dataService.GetAllFactures().Count());
             dataService.AddClient("Andrzej", "Nowak", 123456789);
             dataService.AddCar("Skoda", "Fabia", "Style", 210, "Silver Metalic", VehicleType.Small_car, FuelType.Petrol, Transmission.Manual);
             dataService.AddWarehouseItem(dataService.GetAllCars().First(), 10000);
             dataService.AddFacture(dataService.GetAllClients().First(), dataService.GetAllWarehouseItems().First());
             Assert.AreEqual(1, dataService.GetAllCars().Count());
             dataService.DeleteFacture(dataService.GetAllFactures().First());
-            Assert.AreEqual(0, dataService.GetAllFactures().Count());*/
+            Assert.AreEqual(0, dataService.GetAllFactures().Count());
         }
         [TestMethod]
         public void UpdateFactureTest()
         {
-           
+            Assert.AreEqual(0, dataService.GetAllFactures().Count());
+            dataService.AddClient("Andrzej", "Nowak", 123456789);
+            dataService.AddClient("Marian", "Kowalski", 987654321);
+            dataService.AddCar("Skoda", "Fabia", "Style", 210, "Silver Metalic", VehicleType.Small_car, FuelType.Petrol, Transmission.Manual);
+            dataService.AddWarehouseItem(dataService.GetAllCars().First(), 10000);
+            dataService.AddFacture(dataService.GetAllClients().First(), dataService.GetAllWarehouseItems().First());
+            Facture f2 = new Facture(dataService.GetAllClients().Last(), dataService.GetAllWarehouseItems().First());
+            dataService.updateFacture(dataService.GetAllFactures().First().Id,f2);
+
+            Assert.AreEqual(dataService.GetAllFactures().First(),f2);
+
         }
         [TestMethod]
         public void GetFactureTest()
@@ -122,17 +139,27 @@ namespace LogicLayerTests
         {
 
 
-            /*Assert.AreEqual(0, dataService.GetAllWarehouseItems().Count());
+            Assert.AreEqual(0, dataService.GetAllWarehouseItems().Count());
             dataService.AddClient("Andrzej", "Nowak", 123456789);
             dataService.AddCar("Skoda", "Fabia", "Style", 210, "Silver Metalic", VehicleType.Small_car, FuelType.Petrol, Transmission.Manual);
             dataService.AddWarehouseItem(dataService.GetAllCars().First(), 10000);
             Assert.AreEqual(1, dataService.GetAllWarehouseItems().Count());
             dataService.DeleteWarehouseItem(dataService.GetAllWarehouseItems().First());
-            Assert.AreEqual(0, dataService.GetAllWarehouseItems().Count());*/
+            Assert.AreEqual(0, dataService.GetAllWarehouseItems().Count());
         }
         [TestMethod]
         public void UpdateWarehouseItemTest()
         {
+            Assert.AreEqual(0, dataService.GetAllFactures().Count());
+            dataService.AddClient("Andrzej", "Nowak", 123456789);
+            dataService.AddClient("Marian", "Kowalski", 987654321);
+            dataService.AddCar("Skoda", "Fabia", "Style", 210, "Silver Metalic", VehicleType.Small_car, FuelType.Petrol, Transmission.Manual);
+            dataService.AddCar("Alfa Romeo", "Brera", "Italia Independent", 210, "Matte Grey", VehicleType.Coupe, FuelType.Diesel, Transmission.Manual);
+            dataService.AddWarehouseItem(dataService.GetAllCars().First(), 10000);
+            WarehouseItem wh2 = new WarehouseItem(dataService.GetAllCars().Last(), 20000);
+            dataService.updateWarehouseItem(dataService.GetAllWarehouseItems().First().Id, wh2);
+
+            Assert.AreEqual(dataService.GetAllWarehouseItems().First(),  wh2);
 
         }
         [TestMethod]

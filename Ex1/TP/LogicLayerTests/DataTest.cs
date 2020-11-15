@@ -108,14 +108,14 @@ namespace DataLayerTests
         [TestMethod]
         public void RemoveFactureTest()
         {
-           /* Car Car1 = new Car("Alfa Romeo", "Brera", "Italia Independent", 210, "Matte Grey", VehicleType.Coupe, FuelType.Diesel, Transmission.Manual);
+            Car Car1 = new Car("Alfa Romeo", "Brera", "Italia Independent", 210, "Matte Grey", VehicleType.Coupe, FuelType.Diesel, Transmission.Manual);
             Client c1 = new Client("Jan", "Kowalski", 111111);
             WarehouseItem wi1 = new WarehouseItem(Car1, 10000);
             Facture f1 = new Facture(c1, wi1);
             dataRepository.AddFacture(f1);
             Assert.AreEqual(dataRepository.GetFacture(f1.Id), f1);
             dataRepository.DeleteFacture(f1);
-            Assert.AreEqual(0, dataRepository.GetAllFactures().Count());*/
+            Assert.AreEqual(0, dataRepository.GetAllFactures().Count());
 
         }
         [TestMethod]
@@ -157,14 +157,14 @@ namespace DataLayerTests
         [TestMethod]
         public void RemoveWarehouseItemTest()
         {
-           /* Assert.AreEqual(0, dataRepository.GetAllWarehouseItems().Count());
+            Assert.AreEqual(0, dataRepository.GetAllWarehouseItems().Count());
             Car Car1 = new Car("Alfa Romeo", "Brera", "Italia Independent", 210, "Matte Grey", VehicleType.Coupe, FuelType.Diesel, Transmission.Manual);
             Client c1 = new Client("Jan", "Kowalski", 111111);
             WarehouseItem wi1 = new WarehouseItem(Car1, 10000);
             dataRepository.AddWarehouseItem(wi1);
             Assert.AreEqual(1, dataRepository.GetAllWarehouseItems().Count());
             dataRepository.DeleteWarehouseItem(wi1);
-            Assert.AreEqual(0, dataRepository.GetAllWarehouseItems().Count());*/
+            Assert.AreEqual(0, dataRepository.GetAllWarehouseItems().Count());
         }
         [TestMethod]
         public void UpdateWarehouseItemTest()

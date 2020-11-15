@@ -111,7 +111,7 @@ namespace TP
         {
             if (dataContext.Factures.Contains(facture))
             {
-                dataContext.Cars.Remove(facture.Id);
+                dataContext.Factures.Remove(facture);
             }
             else
             {
@@ -121,9 +121,9 @@ namespace TP
 
         public void DeleteWarehouseItem(WarehouseItem warehouseItem)
         {
-            if (dataContext.Cars.ContainsKey(warehouseItem.Id))
+            if (dataContext.WarehouseItems.Contains(warehouseItem))
             {
-                dataContext.Cars.Remove(warehouseItem.Id);
+                dataContext.WarehouseItems.Remove(warehouseItem);
             }
             else
             {
