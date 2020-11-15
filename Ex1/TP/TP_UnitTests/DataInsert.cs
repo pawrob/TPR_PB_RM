@@ -6,8 +6,8 @@ using System.IO;
 using System.Text;
 using System.Xml;
 using System.Linq;
-using TP;
-using TP.Objects;
+using TP_DL;
+using TP_DL.Objects;
 
 namespace TP_UnitTests
 {

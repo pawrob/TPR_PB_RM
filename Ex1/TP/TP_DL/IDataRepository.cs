@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using TP.Objects;
+using TP_DL.Objects;
 
-namespace TP
+namespace TP_DL
 {
     public interface IDataRepository
     {

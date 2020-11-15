@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using TP;
-using TP.Objects;
+using TP_DL;
+using TP_DL.Objects;
 
 namespace TP_LL
 {

@@ -1,9 +1,9 @@
 ﻿using System;
-using TP.Objects;
+using TP_DL.Objects;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
-namespace TP
+namespace TP_DL
 {
     public class DataContext
     {

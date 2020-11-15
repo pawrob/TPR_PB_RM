@@ -1,7 +1,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
-using TP;
-using TP.Objects;
+using TP_DL;
+using TP_DL.Objects;
 using TP_LL;
 
 namespace LogicLayerTests

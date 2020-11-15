@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using TP.Objects;
+using TP_DL.Objects;
 using System.Linq;
 
-namespace TP
+namespace TP_DL
 {
     public class DataRepository : IDataRepository
     {

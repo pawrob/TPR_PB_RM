@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace TP.Objects
+namespace TP_DL.Objects
 {
     public class WarehouseItem
     {
