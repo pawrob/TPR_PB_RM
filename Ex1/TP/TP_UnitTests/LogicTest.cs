@@ -46,9 +46,6 @@ namespace TP_UnitTests
         }
 
 
-
-
-
         [TestMethod]
         public void AddCarTest()
         {
@@ -67,16 +64,6 @@ namespace TP_UnitTests
             dataService.DeleteCar(dataService.GetAllCars().First());
             Assert.AreEqual(0, dataService.GetAllCars().Count());
 
-        }
-        [TestMethod]
-        public void UpdateCarTest()
-
-        {
-           /* dataService = new DataService(new DataRepository());
-            dataService.AddCar("Skoda", "Fabia", "Style", 210, "Silver Metalic", VehicleType.Small_car, FuelType.Petrol, Transmission.Manual);
-            dataService.AddCar("Alfa Romeo", "Brera", "Italia Independent", 210, "Matte Grey", VehicleType.Coupe, FuelType.Diesel, Transmission.Manual);
-            dataService.updateCar(dataService.GetAllCars().First().Id, dataService.GetAllCars().Last());
-            Assert.AreEqual(dataService.GetAllCars().First(), dataService.GetAllCars().Last());*/
         }
 
         [TestMethod]
@@ -110,10 +97,10 @@ namespace TP_UnitTests
             dataService.AddCar("Skoda", "Fabia", "Style", 210, "Silver Metalic", VehicleType.Small_car, FuelType.Petrol, Transmission.Manual);
             dataService.AddWarehouseItem(dataService.GetAllCars().First(), 10000);
             dataService.AddFacture(dataService.GetAllClients().First(), dataService.GetAllWarehouseItems().First());
-            Facture f2 = new Facture(dataService.GetAllClients().Last(), dataService.GetAllWarehouseItems().First(),new Guid(), DateTime.Now);
-            dataService.updateFacture(dataService.GetAllFactures().First().Id,f2);
+            Facture f2 = new Facture(dataService.GetAllClients().Last(), dataService.GetAllWarehouseItems().First(), new Guid(), DateTime.Now);
+            dataService.updateFacture(dataService.GetAllFactures().First().Id, f2);
 
-            Assert.AreEqual(dataService.GetAllFactures().First(),f2);
+            Assert.AreEqual(dataService.GetAllFactures().First(), f2);
 
         }
 
@@ -123,10 +110,10 @@ namespace TP_UnitTests
         public void AddBillTest()
         {
             Assert.AreEqual(0, dataService.GetAllBills().Count());
-            
+
             dataService.AddCar("Skoda", "Fabia", "Style", 210, "Silver Metalic", VehicleType.Small_car, FuelType.Petrol, Transmission.Manual);
             dataService.AddWarehouseItem(dataService.GetAllCars().First(), 10000);
-            dataService.AddBill( dataService.GetAllWarehouseItems().First());
+            dataService.AddBill(dataService.GetAllWarehouseItems().First());
             Assert.AreEqual(1, dataService.GetAllCars().Count());
         }
         [TestMethod]
@@ -149,7 +136,7 @@ namespace TP_UnitTests
             dataService.AddCar("Skoda", "Fabia", "Style", 210, "Silver Metalic", VehicleType.Small_car, FuelType.Petrol, Transmission.Manual);
             dataService.AddWarehouseItem(dataService.GetAllCars().First(), 10000);
             dataService.AddBill(dataService.GetAllWarehouseItems().First());
-            BillOfSale b2 = new BillOfSale( dataService.GetAllWarehouseItems().First(), new Guid(), DateTime.Now);
+            BillOfSale b2 = new BillOfSale(dataService.GetAllWarehouseItems().First(), new Guid(), DateTime.Now);
             dataService.updateBill(dataService.GetAllBills().First().Id, b2);
 
             Assert.AreEqual(dataService.GetAllBills().First(), b2);
@@ -178,23 +165,9 @@ namespace TP_UnitTests
             dataService.DeleteWarehouseItem(dataService.GetAllWarehouseItems().First());
             Assert.AreEqual(0, dataService.GetAllWarehouseItems().Count());
         }
-        [TestMethod]
-        public void UpdateWarehouseItemTest()
-        {
-            /*Assert.AreEqual(0, dataService.GetAllFactures().Count());
-            dataService.AddClient("Andrzej", "Nowak", 123456789);
-            dataService.AddClient("Marian", "Kowalski", 987654321);
-            dataService.AddCar("Skoda", "Fabia", "Style", 210, "Silver Metalic", VehicleType.Small_car, FuelType.Petrol, Transmission.Manual);
-            dataService.AddCar("Alfa Romeo", "Brera", "Italia Independent", 210, "Matte Grey", VehicleType.Coupe, FuelType.Diesel, Transmission.Manual);
-            dataService.AddWarehouseItem(dataService.GetAllCars().First(), 10000);
-            WarehouseItem wh2 = new WarehouseItem(dataService.GetAllCars().Last(), 20000, new Guid());
-            dataService.updateWarehouseItem(dataService.GetAllWarehouseItems().First().Id, wh2);
-
-            Assert.AreEqual(dataService.GetAllWarehouseItems().First(),  wh2);*/
-
-        }
 
 
+        
         
     }
 }
