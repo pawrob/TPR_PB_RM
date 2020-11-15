@@ -19,7 +19,7 @@ namespace TP_DL
         // ADD METHODS
         public void AddCar(Car car)
         {
-            try
+ /*           try
             {
                 dataContext.Cars.Add(car.Id, car);
             }
@@ -30,7 +30,7 @@ namespace TP_DL
             catch (ArgumentException e)
             {
                 throw new ArgumentException($"Car with Id {car.Id} already exists.", e);
-            }
+            }*/
         }
 
         public void AddClient(Client client)
@@ -85,14 +85,14 @@ namespace TP_DL
         //DELETE METHODS
         public void DeleteCar(Car car)
         {
-            if (dataContext.Cars.ContainsKey(car.Id))
+/*            if (dataContext.Cars.ContainsKey(car.Id))
             {
                 dataContext.Cars.Remove(car.Id);
             }
             else
             {
                 throw new ArgumentException($"There isn't car with {car.Id} id in warehouse");
-            }
+            }*/
         }
 
         public void DeleteClient(Client client)
