@@ -57,6 +57,7 @@ namespace TP.Objects
     {
         Cabriolet,
         Estate_car,
+        Hatchback,
         Saloon,
         Small_car,
         Coupe,
