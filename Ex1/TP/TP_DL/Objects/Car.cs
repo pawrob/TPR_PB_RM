@@ -45,6 +45,8 @@ namespace TP_DL.Objects
         public FuelType Fueltype { get; set; }
         public Transmission Transmission { get; set; }
 
+        public Guid Id{ get; set; }
+
         public Car(string make, string model, string variant, int horsepower, string color, VehicleType vehicleType, FuelType fueltype, Transmission transmission)
         {
             Make = make;
@@ -55,6 +57,7 @@ namespace TP_DL.Objects
             VehicleType = vehicleType;
             Fueltype = fueltype;
             Transmission = transmission;
+            Id = new Guid();
         }
 
         public override bool Equals(object obj)

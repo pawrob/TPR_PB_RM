@@ -10,18 +10,33 @@ namespace TP_DL
     {
 
         private DataContext dataContext;
+        private IDataFiller dataFiller = null;
 
+        public IDataFiller DataFiller { get => dataFiller; set => dataFiller = value; }
         public DataRepository()
         {
             dataContext = new DataContext();
         }
 
+        public void FillData()
+        {
+            if (dataFiller != null)
+            {
+                dataFiller.InsertData(dataContext);
+            }
+        }
+
         // ADD METHODS
         public void AddCar(Car car)
         {
- /*           try
+           
+            try
             {
-                dataContext.Cars.Add(car.Id, car);
+                Guid g = new Guid();
+                car.Id = g;
+                dataContext.Cars.Add(g, car);
+                
+
             }
             catch (ArgumentNullException e)
             {
@@ -30,7 +45,7 @@ namespace TP_DL
             catch (ArgumentException e)
             {
                 throw new ArgumentException($"Car with Id {car.Id} already exists.", e);
-            }*/
+            }
         }
 
         public void AddClient(Client client)
@@ -85,14 +100,14 @@ namespace TP_DL
         //DELETE METHODS
         public void DeleteCar(Car car)
         {
-/*            if (dataContext.Cars.ContainsKey(car.Id))
+            if (dataContext.Cars.ContainsKey(car.Id))
             {
                 dataContext.Cars.Remove(car.Id);
             }
             else
             {
                 throw new ArgumentException($"There isn't car with {car.Id} id in warehouse");
-            }*/
+            }
         }
 
         public void DeleteClient(Client client)

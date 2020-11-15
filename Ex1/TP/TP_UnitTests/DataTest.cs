@@ -4,13 +4,23 @@ using TP_DL;
 using System.Linq;
 using System;
 
-namespace DataLayerTests
+namespace TP_UnitTests
 {
     [TestClass]
     public class DataLayerUnitTests
     {
 
         DataRepository dataRepository = new DataRepository();
+
+
+        [TestMethod]
+        public void ObjectsDataFiller()
+        {
+            DataFiller df1 = new DataFiller();
+            dataRepository.DataFiller = df1;
+            dataRepository.FillData();
+            Assert.AreEqual(1, dataRepository.GetAllClients().Count());
+        }
 
         [TestMethod]
         public void AddClientTest()

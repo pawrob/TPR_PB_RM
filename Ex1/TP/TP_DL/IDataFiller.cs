@@ -1,8 +1,7 @@
-﻿using TP_DL;
-
-namespace TP_UnitTests
+﻿
+namespace TP_DL
 {
-    interface IDataFiller
+    public interface IDataFiller
     {
         void InsertData(DataContext dataContext);
     }

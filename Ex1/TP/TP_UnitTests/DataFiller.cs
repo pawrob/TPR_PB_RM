@@ -9,24 +9,16 @@ using TP_DL;
 using TP_DL.Objects;
 
 
-namespace UnitTests
+namespace TP_UnitTests
 {
-    [TestClass]
-    public class DataFiller
+    public class DataFiller : IDataFiller
     {
-        //private string jsonString;
-        private const string fileName = (@"..\..\..\..\data.json");
 
-        [TestMethod]
-        public void LoadJson()
+        public DataFiller(){}
+
+        public void InsertData(DataContext dataContext)
         {
-            using (StreamReader r = new StreamReader(fileName))
-            {
-                string json = r.ReadToEnd();
-                List<Client> items = JsonConvert.DeserializeObject<List<Client>>(json);
-                string Something = string.Join(",", items);
-                Console.Write(Something);
-            }
+            dataContext.Clients.Add(new Client("John", "Doe", 000000000, new Guid()));
         }
     }
 }
