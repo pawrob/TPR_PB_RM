@@ -13,6 +13,8 @@ namespace TP_UnitTests
 {
     class DataXMLFiller : IDataFiller
     {
+        public DataXMLFiller() { }
+
         public Dictionary<string, string> Parse(XmlNode child)
         {
             Dictionary<string, string> dictionary = new Dictionary<string, string>();
@@ -22,6 +24,7 @@ namespace TP_UnitTests
             }
             return dictionary;
         }
+
         public void InsertData(DataContext dataContext)
         {
             XmlDocument xmlDocument = new XmlDocument();

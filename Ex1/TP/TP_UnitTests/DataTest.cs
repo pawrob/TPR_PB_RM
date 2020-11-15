@@ -23,6 +23,15 @@ namespace TP_UnitTests
         }
 
         [TestMethod]
+        public void XMLDataFiller()
+        {
+            DataXMLFiller df1 = new DataXMLFiller();
+            dataRepository.DataFiller = df1;
+            dataRepository.FillData();
+            Assert.AreEqual(5, dataRepository.GetAllClients().Count());
+        }
+
+        [TestMethod]
         public void AddClientTest()
         {
 
