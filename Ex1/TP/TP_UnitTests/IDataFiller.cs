@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using TP;
 
 namespace TP_UnitTests
 {
     interface IDataFiller
     {
+        void InsertData(DataContext dataContext);
     }
 }
