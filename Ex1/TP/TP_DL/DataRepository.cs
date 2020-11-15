@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
-using TP_DL.Objects;
 using System.Linq;
+using TP_DL.Objects;
 
 namespace TP_DL
 {
