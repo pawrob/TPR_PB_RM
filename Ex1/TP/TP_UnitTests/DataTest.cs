@@ -10,11 +10,11 @@ namespace TP_UnitTests
     public class DataLayerUnitTests
     {
 
-        DataRepository dataRepository = new DataRepository();
+        DataRepository dataRepository = new DataRepository(null);
 
 
         [TestMethod]
-        public void ObjectsDataFiller()
+        public void ObjectsDataFillerTest()
         {
             DataManualFiller df1 = new DataManualFiller();
             dataRepository.DataFiller = df1;
@@ -23,7 +23,7 @@ namespace TP_UnitTests
         }
 
         [TestMethod]
-        public void XMLDataFiller()
+        public void XMLDataFillerTest()
         {
             DataXMLFiller df1 = new DataXMLFiller();
             dataRepository.DataFiller = df1;
@@ -31,6 +31,7 @@ namespace TP_UnitTests
             Assert.AreEqual(5, dataRepository.GetAllClients().Count());
             Assert.AreEqual(5, dataRepository.GetAllCars().Count());
             Assert.AreEqual(5, dataRepository.GetAllFactures().Count());
+            Assert.AreEqual(5, dataRepository.GetAllBillesOfSale().Count());
             Assert.AreEqual(5, dataRepository.GetAllWarehouseItems().Count());
         }
 
@@ -163,6 +164,57 @@ namespace TP_UnitTests
             dataRepository.AddFacture(f1);
             Assert.IsTrue(dataRepository.GetFacture(f1.Id) == f1);
         }
+
+
+        [TestMethod]
+        public void AddBillTest()
+        {
+            Car Car1 = new Car("Alfa Romeo", "Brera", "Italia Independent", 210, "Matte Grey", VehicleType.Coupe, FuelType.Diesel, Transmission.Manual);
+           
+            WarehouseItem wi1 = new WarehouseItem(Car1,10000, Guid.Parse("594e4c41-7e20-432c-9773-085d75e9b90b")); 
+            BillOfSale b1 = new BillOfSale( wi1, Guid.Parse("594e4c41-7e20-432c-9773-085d75e9b90b"), Convert.ToDateTime("5.11.2020"));
+            dataRepository.AddBill(b1);
+            Assert.AreEqual(dataRepository.GetBill(b1.Id), b1);
+        }
+        [TestMethod]
+        public void RemoveBillTest()
+        {
+            Car Car1 = new Car("Alfa Romeo", "Brera", "Italia Independent", 210, "Matte Grey", VehicleType.Coupe, FuelType.Diesel, Transmission.Manual);
+
+            WarehouseItem wi1 = new WarehouseItem(Car1, 10000, Guid.Parse("594e4c41-7e20-432c-9773-085d75e9b90b"));
+            BillOfSale b1 = new BillOfSale(wi1, Guid.Parse("594e4c41-7e20-432c-9773-085d75e9b90b"), Convert.ToDateTime("5.11.2020"));
+            dataRepository.AddBill(b1);
+            Assert.AreEqual(dataRepository.GetBill(b1.Id), b1);
+            dataRepository.DeleteBill(b1);
+            Assert.AreEqual(0, dataRepository.GetAllBillesOfSale().Count());
+
+        }
+        [TestMethod]
+        public void UpdateBillTest()
+        {
+            Car Car1 = new Car("Alfa Romeo", "Brera", "Italia Independent", 210, "Matte Grey", VehicleType.Coupe, FuelType.Diesel, Transmission.Manual);
+
+            WarehouseItem wi1 = new WarehouseItem(Car1, 10000, Guid.Parse("594e4c41-7e20-432c-9773-085d75e9b90b"));
+            BillOfSale b1 = new BillOfSale(wi1, Guid.Parse("594e4c41-7e20-432c-9773-085d75e9b90b"), Convert.ToDateTime("5.11.2020"));
+            dataRepository.AddBill(b1);
+            Car Car2 = new Car("Skoda", "Fabia", "Style", 210, "Silver Metalic", VehicleType.Small_car, FuelType.Petrol, Transmission.Manual);
+            WarehouseItem wi2 = new WarehouseItem(Car2, 210000, Guid.Parse("2273ec6b-7c26-4bce-8ec0-00a2773d108a"));
+            BillOfSale b2 = new BillOfSale(wi2, Guid.Parse("bef406e7-61b5-4a14-86b7-d20af86cb752"), Convert.ToDateTime("8.11.2020"));
+            dataRepository.UpdateBill(b1.Id, b2);
+
+            Assert.AreEqual(b2, dataRepository.GetAllBillesOfSale().First());
+        }
+        [TestMethod]
+        public void GetBillTest()
+        {
+            Car Car1 = new Car("Alfa Romeo", "Brera", "Italia Independent", 210, "Matte Grey", VehicleType.Coupe, FuelType.Diesel, Transmission.Manual);
+
+            WarehouseItem wi1 = new WarehouseItem(Car1, 10000, Guid.Parse("594e4c41-7e20-432c-9773-085d75e9b90b"));
+            BillOfSale b1 = new BillOfSale(wi1, Guid.Parse("594e4c41-7e20-432c-9773-085d75e9b90b"), Convert.ToDateTime("5.11.2020"));
+            dataRepository.AddBill(b1);
+            Assert.IsTrue(dataRepository.GetBill(b1.Id) == b1);
+        }
+
 
         [TestMethod]
         public void AddWarehouseItemTest()

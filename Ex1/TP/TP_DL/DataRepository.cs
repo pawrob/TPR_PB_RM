@@ -9,20 +9,25 @@ namespace TP_DL
     {
 
         private DataContext dataContext;
-        private IDataFiller dataFiller = null;
+        public IDataFiller DataFiller = null;
 
-        public IDataFiller DataFiller { get => dataFiller; set => dataFiller = value; }
-        public DataRepository()
+
+        public DataRepository(IDataFiller dataFiller)
         {
-            dataContext = new DataContext();
+            this.DataFiller = dataFiller;
+            this.dataContext = new DataContext();
         }
 
         public void FillData()
         {
-            if (dataFiller != null)
+            if (DataFiller != null)
             {
-                dataFiller.InsertData(dataContext);
+                DataFiller.InsertData(dataContext);
             }
+            else {
+                throw new Exception($"Data filler is not specyfied.");
+            }
+
         }
 
         // ADD METHODS
@@ -80,6 +85,22 @@ namespace TP_DL
             }
         }
 
+        public void AddBill(BillOfSale bill)
+        {
+            try
+            {
+                dataContext.BillesOfSale.Add(bill);
+            }
+            catch (ArgumentNullException e)
+            {
+                throw new ArgumentNullException($"Bill with Id {bill.Id} do not exist.", e);
+            }
+            catch (ArgumentException e)
+            {
+                throw new ArgumentException($"Bill with Id {bill.Id} already exists.", e);
+            }
+        }
+
         public void AddWarehouseItem(WarehouseItem warehouseItem)
         {
             try
@@ -132,6 +153,17 @@ namespace TP_DL
                 throw new ArgumentException($"There isn't facture with {facture.Id} id in warehouse");
             }
         }
+        public void DeleteBill(BillOfSale bill)
+        {
+            if (dataContext.BillesOfSale.Contains(bill))
+            {
+                dataContext.BillesOfSale.Remove(bill);
+            }
+            else
+            {
+                throw new ArgumentException($"There isn't bill with {bill.Id} id in warehouse");
+            }
+        }
 
         public void DeleteWarehouseItem(WarehouseItem warehouseItem)
         {
@@ -158,6 +190,11 @@ namespace TP_DL
         public IEnumerable<Facture> GetAllFactures()
         {
             return dataContext.Factures;
+        }
+
+        public IEnumerable<BillOfSale> GetAllBillesOfSale()
+        {
+            return dataContext.BillesOfSale;
         }
 
         public IEnumerable<WarehouseItem> GetAllWarehouseItems()
@@ -200,6 +237,19 @@ namespace TP_DL
             else
             {
                 throw new ArgumentNullException($"There isn't facture with {id} id");
+            }
+        }
+
+        public BillOfSale GetBill(Guid id)
+        {
+            if (dataContext.BillesOfSale.Count != 0)
+            {
+
+                return dataContext.BillesOfSale.First(b => b.Id.Equals(id));
+            }
+            else
+            {
+                throw new ArgumentNullException($"There isn't bill with {id} id");
             }
         }
 
@@ -246,6 +296,16 @@ namespace TP_DL
                 throw new ArgumentException($"Facture with {id} id doesn't exist");
             }
             dataContext.Factures[dataContext.Factures.IndexOf(foundFacture)] = facture;
+        }
+
+        public void UpdateBill(Guid id,BillOfSale bill)
+        {
+            BillOfSale foundBill = dataContext.BillesOfSale.First(f => f.Id.Equals(id));
+            if (foundBill== null)
+            {
+                throw new ArgumentException($"Bill with {id} id doesn't exist");
+            }
+            dataContext.BillesOfSale[dataContext.BillesOfSale.IndexOf(foundBill)] = bill;
         }
 
         public void UpdateWarehouseItem(Guid id, WarehouseItem warehouseItem)

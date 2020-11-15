@@ -27,6 +27,12 @@ namespace TP_LL
         Facture GetFacture(Guid id);
         void updateFacture(Guid id, Facture facture);
 
+        void AddBill(WarehouseItem warehouseItem);
+        void DeleteBill(BillOfSale bill);
+        IEnumerable<BillOfSale> GetAllBills();
+        BillOfSale GetBill(Guid id);
+        void updateBill(Guid id, BillOfSale bill);
+
         //WarehouseItem
         void AddWarehouseItem(Car car, decimal price);
         void DeleteWarehouseItem(WarehouseItem warehouseItem);

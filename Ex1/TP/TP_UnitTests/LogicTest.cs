@@ -10,7 +10,7 @@ namespace TP_UnitTests
     [TestClass]
     public class LogicLayerUnitTests
     {
-        public DataService dataService = new DataService(new DataRepository());
+        public DataService dataService = new DataService(new DataRepository(null));
 
 
         [TestMethod]
@@ -44,11 +44,8 @@ namespace TP_UnitTests
 
 
         }
-        [TestMethod]
-        public void GetClientTest()
-        {
-           
-        }
+
+
 
 
 
@@ -81,10 +78,7 @@ namespace TP_UnitTests
             dataService.updateCar(dataService.GetAllCars().First().Id, dataService.GetAllCars().Last());
             Assert.AreEqual(dataService.GetAllCars().First(), dataService.GetAllCars().Last());*/
         }
-        [TestMethod]
-        public void GetCarTest()
-        {
-        }
+
         [TestMethod]
         public void AddFactureTest()
         {
@@ -122,10 +116,44 @@ namespace TP_UnitTests
             Assert.AreEqual(dataService.GetAllFactures().First(),f2);
 
         }
+
+
+
         [TestMethod]
-        public void GetFactureTest()
+        public void AddBillTest()
         {
-           
+            Assert.AreEqual(0, dataService.GetAllBills().Count());
+            
+            dataService.AddCar("Skoda", "Fabia", "Style", 210, "Silver Metalic", VehicleType.Small_car, FuelType.Petrol, Transmission.Manual);
+            dataService.AddWarehouseItem(dataService.GetAllCars().First(), 10000);
+            dataService.AddBill( dataService.GetAllWarehouseItems().First());
+            Assert.AreEqual(1, dataService.GetAllCars().Count());
+        }
+        [TestMethod]
+        public void RemoveBillTest()
+        {
+            Assert.AreEqual(0, dataService.GetAllBills().Count());
+
+            dataService.AddCar("Skoda", "Fabia", "Style", 210, "Silver Metalic", VehicleType.Small_car, FuelType.Petrol, Transmission.Manual);
+            dataService.AddWarehouseItem(dataService.GetAllCars().First(), 10000);
+            dataService.AddBill(dataService.GetAllWarehouseItems().First());
+            Assert.AreEqual(1, dataService.GetAllCars().Count());
+            dataService.DeleteBill(dataService.GetAllBills().First());
+            Assert.AreEqual(0, dataService.GetAllBills().Count());
+        }
+        [TestMethod]
+        public void UpdateBillTest()
+        {
+            Assert.AreEqual(0, dataService.GetAllBills().Count());
+
+            dataService.AddCar("Skoda", "Fabia", "Style", 210, "Silver Metalic", VehicleType.Small_car, FuelType.Petrol, Transmission.Manual);
+            dataService.AddWarehouseItem(dataService.GetAllCars().First(), 10000);
+            dataService.AddBill(dataService.GetAllWarehouseItems().First());
+            BillOfSale b2 = new BillOfSale( dataService.GetAllWarehouseItems().First(), new Guid(), DateTime.Now);
+            dataService.updateBill(dataService.GetAllBills().First().Id, b2);
+
+            Assert.AreEqual(dataService.GetAllBills().First(), b2);
+
         }
 
         [TestMethod]
@@ -165,11 +193,7 @@ namespace TP_UnitTests
             Assert.AreEqual(dataService.GetAllWarehouseItems().First(),  wh2);*/
 
         }
-        [TestMethod]
-        public void GetWarehouseItemTest()
-        {
 
-        }
 
         
     }

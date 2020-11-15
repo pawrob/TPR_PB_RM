@@ -27,6 +27,14 @@ namespace TP_DL
         public void UpdateFacture(Guid id, Facture facture);
         public void DeleteFacture(Facture facture);
 
+        //BillOfSale
+        public void AddBill(BillOfSale bill);
+        public BillOfSale GetBill(Guid id);
+        public IEnumerable<BillOfSale> GetAllBillesOfSale();
+        public void UpdateBill(Guid id, BillOfSale bill);
+        public void DeleteBill(BillOfSale bill);
+
+
         //stock
         public void AddWarehouseItem(WarehouseItem warehouseItem);
         public WarehouseItem GetWarehouseItem(Guid id);

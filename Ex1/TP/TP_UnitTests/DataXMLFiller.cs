@@ -45,6 +45,9 @@ namespace TP_UnitTests
                         case "factures":
                             dataContext.Factures.Add(new Facture(dataContext.Clients.Find(c => c.Id.Equals(Guid.Parse(elements["client"]))), dataContext.WarehouseItems.Find(c => c.Id.Equals(Guid.Parse(elements["warehouseItem"]))), Guid.Parse(elements["id"]), DateTime.ParseExact(elements["boughtTime"], "dd.MM.yyyy", CultureInfo.InvariantCulture)));
                             break;
+                        case "billesOfSale":
+                            dataContext.BillesOfSale.Add(new BillOfSale( dataContext.WarehouseItems.Find(c => c.Id.Equals(Guid.Parse(elements["warehouseItem"]))), Guid.Parse(elements["id"]), DateTime.ParseExact(elements["boughtTime"], "dd.MM.yyyy", CultureInfo.InvariantCulture)));
+                            break;
                     }
                 }
             }

@@ -33,6 +33,11 @@ namespace TP_LL
             dataRepository.AddFacture(new Facture(client, warehouseItem, new Guid(), DateTime.Now));
         }
 
+        public void AddBill(WarehouseItem warehouseItem)
+        {
+            dataRepository.AddBill(new BillOfSale(warehouseItem, new Guid(), DateTime.Now));
+        }
+
         public void AddWarehouseItem(Car car, decimal price)
         {
             dataRepository.AddWarehouseItem(new WarehouseItem(car, price, new Guid()));
@@ -57,6 +62,10 @@ namespace TP_LL
         {
             return dataRepository.GetAllFactures();
         }
+        public IEnumerable<BillOfSale> GetAllBills()
+        {
+            return dataRepository.GetAllBillesOfSale();
+        }
 
         public IEnumerable<WarehouseItem> GetAllWarehouseItems()
         {
@@ -78,6 +87,11 @@ namespace TP_LL
             return dataRepository.GetFacture(id);
         }
 
+        public BillOfSale GetBill(Guid id)
+        {
+            return dataRepository.GetBill(id);
+        }
+
         public WarehouseItem GetWarehouseItem(Guid id)
         {
             return dataRepository.GetWarehouseItem(id);
@@ -95,6 +109,11 @@ namespace TP_LL
         public void DeleteFacture(Facture facture)
         {
             dataRepository.DeleteFacture(facture);
+        }
+
+        public void DeleteBill(BillOfSale bill)
+        {
+            dataRepository.DeleteBill(bill);
         }
 
         public void DeleteWarehouseItem(WarehouseItem warehouseItem)
@@ -117,9 +136,23 @@ namespace TP_LL
             dataRepository.UpdateFacture(id, facture);
         }
 
+        public void updateBill(Guid id, BillOfSale bill)
+        {
+            dataRepository.UpdateBill(id, bill);
+        }
+
         public void updateWarehouseItem(Guid id, WarehouseItem warehouseItem)
         {
             dataRepository.UpdateWarehouseItem(id, warehouseItem);
         }
+
+
+
+
+
+
+
+
+       
     }
 }
