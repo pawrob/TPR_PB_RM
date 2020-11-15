@@ -26,17 +26,17 @@ namespace TP_LL
 
         public void AddClient(string firstName, string lastName, long phoneNumber)
         {
-            dataRepository.AddClient(new Client(firstName, lastName, phoneNumber));
+            dataRepository.AddClient(new Client(firstName, lastName, phoneNumber,new Guid()));
         }
 
         public void AddFacture(Client client, WarehouseItem warehouseItem)
         {
-            dataRepository.AddFacture(new Facture(client, warehouseItem));
+            dataRepository.AddFacture(new Facture(client, warehouseItem, new Guid(), DateTime.Now));
         }
 
         public void AddWarehouseItem(Car car, decimal price)
         {
-            dataRepository.AddWarehouseItem(new WarehouseItem(car, price));
+            dataRepository.AddWarehouseItem(new WarehouseItem(car, price, new Guid()));
         }
 
         public void DeleteClient(Client client)
