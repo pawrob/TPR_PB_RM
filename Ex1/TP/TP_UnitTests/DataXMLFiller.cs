@@ -44,7 +44,7 @@ namespace TP_UnitTests
                             dataContext.WarehouseItems.Add(new WarehouseItem(dataContext.Cars[Guid.Parse(elements["car"])], decimal.Parse(elements["price"]), Guid.Parse(elements["id"])));
                             break;
                         case "factures":
-                            dataContext.Factures.Add(new Facture(dataContext.Clients.Find(c => c.Id.Equals(Guid.Parse(elements["client"]))), dataContext.WarehouseItems.Find(c => c.Id.Equals(Guid.Parse(elements["warehouseItem"]))), Guid.Parse(elements["id"]), Convert.ToDateTime(elements["dateOfEmployment"])));
+                            dataContext.Factures.Add(new Facture(dataContext.Clients.Find(c => c.Id.Equals(Guid.Parse(elements["client"]))), dataContext.WarehouseItems.Find(c => c.Id.Equals(Guid.Parse(elements["warehouseItem"]))), Guid.Parse(elements["id"]), Convert.ToDateTime(elements["boughtTime"])));
                             break;
                     }
                 }
