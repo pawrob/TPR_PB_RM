@@ -1,0 +1,151 @@
+<dataContext>
+
+    <clients>
+        <Client>
+            <firstName>Andrzej</firstName>
+            <lastName>Duda</lastName>
+            <phoneNumber>127301025</phoneNumber>
+            <id>1981e86b-2f16-4b61-9d91-664bfed3ebc5</id>
+        </Client>
+        <Client>
+            <firstName>Nina</firstName>
+            <lastName>Wieczorek</lastName>
+            <phoneNumber>761842371</phoneNumber>
+            <id>03e0c811-7c69-4924-b0e0-b2a44065b9bd</id>
+        </Client>
+        <Client>
+            <firstName>Krzysztof</firstName>
+            <lastName>Głąb</lastName>
+            <phoneNumber>695291739</phoneNumber>
+            <id>1a13c1f9-4936-43ef-8258-de6300d83d7a</id>
+        </Client>
+        <Client>
+            <firstName>Karol</firstName>
+            <lastName>Wojtyła</lastName>
+            <phoneNumber>790772354</phoneNumber>
+            <id>1981e86b-2f16-4b61-9d91-664bfed3ebc5</id>
+        </Client>
+        <Client>
+            <firstName>Aleksander</firstName>
+            <lastName>Wojciechowski</lastName>
+            <phoneNumber>436979547</phoneNumber>
+            <id>c9163092-60ab-49cb-8784-9dccbad0dea7</id>
+        </Client>
+    </clients>
+
+    <cars>
+        <Car>
+            <id>c6287495-87fd-4092-a743-f230a0ca07b5</id>
+            <make>Alfa Romeo</make>
+            <model>Brera</model>
+            <variant>Italia Independent</variant>
+            <horsepower>210</horsepower>
+            <color>Matte Grey</color>
+            <vehicleType>Coupe</vehicleType>
+            <fuelType>Diesel</fuelType>
+            <transmission>Manual</transmission>
+        </Car>
+        <Car>
+            <id>13066b43-57ab-4ea5-9ced-f287ef6bf153</id>
+            <make>Volkswagen</make>
+            <model>Golf</model>
+            <variant>GTI</variant>
+            <horsepower>260</horsepower>
+            <color>Black</color>
+            <vehicleType>Hatchback</vehicleType>
+            <fuelType>Petrol</fuelType>
+            <transmission>Manual</transmission>
+        </Car>
+        <Car>
+            <id>ebecc7ac-c4a7-4031-abf0-4fb4e7322c18</id>
+            <make>Skoda</make>
+            <model>Fabia</model>
+            <variant>Style</variant>
+            <horsepower>140</horsepower>
+            <color>Silver Metalic</color>
+            <vehicleType>Small_car</vehicleType>
+            <fuelType>Petrol</fuelType>
+            <transmission>Manual</transmission>
+        </Car>
+        <Car>
+            <id>a6569dac-3652-453b-bd98-532edb8bf3bf</id>
+            <make>Renault</make>
+            <model>Latitude</model>
+            <variant>Initiale Paris</variant>
+            <horsepower>230</horsepower>
+            <color>Pearl White</color>
+            <vehicleType>Saloon</vehicleType>
+            <fuelType>Diesel</fuelType>
+            <transmission>Automatic</transmission>
+        </Car>
+        <Car>
+            <id>6c58d1b4-e48b-43a3-9961-a7646e88bdb3</id>
+            <make>Mercedes-Benz</make>
+            <model>C63 AMG</model>
+            <variant>Black Series</variant>
+            <horsepower>510</horsepower>
+            <color>Red</color>
+            <vehicleType>Coupe</vehicleType>
+            <fuelType>Petrol</fuelType>
+            <transmission>Automatic</transmission>
+        </Car>
+    </cars>
+
+
+    <warehouse>
+        <WarehouseItem>
+            <car>c6287495-87fd-4092-a743-f230a0ca07b5</car>
+            <price>90000</price>
+            <id>594e4c41-7e20-432c-9773-085d75e9b90b</id>
+        </WarehouseItem>
+        <WarehouseItem>
+            <car>13066b43-57ab-4ea5-9ced-f287ef6bf153</car>
+            <price>35500</price>
+            <id>a92eb04f-ba08-41cb-a6e7-f170ce793488</id>
+        </WarehouseItem>
+        <WarehouseItem>
+            <car>ebecc7ac-c4a7-4031-abf0-4fb4e7322c18</car>
+            <price>32100</price>
+            <id>6f16b79d-f9fd-4cc3-8e46-78f8a799b176</id>
+        </WarehouseItem>
+        <WarehouseItem>
+            <car>a6569dac-3652-453b-bd98-532edb8bf3bf</car>
+            <price>40000</price>
+            <id>cac289cf-9ff4-40ec-938e-ef446d74c2cc</id>
+        </WarehouseItem>
+        <WarehouseItem>
+            <car>6c58d1b4-e48b-43a3-9961-a7646e88bdb3</car>
+            <price>650000</price>
+            <id>2273ec6b-7c26-4bce-8ec0-00a2773d108a</id>
+        </WarehouseItem>
+    </warehouse>
+
+    <factures>
+        <Facture>
+            <client>1981e86b-2f16-4b61-9d91-664bfed3ebc5</client>
+            <warehouseItem>6c58d1b4-e48b-43a3-9961-a7646e88bdb3</warehouseItem>
+            <id>844d5572-65da-4b1b-a59f-387a99d8a3f8</id>
+        </Facture>
+        <Facture>
+            <client>03e0c811-7c69-4924-b0e0-b2a44065b9bd</client>
+            <warehouseItem>c6287495-87fd-4092-a743-f230a0ca07b5</warehouseItem>
+            <id>95c1ee50-0142-4ab9-8db4-0d425d10ceb7</id>
+        </Facture>
+        <Facture>
+            <client>1a13c1f9-4936-43ef-8258-de6300d83d7a</client>
+            <warehouseItem>a6569dac-3652-453b-bd98-532edb8bf3bf</warehouseItem>
+            <id>571a463b-9f25-47eb-8651-2c26e0202b74</id>
+        </Facture>
+        <Facture>
+            <client>1981e86b-2f16-4b61-9d91-664bfed3ebc5</client>
+            <warehouseItem>13066b43-57ab-4ea5-9ced-f287ef6bf153</warehouseItem>
+            <id>bef406e7-61b5-4a14-86b7-d20af86cb752</id>
+        </Facture>
+        <Facture>
+            <client>c9163092-60ab-49cb-8784-9dccbad0dea7</client>
+            <warehouseItem>ebecc7ac-c4a7-4031-abf0-4fb4e7322c18</warehouseItem>
+            <id>1d7126d3-c9c9-48f2-abca-30601b399913</id>
+        </Facture>
+    </factures>
+
+</dataContext>
