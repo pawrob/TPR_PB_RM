@@ -5,7 +5,7 @@ namespace TP_DL.Objects
     public class BillOfSale : PaymentType
     {
 
-        public Client Client;
+
         public WarehouseItem CarCopy;
         public Guid Id { get; }
         public DateTimeOffset BoughtTime { get; }
@@ -19,7 +19,7 @@ namespace TP_DL.Objects
 
         public override string ToString()
         {
-            return "Bought by: " + Client + ", Car: " + CarCopy.Car.Model + ", Id: " + Id + ", Date of bought: " + BoughtTime;
+            return "Bought  Car: " + CarCopy.Car.Model + ", Id: " + Id + ", Date of bought: " + BoughtTime;
         }
     }
 }
