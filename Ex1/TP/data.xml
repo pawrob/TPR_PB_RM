@@ -125,26 +125,31 @@
             <client>1981e86b-2f16-4b61-9d91-664bfed3ebc5</client>
             <warehouseItem>6c58d1b4-e48b-43a3-9961-a7646e88bdb3</warehouseItem>
             <id>844d5572-65da-4b1b-a59f-387a99d8a3f8</id>
+			<boughtTime>5.11.2020</boughtTime>
         </Facture>
         <Facture>
             <client>03e0c811-7c69-4924-b0e0-b2a44065b9bd</client>
             <warehouseItem>c6287495-87fd-4092-a743-f230a0ca07b5</warehouseItem>
             <id>95c1ee50-0142-4ab9-8db4-0d425d10ceb7</id>
+			<boughtTime>3.11.2020</boughtTime>
         </Facture>
         <Facture>
             <client>1a13c1f9-4936-43ef-8258-de6300d83d7a</client>
             <warehouseItem>a6569dac-3652-453b-bd98-532edb8bf3bf</warehouseItem>
             <id>571a463b-9f25-47eb-8651-2c26e0202b74</id>
+			<boughtTime>18.10.2020</boughtTime>
         </Facture>
         <Facture>
             <client>1981e86b-2f16-4b61-9d91-664bfed3ebc5</client>
             <warehouseItem>13066b43-57ab-4ea5-9ced-f287ef6bf153</warehouseItem>
             <id>bef406e7-61b5-4a14-86b7-d20af86cb752</id>
+			<boughtTime>15.10.2020</boughtTime>
         </Facture>
         <Facture>
             <client>c9163092-60ab-49cb-8784-9dccbad0dea7</client>
             <warehouseItem>ebecc7ac-c4a7-4031-abf0-4fb4e7322c18</warehouseItem>
             <id>1d7126d3-c9c9-48f2-abca-30601b399913</id>
+			<boughtTime>13.10.2020</boughtTime>
         </Facture>
     </factures>
 

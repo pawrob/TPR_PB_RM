@@ -11,13 +11,14 @@ namespace TP.Objects
         public long PhoneNumber { get; set; }
         public Guid Id { get; set; }
 
-        public Client(string firstName, string lastName, long phoneNumber)
+        public Client(string firstName, string lastName, long phoneNumber, Guid id)
         {
             FirstName = firstName;
             LastName = lastName;
             PhoneNumber = phoneNumber;
-            Id = Guid.NewGuid();
+            Id = id;
         }
+
         public override string ToString()
         {
             return "Client: " + FirstName + " " + LastName + " " + "\nPhone Number: " + PhoneNumber;

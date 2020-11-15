@@ -6,16 +6,15 @@ namespace TP.Objects
 {
     public class WarehouseItem
     {
-       
-        public Guid Id  { get; set; }
         public Car Car { get; set; }
         public decimal Price { get; set; }
+        public Guid Id  { get; set; }
 
-        public WarehouseItem(Car car, decimal price)
+        public WarehouseItem(Car car, decimal price, Guid id)
         {
-            this.Car = car;
-            this.Price = price;
-            this.Id = Guid.NewGuid();
+            Car = car;
+            Price = price;
+            Id = id;
         }
 
         public override string ToString()

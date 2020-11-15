@@ -12,14 +12,14 @@ namespace TP.Objects
         public Guid Id { get; }
         public DateTimeOffset BoughtTime { get; }
 
-
-        public Facture(Client client, WarehouseItem warehouseItem)
+        public Facture(Client client, WarehouseItem carCopy, Guid id, DateTimeOffset boughtTime)
         {
             Client = client;
-            CarCopy = warehouseItem;
-            Id = Guid.NewGuid();
-            BoughtTime = DateTime.UtcNow;
+            CarCopy = carCopy;
+            Id = id;
+            BoughtTime = boughtTime;
         }
+
 
         public override string ToString()
         {
