@@ -12,7 +12,7 @@ namespace TP_LL
 
         private IDataRepository dataRepository;
 
-        static void Main() { }
+
 
         public DataService(IDataRepository dataRepository)
         {
