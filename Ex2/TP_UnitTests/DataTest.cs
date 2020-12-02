@@ -3,6 +3,7 @@ using TP_DL.Objects;
 using TP_DL;
 using System.Linq;
 using System;
+using TP_Serializer;
 
 namespace TP_UnitTests
 {
@@ -122,7 +123,7 @@ namespace TP_UnitTests
             Car Car1 = new Car("Alfa Romeo", "Brera", "Italia Independent", 210, "Matte Grey", VehicleType.Coupe, FuelType.Diesel, Transmission.Manual);
             Client c1 = new Client("Jan", "Kowalski", 111111, Guid.Parse("1981e86b-2f16-4b61-9d91-664bfed3ebc5"));
             WarehouseItem wi1 = new WarehouseItem(Car1,10000, Guid.Parse("594e4c41-7e20-432c-9773-085d75e9b90b")); 
-            Facture f1 = new Facture(c1, wi1, Guid.Parse("594e4c41-7e20-432c-9773-085d75e9b90b"), Convert.ToDateTime("5.11.2020"));
+            SellCar f1 = new SellCar(c1, wi1, Guid.Parse("594e4c41-7e20-432c-9773-085d75e9b90b"), Convert.ToDateTime("5.11.2020"));
             dataRepository.AddFacture(f1);
             Assert.AreEqual(dataRepository.GetFacture(f1.Id), f1);
         }
@@ -132,7 +133,7 @@ namespace TP_UnitTests
             Car Car1 = new Car("Alfa Romeo", "Brera", "Italia Independent", 210, "Matte Grey", VehicleType.Coupe, FuelType.Diesel, Transmission.Manual);
             Client c1 = new Client("Jan", "Kowalski", 111111, Guid.Parse("1981e86b-2f16-4b61-9d91-664bfed3ebc5"));
             WarehouseItem wi1 = new WarehouseItem(Car1, 10000, Guid.Parse("594e4c41-7e20-432c-9773-085d75e9b90b"));
-            Facture f1 = new Facture(c1, wi1, Guid.Parse("594e4c41-7e20-432c-9773-085d75e9b90b"), Convert.ToDateTime("5.11.2020"));
+            SellCar f1 = new SellCar(c1, wi1, Guid.Parse("594e4c41-7e20-432c-9773-085d75e9b90b"), Convert.ToDateTime("5.11.2020"));
             dataRepository.AddFacture(f1);
             Assert.AreEqual(dataRepository.GetFacture(f1.Id), f1);
             dataRepository.DeleteFacture(f1);
@@ -145,11 +146,11 @@ namespace TP_UnitTests
             Car Car1 = new Car("Alfa Romeo", "Brera", "Italia Independent", 210, "Matte Grey", VehicleType.Coupe, FuelType.Diesel, Transmission.Manual);
             Client c1 = new Client("Jan", "Kowalski", 111111, Guid.Parse("1981e86b-2f16-4b61-9d91-664bfed3ebc5"));
             WarehouseItem wi1 = new WarehouseItem(Car1, 10000, Guid.Parse("594e4c41-7e20-432c-9773-085d75e9b90b"));
-            Facture f1 = new Facture(c1, wi1, Guid.Parse("594e4c41-7e20-432c-9773-085d75e9b90b"), Convert.ToDateTime("5.11.2020"));
+            SellCar f1 = new SellCar(c1, wi1, Guid.Parse("594e4c41-7e20-432c-9773-085d75e9b90b"), Convert.ToDateTime("5.11.2020"));
             dataRepository.AddFacture(f1);
             Car Car2 = new Car("Skoda", "Fabia", "Style", 210, "Silver Metalic", VehicleType.Small_car, FuelType.Petrol, Transmission.Manual);
             WarehouseItem wi2 = new WarehouseItem(Car2, 210000, Guid.Parse("2273ec6b-7c26-4bce-8ec0-00a2773d108a"));
-            Facture f2 = new Facture(c1, wi2, Guid.Parse("bef406e7-61b5-4a14-86b7-d20af86cb752"), Convert.ToDateTime("8.11.2020"));
+            SellCar f2 = new SellCar(c1, wi2, Guid.Parse("bef406e7-61b5-4a14-86b7-d20af86cb752"), Convert.ToDateTime("8.11.2020"));
             dataRepository.UpdateFacture(f1.Id, f2);
 
             Assert.AreEqual(f2, dataRepository.GetAllFactures().First());
@@ -160,7 +161,7 @@ namespace TP_UnitTests
             Car Car1 = new Car("Alfa Romeo", "Brera", "Italia Independent", 210, "Matte Grey", VehicleType.Coupe, FuelType.Diesel, Transmission.Manual);
             Client c1 = new Client("Jan", "Kowalski", 111111, Guid.Parse("1981e86b-2f16-4b61-9d91-664bfed3ebc5"));
             WarehouseItem wi1 = new WarehouseItem(Car1, 10000, Guid.Parse("594e4c41-7e20-432c-9773-085d75e9b90b"));
-            Facture f1 = new Facture(c1, wi1, Guid.Parse("594e4c41-7e20-432c-9773-085d75e9b90b"), Convert.ToDateTime("5.11.2020"));
+            SellCar f1 = new SellCar(c1, wi1, Guid.Parse("594e4c41-7e20-432c-9773-085d75e9b90b"), Convert.ToDateTime("5.11.2020"));
             dataRepository.AddFacture(f1);
             Assert.IsTrue(dataRepository.GetFacture(f1.Id) == f1);
         }
@@ -172,7 +173,7 @@ namespace TP_UnitTests
             Car Car1 = new Car("Alfa Romeo", "Brera", "Italia Independent", 210, "Matte Grey", VehicleType.Coupe, FuelType.Diesel, Transmission.Manual);
            
             WarehouseItem wi1 = new WarehouseItem(Car1,10000, Guid.Parse("594e4c41-7e20-432c-9773-085d75e9b90b")); 
-            BillOfSale b1 = new BillOfSale( wi1, Guid.Parse("594e4c41-7e20-432c-9773-085d75e9b90b"), Convert.ToDateTime("5.11.2020"));
+            BuyCar b1 = new BuyCar( wi1, Guid.Parse("594e4c41-7e20-432c-9773-085d75e9b90b"), Convert.ToDateTime("5.11.2020"));
             dataRepository.AddBill(b1);
             Assert.AreEqual(dataRepository.GetBill(b1.Id), b1);
         }
@@ -182,7 +183,7 @@ namespace TP_UnitTests
             Car Car1 = new Car("Alfa Romeo", "Brera", "Italia Independent", 210, "Matte Grey", VehicleType.Coupe, FuelType.Diesel, Transmission.Manual);
 
             WarehouseItem wi1 = new WarehouseItem(Car1, 10000, Guid.Parse("594e4c41-7e20-432c-9773-085d75e9b90b"));
-            BillOfSale b1 = new BillOfSale(wi1, Guid.Parse("594e4c41-7e20-432c-9773-085d75e9b90b"), Convert.ToDateTime("5.11.2020"));
+            BuyCar b1 = new BuyCar(wi1, Guid.Parse("594e4c41-7e20-432c-9773-085d75e9b90b"), Convert.ToDateTime("5.11.2020"));
             dataRepository.AddBill(b1);
             Assert.AreEqual(dataRepository.GetBill(b1.Id), b1);
             dataRepository.DeleteBill(b1);
@@ -195,11 +196,11 @@ namespace TP_UnitTests
             Car Car1 = new Car("Alfa Romeo", "Brera", "Italia Independent", 210, "Matte Grey", VehicleType.Coupe, FuelType.Diesel, Transmission.Manual);
 
             WarehouseItem wi1 = new WarehouseItem(Car1, 10000, Guid.Parse("594e4c41-7e20-432c-9773-085d75e9b90b"));
-            BillOfSale b1 = new BillOfSale(wi1, Guid.Parse("594e4c41-7e20-432c-9773-085d75e9b90b"), Convert.ToDateTime("5.11.2020"));
+            BuyCar b1 = new BuyCar(wi1, Guid.Parse("594e4c41-7e20-432c-9773-085d75e9b90b"), Convert.ToDateTime("5.11.2020"));
             dataRepository.AddBill(b1);
             Car Car2 = new Car("Skoda", "Fabia", "Style", 210, "Silver Metalic", VehicleType.Small_car, FuelType.Petrol, Transmission.Manual);
             WarehouseItem wi2 = new WarehouseItem(Car2, 210000, Guid.Parse("2273ec6b-7c26-4bce-8ec0-00a2773d108a"));
-            BillOfSale b2 = new BillOfSale(wi2, Guid.Parse("bef406e7-61b5-4a14-86b7-d20af86cb752"), Convert.ToDateTime("8.11.2020"));
+            BuyCar b2 = new BuyCar(wi2, Guid.Parse("bef406e7-61b5-4a14-86b7-d20af86cb752"), Convert.ToDateTime("8.11.2020"));
             dataRepository.UpdateBill(b1.Id, b2);
 
             Assert.AreEqual(b2, dataRepository.GetAllBillesOfSale().First());
@@ -210,7 +211,7 @@ namespace TP_UnitTests
             Car Car1 = new Car("Alfa Romeo", "Brera", "Italia Independent", 210, "Matte Grey", VehicleType.Coupe, FuelType.Diesel, Transmission.Manual);
 
             WarehouseItem wi1 = new WarehouseItem(Car1, 10000, Guid.Parse("594e4c41-7e20-432c-9773-085d75e9b90b"));
-            BillOfSale b1 = new BillOfSale(wi1, Guid.Parse("594e4c41-7e20-432c-9773-085d75e9b90b"), Convert.ToDateTime("5.11.2020"));
+            BuyCar b1 = new BuyCar(wi1, Guid.Parse("594e4c41-7e20-432c-9773-085d75e9b90b"), Convert.ToDateTime("5.11.2020"));
             dataRepository.AddBill(b1);
             Assert.IsTrue(dataRepository.GetBill(b1.Id) == b1);
         }

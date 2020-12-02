@@ -30,12 +30,12 @@ namespace TP_LL
 
         public void AddFacture(Client client, WarehouseItem warehouseItem)
         {
-            dataRepository.AddFacture(new Facture(client, warehouseItem, new Guid(), DateTime.Now));
+            dataRepository.AddFacture(new SellCar(client, warehouseItem, new Guid(), DateTime.Now));
         }
 
         public void AddBill(WarehouseItem warehouseItem)
         {
-            dataRepository.AddBill(new BillOfSale(warehouseItem, new Guid(), DateTime.Now));
+            dataRepository.AddBill(new BuyCar(warehouseItem, new Guid(), DateTime.Now));
         }
 
         public void AddWarehouseItem(Car car, decimal price)
@@ -58,11 +58,11 @@ namespace TP_LL
             return dataRepository.GetAllClients();
         }
 
-        public IEnumerable<Facture> GetAllFactures()
+        public IEnumerable<SellCar> GetAllFactures()
         {
             return dataRepository.GetAllFactures();
         }
-        public IEnumerable<BillOfSale> GetAllBills()
+        public IEnumerable<BuyCar> GetAllBills()
         {
             return dataRepository.GetAllBillesOfSale();
         }
@@ -82,12 +82,12 @@ namespace TP_LL
             return dataRepository.GetClient(id);
         }
 
-        public Facture GetFacture(Guid id)
+        public SellCar GetFacture(Guid id)
         {
             return dataRepository.GetFacture(id);
         }
 
-        public BillOfSale GetBill(Guid id)
+        public BuyCar GetBill(Guid id)
         {
             return dataRepository.GetBill(id);
         }
@@ -106,12 +106,12 @@ namespace TP_LL
             dataRepository.DeleteCar(car);
         }
 
-        public void DeleteFacture(Facture facture)
+        public void DeleteFacture(SellCar facture)
         {
             dataRepository.DeleteFacture(facture);
         }
 
-        public void DeleteBill(BillOfSale bill)
+        public void DeleteBill(BuyCar bill)
         {
             dataRepository.DeleteBill(bill);
         }
@@ -131,12 +131,12 @@ namespace TP_LL
             dataRepository.UpdateClient(id, client);
         }
 
-        public void updateFacture(Guid id, Facture facture)
+        public void updateFacture(Guid id, SellCar facture)
         {
             dataRepository.UpdateFacture(id, facture);
         }
 
-        public void updateBill(Guid id, BillOfSale bill)
+        public void updateBill(Guid id, BuyCar bill)
         {
             dataRepository.UpdateBill(id, bill);
         }

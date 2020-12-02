@@ -21,18 +21,18 @@ namespace TP_DL
         public void DeleteClient(Client client);
 
         //facture
-        public void AddFacture(Facture facture);
-        public Facture GetFacture(Guid id);
-        public IEnumerable<Facture> GetAllFactures();
-        public void UpdateFacture(Guid id, Facture facture);
-        public void DeleteFacture(Facture facture);
+        public void AddFacture(SellCar facture);
+        public SellCar GetFacture(Guid id);
+        public IEnumerable<SellCar> GetAllFactures();
+        public void UpdateFacture(Guid id, SellCar facture);
+        public void DeleteFacture(SellCar facture);
 
         //BillOfSale
-        public void AddBill(BillOfSale bill);
-        public BillOfSale GetBill(Guid id);
-        public IEnumerable<BillOfSale> GetAllBillesOfSale();
-        public void UpdateBill(Guid id, BillOfSale bill);
-        public void DeleteBill(BillOfSale bill);
+        public void AddBill(BuyCar bill);
+        public BuyCar GetBill(Guid id);
+        public IEnumerable<BuyCar> GetAllBillesOfSale();
+        public void UpdateBill(Guid id, BuyCar bill);
+        public void DeleteBill(BuyCar bill);
 
 
         //stock

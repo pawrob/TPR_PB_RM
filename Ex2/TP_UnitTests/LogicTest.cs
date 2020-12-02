@@ -97,7 +97,7 @@ namespace TP_UnitTests
             dataService.AddCar("Skoda", "Fabia", "Style", 210, "Silver Metalic", VehicleType.Small_car, FuelType.Petrol, Transmission.Manual);
             dataService.AddWarehouseItem(dataService.GetAllCars().First(), 10000);
             dataService.AddFacture(dataService.GetAllClients().First(), dataService.GetAllWarehouseItems().First());
-            Facture f2 = new Facture(dataService.GetAllClients().Last(), dataService.GetAllWarehouseItems().First(), new Guid(), DateTime.Now);
+            SellCar f2 = new SellCar(dataService.GetAllClients().Last(), dataService.GetAllWarehouseItems().First(), new Guid(), DateTime.Now);
             dataService.updateFacture(dataService.GetAllFactures().First().Id, f2);
 
             Assert.AreEqual(dataService.GetAllFactures().First(), f2);
@@ -136,7 +136,7 @@ namespace TP_UnitTests
             dataService.AddCar("Skoda", "Fabia", "Style", 210, "Silver Metalic", VehicleType.Small_car, FuelType.Petrol, Transmission.Manual);
             dataService.AddWarehouseItem(dataService.GetAllCars().First(), 10000);
             dataService.AddBill(dataService.GetAllWarehouseItems().First());
-            BillOfSale b2 = new BillOfSale(dataService.GetAllWarehouseItems().First(), new Guid(), DateTime.Now);
+            BuyCar b2 = new BuyCar(dataService.GetAllWarehouseItems().First(), new Guid(), DateTime.Now);
             dataService.updateBill(dataService.GetAllBills().First().Id, b2);
 
             Assert.AreEqual(dataService.GetAllBills().First(), b2);

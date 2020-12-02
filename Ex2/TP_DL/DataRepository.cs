@@ -69,11 +69,11 @@ namespace TP_DL
         }
    
 
-        public void AddFacture(Facture facture)
+        public void AddFacture(SellCar facture)
         {
             try
             {
-                dataContext.Factures.Add(facture);
+                dataContext.SoldCars.Add(facture);
             }
             catch (ArgumentNullException e)
             {
@@ -85,11 +85,11 @@ namespace TP_DL
             }
         }
 
-        public void AddBill(BillOfSale bill)
+        public void AddBill(BuyCar bill)
         {
             try
             {
-                dataContext.BillesOfSale.Add(bill);
+                dataContext.BoughtCars.Add(bill);
             }
             catch (ArgumentNullException e)
             {
@@ -142,22 +142,22 @@ namespace TP_DL
             }
         }
 
-        public void DeleteFacture(Facture facture)
+        public void DeleteFacture(SellCar facture)
         {
-            if (dataContext.Factures.Contains(facture))
+            if (dataContext.SoldCars.Contains(facture))
             {
-                dataContext.Factures.Remove(facture);
+                dataContext.SoldCars.Remove(facture);
             }
             else
             {
                 throw new ArgumentException($"There isn't facture with {facture.Id} id in warehouse");
             }
         }
-        public void DeleteBill(BillOfSale bill)
+        public void DeleteBill(BuyCar bill)
         {
-            if (dataContext.BillesOfSale.Contains(bill))
+            if (dataContext.BoughtCars.Contains(bill))
             {
-                dataContext.BillesOfSale.Remove(bill);
+                dataContext.BoughtCars.Remove(bill);
             }
             else
             {
@@ -187,14 +187,14 @@ namespace TP_DL
             return dataContext.Clients;
         }
 
-        public IEnumerable<Facture> GetAllFactures()
+        public IEnumerable<SellCar> GetAllFactures()
         {
-            return dataContext.Factures;
+            return dataContext.SoldCars;
         }
 
-        public IEnumerable<BillOfSale> GetAllBillesOfSale()
+        public IEnumerable<BuyCar> GetAllBillesOfSale()
         {
-            return dataContext.BillesOfSale;
+            return dataContext.BoughtCars;
         }
 
         public IEnumerable<WarehouseItem> GetAllWarehouseItems()
@@ -227,12 +227,12 @@ namespace TP_DL
             }   
         }
 
-        public Facture GetFacture(Guid id)
+        public SellCar GetFacture(Guid id)
         {
-            if (dataContext.Factures.Count != 0)
+            if (dataContext.SoldCars.Count != 0)
             {
 
-                return dataContext.Factures.First(f => f.Id.Equals(id));
+                return dataContext.SoldCars.First(f => f.Id.Equals(id));
             }
             else
             {
@@ -240,12 +240,12 @@ namespace TP_DL
             }
         }
 
-        public BillOfSale GetBill(Guid id)
+        public BuyCar GetBill(Guid id)
         {
-            if (dataContext.BillesOfSale.Count != 0)
+            if (dataContext.BoughtCars.Count != 0)
             {
 
-                return dataContext.BillesOfSale.First(b => b.Id.Equals(id));
+                return dataContext.BoughtCars.First(b => b.Id.Equals(id));
             }
             else
             {
@@ -288,24 +288,24 @@ namespace TP_DL
             dataContext.Clients[dataContext.Clients.IndexOf(foundClient)] = client;
         }
 
-        public void UpdateFacture(Guid id, Facture facture)
+        public void UpdateFacture(Guid id, SellCar facture)
         {
-            Facture foundFacture = dataContext.Factures.First(f => f.Id.Equals(id)); 
+            SellCar foundFacture = dataContext.SoldCars.First(f => f.Id.Equals(id)); 
             if (foundFacture == null)
             {
                 throw new ArgumentException($"Facture with {id} id doesn't exist");
             }
-            dataContext.Factures[dataContext.Factures.IndexOf(foundFacture)] = facture;
+            dataContext.SoldCars[dataContext.SoldCars.IndexOf(foundFacture)] = facture;
         }
 
-        public void UpdateBill(Guid id,BillOfSale bill)
+        public void UpdateBill(Guid id,BuyCar bill)
         {
-            BillOfSale foundBill = dataContext.BillesOfSale.First(f => f.Id.Equals(id));
+            BuyCar foundBill = dataContext.BoughtCars.First(f => f.Id.Equals(id));
             if (foundBill== null)
             {
                 throw new ArgumentException($"Bill with {id} id doesn't exist");
             }
-            dataContext.BillesOfSale[dataContext.BillesOfSale.IndexOf(foundBill)] = bill;
+            dataContext.BoughtCars[dataContext.BoughtCars.IndexOf(foundBill)] = bill;
         }
 
         public void UpdateWarehouseItem(Guid id, WarehouseItem warehouseItem)

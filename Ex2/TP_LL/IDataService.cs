@@ -22,16 +22,16 @@ namespace TP_LL
 
         //Facture
         void AddFacture(Client client, WarehouseItem warehouseItem);
-        void DeleteFacture(Facture facture);
-        IEnumerable<Facture> GetAllFactures();
-        Facture GetFacture(Guid id);
-        void updateFacture(Guid id, Facture facture);
+        void DeleteFacture(SellCar facture);
+        IEnumerable<SellCar> GetAllFactures();
+        SellCar GetFacture(Guid id);
+        void updateFacture(Guid id, SellCar facture);
 
         void AddBill(WarehouseItem warehouseItem);
-        void DeleteBill(BillOfSale bill);
-        IEnumerable<BillOfSale> GetAllBills();
-        BillOfSale GetBill(Guid id);
-        void updateBill(Guid id, BillOfSale bill);
+        void DeleteBill(BuyCar bill);
+        IEnumerable<BuyCar> GetAllBills();
+        BuyCar GetBill(Guid id);
+        void updateBill(Guid id, BuyCar bill);
 
         //WarehouseItem
         void AddWarehouseItem(Car car, decimal price);
