@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 
 namespace TP_DL.Objects
 {
-    public class WarehouseItem
+    public class WarehouseItem : ISerializable
     {
         public Car Car { get; set; }
         public decimal Price { get; set; }
@@ -16,6 +17,14 @@ namespace TP_DL.Objects
             Id = id;
         }
 
+        public WarehouseItem(SerializationInfo info, StreamingContext context)
+        {
+            Car = (Car)info.GetValue("Car", typeof(Car));
+            Price = info.GetDecimal("Price");
+
+            Id = (Guid)info.GetValue("Id", typeof(Guid));
+        }
+
         public override string ToString()
         {
             return "Car: " + Car.Model + " Car Id: " + Id;
@@ -26,6 +35,12 @@ namespace TP_DL.Objects
                    Id.Equals(stock.Id) &&
                    EqualityComparer<Car>.Default.Equals(Car, stock.Car) &&
                    Price == stock.Price;
+        }
+        public void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            info.AddValue("Car", Car, typeof(Car));
+            info.AddValue("Price", Price);
+            info.AddValue("Id", Id, typeof(Guid));
         }
     }
 }

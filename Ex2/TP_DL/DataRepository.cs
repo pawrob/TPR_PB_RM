@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using TP_DL.Objects;
+using System.Runtime.Serialization;
 
 namespace TP_DL
 {
-    public class DataRepository : IDataRepository
+    public class DataRepository : IDataRepository, ISerializable
     {
 
         private DataContext dataContext;
@@ -16,6 +17,16 @@ namespace TP_DL
         {
             this.DataFiller = dataFiller;
             this.dataContext = new DataContext();
+        }
+
+        public DataRepository(SerializationInfo info, StreamingContext context)
+        {
+            dataContext = (DataContext)info.GetValue("dataContext", typeof(DataContext));
+
+        }
+        public void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            info.AddValue("dataContext", dataContext, typeof(DataContext));
         }
 
         public void FillData()
