@@ -14,11 +14,11 @@ namespace TP_DL.Objects
             eventDate = date;
         }
 
-        public Event(SerializationInfo info, StreamingContext context)
+/*        public Event(SerializationInfo info, StreamingContext context)
         {
             Id = (Guid)info.GetValue("Id", typeof(Guid));
             eventDate = info.GetDateTime("eventDate");
-        }
+        }*/
 
         public virtual void GetObjectData(SerializationInfo info, StreamingContext context)
         {

@@ -24,14 +24,14 @@ namespace TP_DL
             WarehouseItems = new List<WarehouseItem>();  
         }
 
-        public DataContext(SerializationInfo info, StreamingContext context)
+/*        public DataContext(SerializationInfo info, StreamingContext context)
         {
             Clients = (List<Client>)info.GetValue("Clients", typeof(List<Client>));
             Cars = (Dictionary<Guid, Car>)info.GetValue("Cars", typeof(Dictionary<Guid, Car>));  //Dictionary<Guid, Car>();
             SoldCars = (ObservableCollection<SellCar>)info.GetValue("SoldCars", typeof(ObservableCollection<SellCar>));// ObservableCollection<SellCar>();
             BoughtCars = (ObservableCollection<BuyCar>)info.GetValue("BoughtCars", typeof(ObservableCollection<BuyCar>)); //ObservableCollection<BuyCar>();
             WarehouseItems = (List<WarehouseItem>)info.GetValue("WarehouseItems", typeof(List<WarehouseItem>));// List<WarehouseItem>();
-        }
+        }*/
 
         public void GetObjectData(SerializationInfo info, StreamingContext context)
         {

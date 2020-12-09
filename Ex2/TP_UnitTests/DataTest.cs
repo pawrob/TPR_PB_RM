@@ -20,7 +20,7 @@ namespace TP_UnitTests
             DataManualFiller df1 = new DataManualFiller();
             dataRepository.DataFiller = df1;
             dataRepository.FillData();
-            Assert.AreEqual(1, dataRepository.GetAllClients().Count());
+            Assert.AreEqual(3, dataRepository.GetAllClients().Count());
         }
 
         [TestMethod]

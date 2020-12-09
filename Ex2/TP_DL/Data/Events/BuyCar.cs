@@ -12,10 +12,10 @@ namespace TP_DL.Objects
             CarCopy = carCopy;
         }
 
-        public BuyCar(SerializationInfo info, StreamingContext context) : base(info, context)
+/*        public BuyCar(SerializationInfo info, StreamingContext context) : base(info, context)
         {   
             CarCopy = (WarehouseItem)info.GetValue("CarCopy", typeof(WarehouseItem));
-        }
+        }*/
         
 
         public override string ToString()

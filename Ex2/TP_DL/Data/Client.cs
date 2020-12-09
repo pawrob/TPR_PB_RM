@@ -18,13 +18,13 @@ namespace TP_DL.Objects
             Id = id;
         }
 
-        public Client(SerializationInfo info, StreamingContext context)
+       /* public Client(SerializationInfo info, StreamingContext context)
         {
             FirstName = info.GetString("FirstName");
             LastName = info.GetString("LastName");
             PhoneNumber = info.GetInt64("PhoneNumber");
             Id = (Guid)info.GetValue("Id", typeof(Guid));
-        }
+        }*/
 
         public override string ToString()
         {

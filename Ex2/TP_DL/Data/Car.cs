@@ -59,7 +59,7 @@ namespace TP_DL.Objects
             Id = new Guid();
         }
 
-        public Car(SerializationInfo info, StreamingContext context)
+/*        public Car(SerializationInfo info, StreamingContext context)
         {
             Make = info.GetString("Make");
             Model = info.GetString("Model");
@@ -71,7 +71,7 @@ namespace TP_DL.Objects
             FuelType = (FuelType)info.GetValue("FuelType", typeof(Enum));
             Id = (Guid)info.GetValue("Id", typeof(Guid));
         }
-
+*/
         public override bool Equals(object obj)
         {
             return obj is Car car &&

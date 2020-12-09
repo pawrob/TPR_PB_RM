@@ -16,11 +16,11 @@ namespace TP_DL.Objects
             CarCopy = carCopy;
         }
 
-        public SellCar(SerializationInfo info, StreamingContext context) : base(info, context)
+/*        public SellCar(SerializationInfo info, StreamingContext context) : base(info, context)
         {
             CarCopy = (WarehouseItem)info.GetValue("CarCopy", typeof(WarehouseItem));
             Client = (Client)info.GetValue("Client", typeof(Client));
-        }
+        }*/
 
         public override string ToString()
         {

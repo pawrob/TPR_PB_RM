@@ -17,13 +17,13 @@ namespace TP_DL.Objects
             Id = id;
         }
 
-        public WarehouseItem(SerializationInfo info, StreamingContext context)
+/*        public WarehouseItem(SerializationInfo info, StreamingContext context)
         {
             Car = (Car)info.GetValue("Car", typeof(Car));
             Price = info.GetDecimal("Price");
 
             Id = (Guid)info.GetValue("Id", typeof(Guid));
-        }
+        }*/
 
         public override string ToString()
         {
