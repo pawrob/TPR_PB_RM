@@ -6,7 +6,7 @@ using System.Runtime.Serialization;
 
 namespace TP_DL
 {
-    public class DataRepository : IDataRepository, ISerializable
+    public class DataRepository : IDataRepository
     {
 
         private DataContext dataContext;
@@ -19,15 +19,7 @@ namespace TP_DL
             this.dataContext = new DataContext();
         }
 
-        public DataRepository(SerializationInfo info, StreamingContext context)
-        {
-            dataContext = (DataContext)info.GetValue("dataContext", typeof(DataContext));
 
-        }
-        public void GetObjectData(SerializationInfo info, StreamingContext context)
-        {
-            info.AddValue("dataContext", dataContext, typeof(DataContext));
-        }
 
         public void FillData()
         {

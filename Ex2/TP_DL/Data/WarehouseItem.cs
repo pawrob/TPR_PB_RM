@@ -4,8 +4,8 @@ using System.Runtime.Serialization;
 
 namespace TP_DL.Objects
 {
-    public class WarehouseItem : ISerializable
-    {
+    public class WarehouseItem 
+    { 
         public Car Car { get; set; }
         public decimal Price { get; set; }
         public Guid Id  { get; set; }
@@ -16,14 +16,6 @@ namespace TP_DL.Objects
             Price = price;
             Id = id;
         }
-
-/*        public WarehouseItem(SerializationInfo info, StreamingContext context)
-        {
-            Car = (Car)info.GetValue("Car", typeof(Car));
-            Price = info.GetDecimal("Price");
-
-            Id = (Guid)info.GetValue("Id", typeof(Guid));
-        }*/
 
         public override string ToString()
         {
@@ -36,11 +28,6 @@ namespace TP_DL.Objects
                    EqualityComparer<Car>.Default.Equals(Car, stock.Car) &&
                    Price == stock.Price;
         }
-        public void GetObjectData(SerializationInfo info, StreamingContext context)
-        {
-            info.AddValue("Car", Car, typeof(Car));
-            info.AddValue("Price", Price);
-            info.AddValue("Id", Id, typeof(Guid));
-        }
+
     }
 }

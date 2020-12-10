@@ -3,7 +3,7 @@ using System.Runtime.Serialization;
 
 namespace TP_DL.Objects
 {
-    public class Client : ISerializable
+    public class Client
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -18,14 +18,6 @@ namespace TP_DL.Objects
             Id = id;
         }
 
-       /* public Client(SerializationInfo info, StreamingContext context)
-        {
-            FirstName = info.GetString("FirstName");
-            LastName = info.GetString("LastName");
-            PhoneNumber = info.GetInt64("PhoneNumber");
-            Id = (Guid)info.GetValue("Id", typeof(Guid));
-        }*/
-
         public override string ToString()
         {
             return "Client: " + FirstName + " " + LastName + " " + "\nPhone Number: " + PhoneNumber;
@@ -37,12 +29,6 @@ namespace TP_DL.Objects
                    LastName == client.LastName &&
                    PhoneNumber == client.PhoneNumber;
         }
-        public void GetObjectData(SerializationInfo info, StreamingContext context)
-        {
-            info.AddValue("FirstName", FirstName);
-            info.AddValue("LastName", LastName);
-            info.AddValue("PhoneNumber", PhoneNumber);
-            info.AddValue("Id", Id, typeof(Guid));
-        }
+
     }
 }

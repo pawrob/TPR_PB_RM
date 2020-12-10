@@ -33,7 +33,7 @@ namespace TP_DL.Objects
     }
 
 
-    public class Car : ISerializable
+    public class Car
     {
         public string Make { get; set; }
         public string Model { get; set; }
@@ -59,19 +59,7 @@ namespace TP_DL.Objects
             Id = new Guid();
         }
 
-/*        public Car(SerializationInfo info, StreamingContext context)
-        {
-            Make = info.GetString("Make");
-            Model = info.GetString("Model");
-            Variant = info.GetString("Variant");
-            Horsepower = info.GetInt32("Horsepower");
-            Color = info.GetString("Color");
-            VehicleType = (VehicleType)info.GetValue("VehicleType", typeof(Enum));    
-            Transmission = (Transmission)info.GetValue("Transmission", typeof(Enum));
-            FuelType = (FuelType)info.GetValue("FuelType", typeof(Enum));
-            Id = (Guid)info.GetValue("Id", typeof(Guid));
-        }
-*/
+
         public override bool Equals(object obj)
         {
             return obj is Car car &&
@@ -89,21 +77,9 @@ namespace TP_DL.Objects
         {
             return "Make: " + Make + "Model: " + Model + "Variant: " + Variant + "Horsepower: " + Horsepower + "Color: " + Color
                     + "VehicleType: " + VehicleType + "FuelType: " + FuelType + "Transmission: " + Transmission;
-            /*            return nameof(Id) + Id + ", " nameof(Make) + Make + ", " nameof(Model) + Model + ", " nameof(Variant) + Variant + ", " nameof(Horsepower) + Horsepower + ", " nameof(Color) + Color
-                                + ", " nameof(VehicleType) + VehicleType + ", " nameof(Fueltype) + Fueltype + ", " nameof(Transmission) + Transmission;*/
+
         }
 
-        public void GetObjectData(SerializationInfo info, StreamingContext context)
-        {
-            info.AddValue("Make", Make);
-            info.AddValue("Model", Model);
-            info.AddValue("Variant", Variant);
-            info.AddValue("Horsepower", Horsepower);
-            info.AddValue("Color", Color);
-            info.AddValue("VehicleType", VehicleType, typeof(VehicleType));
-            info.AddValue("FuelType", FuelType, typeof(FuelType));
-            info.AddValue("Transmission", Transmission, typeof(Transmission));
-            info.AddValue("Id", Id, typeof(Guid));
-        }
+
     }
 }

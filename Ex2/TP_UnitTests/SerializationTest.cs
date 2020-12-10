@@ -75,17 +75,18 @@ namespace TP_UnitTests
             classB.ClassCProperty = classC;
             classC.ClassAProperty = classA;
 
-            using (FileStream s = new FileStream(@"C:\Users\Pawrob\Desktop\test.txt", FileMode.Create))
+            using (FileStream s = new FileStream("test.txt", FileMode.Create))
             {
                 IFormatter f = new CustomFormatter();
                 f.Serialize(s, classA);
             }
 
-            string result = File.ReadAllText(@"C:\Users\Pawrob\Desktop\test.txt");
-            Assert.AreEqual(result, ""
-   
-            );
-            File.Delete("test.txt");
+            string result = File.ReadAllText("test.txt");
+            Assert.AreEqual(result, "TP_DL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null|TP_DL.RefenrecesModel.ClassA|1|System.Decimal=DecimalProperty=1,20|System.DateTime=DateTimeProperty=1996-12-31 23:00:00|System.String=StringProperty=\"TestA\"|TP_DL.RefenrecesModel.ClassB=ClassBProperty=2\n"
+                                  + "TP_DL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null|TP_DL.RefenrecesModel.ClassB|2|System.Decimal=DecimalProperty=2,20|System.DateTime=DateTimeProperty=1997-01-31 23:00:00|System.String=StringProperty=\"testB\"|TP_DL.RefenrecesModel.ClassC=ClassCProperty=3\n"
+                                  + "TP_DL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null|TP_DL.RefenrecesModel.ClassC|3|System.Decimal=DecimalProperty=3,20|System.DateTime=DateTimeProperty=1997-02-28 23:00:00|System.String=StringProperty=\"testC\"|TP_DL.RefenrecesModel.ClassA=ClassAProperty=1\n");
+
+           File.Delete("test.txt");
         }
 
         [TestMethod]
@@ -106,10 +107,9 @@ namespace TP_UnitTests
             }
 
             string result = File.ReadAllText("test.txt");
-            Assert.AreEqual(result, "ClassLibrary1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null|ClassLibrary.ClassB|1|System.Single=FloatProperty=2.20|System.DateTime=DateTimeProperty=31.01.1997 23:00:00|System.String=StringProperty=\"testB\"|ClassLibrary.ClassC=ClassCProperty=2\n"
-                                  + "ClassLibrary1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null|ClassLibrary.ClassC|2|System.Single=FloatProperty=3.20|System.DateTime=DateTimeProperty=28.02.1997 23:00:00|System.String=StringProperty=\"testC\"|ClassLibrary.ClassA=ClassAProperty=3\n"
-                                  + "ClassLibrary1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null|ClassLibrary.ClassA|3|System.Single=FloatProperty=1.20|System.DateTime=DateTimeProperty=31.12.1996 23:00:00|System.String=StringProperty=\"TestA\"|ClassLibrary.ClassB=ClassBProperty=1\n"
-            );
+            Assert.AreEqual(result, "TP_DL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null|TP_DL.RefenrecesModel.ClassB|1|System.Decimal=DecimalProperty=2,20|System.DateTime=DateTimeProperty=1997-01-31 23:00:00|System.String=StringProperty=\"testB\"|TP_DL.RefenrecesModel.ClassC=ClassCProperty=2\n"
+                                   +"TP_DL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null|TP_DL.RefenrecesModel.ClassC|2|System.Decimal=DecimalProperty=3,20|System.DateTime=DateTimeProperty=1997-02-28 23:00:00|System.String=StringProperty=\"testC\"|TP_DL.RefenrecesModel.ClassA=ClassAProperty=3\n"
+                                   +"TP_DL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null|TP_DL.RefenrecesModel.ClassA|3|System.Decimal=DecimalProperty=1,20|System.DateTime=DateTimeProperty=1996-12-31 23:00:00|System.String=StringProperty=\"TestA\"|TP_DL.RefenrecesModel.ClassB=ClassBProperty=1\n");
             File.Delete("test.txt");
         }
 
@@ -131,10 +131,9 @@ namespace TP_UnitTests
             }
 
             string result = File.ReadAllText("test.txt");
-            Assert.AreEqual(result, "ClassLibrary1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null|ClassLibrary.ClassC|1|System.Single=FloatProperty=3.20|System.DateTime=DateTimeProperty=28.02.1997 23:00:00|System.String=StringProperty=\"testC\"|ClassLibrary.ClassA=ClassAProperty=2\n"
-                                  + "ClassLibrary1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null|ClassLibrary.ClassA|2|System.Single=FloatProperty=1.20|System.DateTime=DateTimeProperty=31.12.1996 23:00:00|System.String=StringProperty=\"TestA\"|ClassLibrary.ClassB=ClassBProperty=3\n"
-                                  + "ClassLibrary1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null|ClassLibrary.ClassB|3|System.Single=FloatProperty=2.20|System.DateTime=DateTimeProperty=31.01.1997 23:00:00|System.String=StringProperty=\"testB\"|ClassLibrary.ClassC=ClassCProperty=1\n"
-            );
+            Assert.AreEqual(result, "TP_DL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null|TP_DL.RefenrecesModel.ClassC|1|System.Decimal=DecimalProperty=3,20|System.DateTime=DateTimeProperty=1997-02-28 23:00:00|System.String=StringProperty=\"testC\"|TP_DL.RefenrecesModel.ClassA=ClassAProperty=2\n"
+                                   +"TP_DL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null|TP_DL.RefenrecesModel.ClassA|2|System.Decimal=DecimalProperty=1,20|System.DateTime=DateTimeProperty=1996-12-31 23:00:00|System.String=StringProperty=\"TestA\"|TP_DL.RefenrecesModel.ClassB=ClassBProperty=3\n"
+                                   +"TP_DL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null|TP_DL.RefenrecesModel.ClassB|3|System.Decimal=DecimalProperty=2,20|System.DateTime=DateTimeProperty=1997-01-31 23:00:00|System.String=StringProperty=\"testB\"|TP_DL.RefenrecesModel.ClassC=ClassCProperty=1\n");
             File.Delete("test.txt");
         }
 
@@ -219,45 +218,6 @@ namespace TP_UnitTests
             File.Delete("test.txt");
         }
 
-        /*  public void CustomSerializationTest()
-          {
-              DataContext dataContext = new DataContext();
-              IDataFiller dataFiller = new DataManualFiller();
-
-              dataFiller.InsertData(dataContext);
-
-              using (FileStream s = new FileStream("test.txt", FileMode.Create))
-              {
-                  IFormatter f = new Formatter();
-                  f.Serialize(s, dataContext);
-              }
-
-              File.Delete("test.txt");
-          }
-
-          [TestMethod]
-          public void CustomDeserializationTest()
-          {
-              DataContext dataContext = new DataContext();
-
-              IDataFiller dataFiller = new DataManualFiller();
-
-              dataFiller.InsertData(dataContext);
-
-              using (FileStream s = new FileStream("test.txt", FileMode.Create))
-              {
-                  IFormatter f = new CustomFormatter();
-                  f.Serialize(s, dataContext);
-              }
-
-              using (FileStream s = new FileStream("test.txt", FileMode.Open))
-              {
-                  IFormatter f = new CustomFormatter();
-                  DataContext newDataContext = (DataContext)f.Deserialize(s);
-                  Assert.AreEqual(1, newDataContext.Clients.Count());
-              }
-
-
-          }*/
-    } 
+       
+    }
 }
