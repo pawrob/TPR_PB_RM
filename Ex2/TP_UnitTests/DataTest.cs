@@ -21,6 +21,10 @@ namespace TP_UnitTests
             dataRepository.DataFiller = df1;
             dataRepository.FillData();
             Assert.AreEqual(3, dataRepository.GetAllClients().Count());
+            Assert.AreEqual(2, dataRepository.GetAllCars().Count());
+            Assert.AreEqual(1, dataRepository.GetAllWarehouseItems().Count());
+            Assert.AreEqual(1, dataRepository.GetAllFactures().Count());
+            Assert.AreEqual(1, dataRepository.GetAllBillesOfSale().Count());
         }
 
         [TestMethod]

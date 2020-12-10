@@ -30,6 +30,7 @@ namespace TP_UnitTests
             CollectionAssert.AreEqual(dataContext.Clients, deserializedDataContext.Clients);
             CollectionAssert.AreEqual(dataContext.Cars, deserializedDataContext.Cars);
             CollectionAssert.AreEqual(dataContext.WarehouseItems, deserializedDataContext.WarehouseItems);
+
             CollectionAssert.AreEqual(dataContext.BoughtCars, deserializedDataContext.BoughtCars);
             CollectionAssert.AreEqual(dataContext.SoldCars, deserializedDataContext.SoldCars);
         }

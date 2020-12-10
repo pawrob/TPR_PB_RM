@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Runtime.Serialization;
 
 namespace TP_DL.Objects
@@ -14,6 +15,14 @@ namespace TP_DL.Objects
         {
             Client = client;
             CarCopy = carCopy;
+        }
+
+        public override bool Equals(object obj)
+        {
+            return obj is SellCar car &&
+                   Id.Equals(car.Id) &&
+                   EqualityComparer<Client>.Default.Equals(Client, car.Client) &&
+                   EqualityComparer<WarehouseItem>.Default.Equals(CarCopy, car.CarCopy);
         }
 
         public override string ToString()

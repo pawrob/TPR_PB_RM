@@ -14,5 +14,11 @@ namespace TP_DL.Objects
             eventDate = date;
         }
 
+        public override bool Equals(object obj)
+        {
+            return obj is Event @event &&
+                   Id.Equals(@event.Id) &&
+                   eventDate.Equals(@event.eventDate);
+        }
     }
 }
