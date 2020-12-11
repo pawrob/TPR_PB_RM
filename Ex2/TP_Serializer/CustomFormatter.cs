@@ -11,36 +11,34 @@ namespace TP_Serializer
         public override SerializationBinder Binder { get; set; }
         public override StreamingContext Context { get; set; }
         public override ISurrogateSelector SurrogateSelector { get; set; }
-        private string SerializedData = "";
-        private List<string> DataToSave = new List<string>();
-        private List<string> DeserializeInfo = new List<string>();
-        private Dictionary<string, object> References = new Dictionary<string, object>();
-
-
+        public ObjectIDGenerator IdGenerator { get; set; }
 
         public CustomFormatter()
         {
             Binder = new CustomBinder();
             Context = new StreamingContext(StreamingContextStates.File);
+            IdGenerator = new ObjectIDGenerator();
         }
 
-       
+        #region Serialize
+        private string SerializedData = "";   //Data to serialize
+        private List<string> FormattedSerializedData = new List<string>(); //List of serialized data
 
         public override void Serialize(Stream serializationStream, object graph)
         {
             if (graph is ISerializable data)
             {
                 SerializationInfo info = new SerializationInfo(graph.GetType(), new FormatterConverter());
-                Binder.BindToName(graph.GetType(), out string assemblyName, out string typeName);
-                SerializedData += assemblyName + "|" + typeName + "|" + this.m_idGenerator.GetId(graph, out bool firstTime);
+                Binder.BindToName(graph.GetType(), out string assemblyName, out string typeName); //Bind graph type to assembly
+                SerializedData += assemblyName + "|" + typeName + "|" + IdGenerator.GetId(graph, out bool firstTime); //Generating ID for specified object
                 data.GetObjectData(info, Context);
-
                 foreach (SerializationEntry item in info)
                 {
                     WriteMember(item.Name, item.Value);
                 }
+                FormattedSerializedData.Add(SerializedData + "\n"); //Divide data by rows
+                SerializedData = "";    //Empty the SerializedData String
 
-                SaveAndCleanDataRow();
                 while (this.m_objectQueue.Count != 0)
                 {
                     this.Serialize(null, this.m_objectQueue.Dequeue());
@@ -50,107 +48,100 @@ namespace TP_Serializer
             }
             else
             {
-                throw new ArgumentException("graph is not Iserializable");
+                throw new ArgumentException("Object graph does not implement interface Iserializable");
             }
         }
+        #endregion
 
-
-        public override object Deserialize(Stream serializationStream)
-        {
-            RecreateReferences(serializationStream);
-            foreach (string row in DeserializeInfo)
-            {
-                string[] splitDataRow = row.Split('|');
-                Type objectDeserializeType = GetTypeFromSplitDeserializeInfoRow(splitDataRow);
-                SerializationInfo info = new SerializationInfo(objectDeserializeType, new FormatterConverter());
-                GetSerializationInfoFromDeserializeInfoRow(info, splitDataRow);
-                Type[] constructorTypes = { info.GetType(), Context.GetType() };
-                object[] constuctorParameters = { info, Context };
-                References[splitDataRow[2]].GetType().GetConstructor(constructorTypes).Invoke(References[splitDataRow[2]], constuctorParameters);
-
-            }
-
-            return References["1"];
-        }
-
-
-        #region functions
-
-
-        private void SaveAndCleanDataRow()
-        {
-            DataToSave.Add(SerializedData + "\n");
-            SerializedData = "";
-        }
-
+        #region Serialize functions
         private void SaveToStream(Stream serializationStream)
         {
-            if (serializationStream != null)
+            if (serializationStream != null && m_objectQueue.Count == 0)
             {
                 using (StreamWriter writer = new StreamWriter(serializationStream))
                 {
-                    foreach (string line in DataToSave)
+                    foreach (string line in FormattedSerializedData)
                         writer.Write(line);
                 }
+            }
+        }
+        #endregion
+
+
+        #region Deserialize
+        private List<string> DeserializedData = new List<string>();
+        private Dictionary<string, object> References = new Dictionary<string, object>();
+
+        public override object Deserialize(Stream serializationStream)
+        {
+            if (serializationStream != null)
+            {
+                RecreateReferences(serializationStream);
+            }
+            foreach (string row in DeserializedData)
+            {
+                string[] splitRow = row.Split('|');
+                Type objectDeserialize = GetBindedType(splitRow);   //Get splitRow type for deserialization
+
+                SerializationInfo info = new SerializationInfo(objectDeserialize, new FormatterConverter());
+                for (int i = 3; i < splitRow.Length; i++)
+                {
+                    string[] data = splitRow[i].Split('=');
+                    Type dataRow = Binder.BindToType(splitRow[0], data[0]);
+                    if (dataRow == null)
+                    {
+                        if (!data[0].Equals("null"))
+                        {
+                            SaveParsedValueToSerializationInfo(info, Type.GetType(data[0]), data[1], data[2]);
+                        }
+                        else
+                        {
+                            info.AddValue(data[1], null);
+                        }
+                    }
+                    else
+                    {
+                        if (!data[2].Equals("-1"))
+                        {
+                            info.AddValue(data[1], References[data[2]], dataRow);
+                        }
+                    }
+                }
+                //Constructing References
+                Type[] constructorTypes = { info.GetType(), Context.GetType() };
+                object[] constuctorParameters = { info, Context };
+                References[splitRow[2]].GetType().GetConstructor(constructorTypes).Invoke(References[splitRow[2]], constuctorParameters);
+            }
+            return References["1"];
+        }
+        #endregion
+
+        #region Deserialize functions
+        private void CreateReferences()
+        {
+            foreach (string item in DeserializedData)
+            {
+                String[] splits = item.Split('|'); //Splits every item in deserialized data
+                References.Add(splits[2], FormatterServices.GetSafeUninitializedObject(Binder.BindToType(splits[0], splits[1])));
             }
         }
 
         private void RecreateReferences(Stream serializationStream)
         {
-            if (serializationStream != null)
+            using (StreamReader reader = new StreamReader(serializationStream))
             {
-                using (StreamReader reader = new StreamReader(serializationStream))
+                String line;
+                while ((line = reader.ReadLine()) != null)
                 {
-                    String line;
-                    while ((line = reader.ReadLine()) != null)
-                    {
-                        DeserializeInfo.Add(line);
-                    }
-                }
-                CreateReferences();
-            }
-        }
-
-        private void CreateReferences()
-        {
-            foreach (string item in DeserializeInfo)
-            {
-                String[] splits = item.Split('|');
-                References.Add(splits[2], FormatterServices.GetSafeUninitializedObject(Binder.BindToType(splits[0], splits[1])));
-            }
-        }
-
-        private Type GetTypeFromSplitDeserializeInfoRow(string[] splitDeserializeRow)
-        {
-            return Binder.BindToType(splitDeserializeRow[0], splitDeserializeRow[1]);
-        }
-
-        private void GetSerializationInfoFromDeserializeInfoRow(SerializationInfo info, string[] splitedDeserializationInfoRow)
-        {
-            for (int i = 3; i < splitedDeserializationInfoRow.Length; i++)
-            {
-                string[] data = splitedDeserializationInfoRow[i].Split('=');
-                Type typeToSave = Binder.BindToType(splitedDeserializationInfoRow[0], data[0]);
-                if (typeToSave == null)
-                {
-                    if (!data[0].Equals("null"))
-                    {
-                        SaveParsedValueToSerializationInfo(info, Type.GetType(data[0]), data[1], data[2]);
-                    }
-                    else
-                    {
-                        info.AddValue(data[1], null);
-                    }
-
-                }
-                else
-                {
-                    if (!data[2].Equals("-1"))
-                    {
-                        info.AddValue(data[1], References[data[2]], typeToSave);
-                    }
+                    DeserializedData.Add(line);
                 }
             }
+            CreateReferences();
+        }
+
+        private Type GetBindedType(string[] splitRow)
+        {
+            return Binder.BindToType(splitRow[0], splitRow[1]);
         }
 
         private void SaveParsedValueToSerializationInfo(SerializationInfo info, Type type, string name, string val)
@@ -172,18 +163,15 @@ namespace TP_Serializer
                 case "System.Guid":
                     info.AddValue(name, Guid.Parse(val));
                     break;
-                case "System.Enum":
-                    info.AddValue(name, Enum.Parse(type, val));
-                    break;
                 case "System.Decimal":
                     info.AddValue(name, Decimal.Parse(val));
                     break;
             }
         }
-
         #endregion
 
-        #region WriteRegion
+
+        #region Write
         protected override void WriteObjectRef(object obj, string name, Type memberType)
         {
             if (memberType.Equals(typeof(String)))
@@ -193,6 +181,27 @@ namespace TP_Serializer
             else
             {
                 WriteObject(obj, name, memberType);
+            }
+        }
+
+        protected void WriteString(object obj, string name)
+        {
+            SerializedData += "|" + obj.GetType() + "=" + name + "=" + "\"" + (String)obj + "\"";
+        }
+
+        protected void WriteObject(object obj, string name, Type type)
+        {
+            if (obj != null)
+            {
+                SerializedData += "|" + obj.GetType() + "=" + name + "=" + IdGenerator.GetId(obj, out bool firstTime).ToString();
+                if (firstTime)
+                {
+                    this.m_objectQueue.Enqueue(obj);
+                }
+            }
+            else
+            {
+                SerializedData += "|" + "null" + "=" + name + "=-1";
             }
         }
 
@@ -221,39 +230,12 @@ namespace TP_Serializer
             SerializedData += "|" + obj.GetType() + "=" + name + "=" + "\"" + obj.ToString() + "\"";
         }
 
-        protected void WriteObject(object obj, string name, Type type)
-        {
-            if (obj != null)
-            {
-                SerializedData += "|" + obj.GetType() + "=" + name + "=" + this.m_idGenerator.GetId(obj, out bool firstTime).ToString();
-                if (firstTime)
-                {
-                    this.m_objectQueue.Enqueue(obj);
-                }
-            }
-            else
-            {
-                SerializedData += "|" + "null" + "=" + name + "=-1";
-            }
-        }
-
-        protected void WriteString(object obj, string name)
-        {
-            SerializedData += "|" + obj.GetType() + "=" + name + "=" + "\"" + (String)obj + "\"";
-        }
-
         protected void WriteGuid(Guid val, string name)
         {
             SerializedData += "|" + val.GetType() + "=" + name + "=" + "\"" + val.ToString() + "\"";
         }
-
-        protected void WriteEnum(Enum val, string name, Type type)
-        {
-            SerializedData += "|" + val.GetType() + "=" + name + "=" + "\"" + val.ToString() + "\"";
-        }
         #endregion
-
-       
+ 
         
         #region notimplemented
         protected override void WriteArray(object obj, string name, Type memberType)
@@ -315,9 +297,6 @@ namespace TP_Serializer
             throw new NotImplementedException();
         }
         #endregion
-
-        
-      
     }
 }
 

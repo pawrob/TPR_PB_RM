@@ -37,44 +37,85 @@ namespace TP_UnitTests
 
 
         [TestMethod]
-        public void TestOwnFormatter()
+        public void PreserveReferencesTestForClassA()
         {
-            ClassA classA = new ClassA(1.2m, new DateTime(1997, 1, 1, 0, 0, 0), "TestA", null);
-            ClassB classB = new ClassB(2.2m, new DateTime(1997, 2, 1, 0, 0, 0), "testB", null);
-            ClassC classC = new ClassC(3.2m, new DateTime(1997, 3, 1, 0, 0, 0), "testC", null);
-
+            ClassA classA = new ClassA(new DateTime(1997, 1, 1, 0, 0, 0), 1.2m, "TestA", null);
+            ClassB classB = new ClassB(new DateTime(1997, 2, 1, 0, 0, 0), 2.2m, "testB", null);
+            ClassC classC = new ClassC(new DateTime(1997, 3, 1, 0, 0, 0), 3.2m, "testC", null);
 
             classA.ClassBProperty = classB;
             classB.ClassCProperty = classC;
             classC.ClassAProperty = classA;
 
             CustomFormatter formatter = new CustomFormatter();
-
             using (Stream stream = File.Open("test.txt", FileMode.Create, FileAccess.ReadWrite))
             {
                 formatter.Serialize(stream, classA);
             }
 
-            ClassA classACopy;
+            ClassA classADuplicate;
             using (Stream stream = File.Open("test.txt", FileMode.Open, FileAccess.Read))
             {
-                classACopy = (ClassA)formatter.Deserialize(stream);
+                classADuplicate = (ClassA)formatter.Deserialize(stream);
             }
-
-            Assert.AreSame(classACopy.ClassBProperty.ClassCProperty.ClassAProperty, classACopy);
+            Assert.AreSame(classADuplicate.ClassBProperty.ClassCProperty.ClassAProperty, classADuplicate);
         }
 
         [TestMethod]
-
-        public void ClassASerializationATest()
+        public void PreserveReferencesTestForClassB()
         {
-            ClassA classA = new ClassA(1.2m, new DateTime(1997, 1, 1, 0, 0, 0), "TestA", null);
-            ClassB classB = new ClassB(2.2m, new DateTime(1997, 2, 1, 0, 0, 0), "testB", null);
-            ClassC classC = new ClassC(3.2m, new DateTime(1997, 3, 1, 0, 0, 0), "testC", null);
+            ClassA classA = new ClassA(new DateTime(1997, 1, 1, 0, 0, 0), 1.2m, "TestA", null);
+            ClassB classB = new ClassB(new DateTime(1997, 2, 1, 0, 0, 0), 2.2m, "testB", null);
+            ClassC classC = new ClassC(new DateTime(1997, 3, 1, 0, 0, 0), 3.2m, "testC", null);
 
             classA.ClassBProperty = classB;
             classB.ClassCProperty = classC;
             classC.ClassAProperty = classA;
+
+            CustomFormatter formatter = new CustomFormatter();
+            using (Stream stream = File.Open("test.txt", FileMode.Create, FileAccess.ReadWrite))
+            {
+                formatter.Serialize(stream, classB);
+            }
+
+            ClassB classBDuplicate;
+            using (Stream stream = File.Open("test.txt", FileMode.Open, FileAccess.Read))
+            {
+                classBDuplicate = (ClassB)formatter.Deserialize(stream);
+            }
+            Assert.AreSame(classBDuplicate.ClassCProperty.ClassAProperty.ClassBProperty, classBDuplicate);
+        }
+
+        [TestMethod]
+        public void PreserveReferencesTestForClassC()
+        {
+            ClassA classA = new ClassA(new DateTime(1997, 1, 1, 0, 0, 0), 1.2m, "TestA", null);
+            ClassB classB = new ClassB(new DateTime(1997, 2, 1, 0, 0, 0), 2.2m, "testB", null);
+            ClassC classC = new ClassC(new DateTime(1997, 3, 1, 0, 0, 0), 3.2m, "testC", null);
+
+            classA.ClassBProperty = classB;
+            classB.ClassCProperty = classC;
+            classC.ClassAProperty = classA;
+
+            CustomFormatter formatter = new CustomFormatter();
+            using (Stream stream = File.Open("test.txt", FileMode.Create, FileAccess.ReadWrite))
+            {
+                formatter.Serialize(stream, classC);
+            }
+
+            ClassC classCDuplicate;
+            using (Stream stream = File.Open("test.txt", FileMode.Open, FileAccess.Read))
+            {
+                classCDuplicate = (ClassC)formatter.Deserialize(stream);
+            }
+            Assert.AreSame(classCDuplicate.ClassAProperty.ClassBProperty.ClassCProperty, classCDuplicate);
+        }
+
+        [TestMethod]
+
+        public void ClassASimpleSerializationTest()
+        {
+            ClassA classA = new ClassA(new DateTime(1997, 1, 1, 0, 0, 0), 1.2m, "TestA", null);
 
             using (FileStream s = new FileStream("test.txt", FileMode.Create))
             {
@@ -83,19 +124,17 @@ namespace TP_UnitTests
             }
 
             string result = File.ReadAllText("test.txt");
-            Assert.AreEqual(result, "TP_DL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null|TP_DL.RefenrecesModel.ClassA|1|System.Decimal=DecimalProperty=1,20|System.DateTime=DateTimeProperty=1996-12-31 23:00:00|System.String=StringProperty=\"TestA\"|TP_DL.RefenrecesModel.ClassB=ClassBProperty=2\n"
-                                  + "TP_DL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null|TP_DL.RefenrecesModel.ClassB|2|System.Decimal=DecimalProperty=2,20|System.DateTime=DateTimeProperty=1997-01-31 23:00:00|System.String=StringProperty=\"testB\"|TP_DL.RefenrecesModel.ClassC=ClassCProperty=3\n"
-                                  + "TP_DL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null|TP_DL.RefenrecesModel.ClassC|3|System.Decimal=DecimalProperty=3,20|System.DateTime=DateTimeProperty=1997-02-28 23:00:00|System.String=StringProperty=\"testC\"|TP_DL.RefenrecesModel.ClassA=ClassAProperty=1\n");
-
-           File.Delete("test.txt");
+            Assert.AreEqual(result, "TP_DL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null|TP_DL.RefenrecesModel.ClassA|1|System.DateTime=DateTimeProperty=31.12.1996 23:00:00|System.Decimal=DecimalProperty=1,20|System.String=StringProperty=\"TestA\"|null=ClassBProperty=-1\n");
+            
+            File.Delete("test.txt");
         }
 
         [TestMethod]
-        public void ClassBSerializationTest()
+        public void ClassAComplexSerializationTest()
         {
-            ClassA classA = new ClassA(1.2m, new DateTime(1997, 1, 1, 0, 0, 0), "TestA", null);
-            ClassB classB = new ClassB(2.2m, new DateTime(1997, 2, 1, 0, 0, 0), "testB", null);
-            ClassC classC = new ClassC(3.2m, new DateTime(1997, 3, 1, 0, 0, 0), "testC", null);
+            ClassA classA = new ClassA(new DateTime(1997, 1, 1, 0, 0, 0), 1.2m, "TestA", null);
+            ClassB classB = new ClassB(new DateTime(1997, 2, 1, 0, 0, 0), 2.2m, "testB", null);
+            ClassC classC = new ClassC(new DateTime(1997, 3, 1, 0, 0, 0), 3.2m, "testC", null);
 
             classA.ClassBProperty = classB;
             classB.ClassCProperty = classC;
@@ -108,18 +147,19 @@ namespace TP_UnitTests
             }
 
             string result = File.ReadAllText("test.txt");
-            Assert.AreEqual(result, "TP_DL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null|TP_DL.RefenrecesModel.ClassB|1|System.Decimal=DecimalProperty=2,20|System.DateTime=DateTimeProperty=1997-01-31 23:00:00|System.String=StringProperty=\"testB\"|TP_DL.RefenrecesModel.ClassC=ClassCProperty=2\n"
-                                   +"TP_DL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null|TP_DL.RefenrecesModel.ClassC|2|System.Decimal=DecimalProperty=3,20|System.DateTime=DateTimeProperty=1997-02-28 23:00:00|System.String=StringProperty=\"testC\"|TP_DL.RefenrecesModel.ClassA=ClassAProperty=3\n"
-                                   +"TP_DL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null|TP_DL.RefenrecesModel.ClassA|3|System.Decimal=DecimalProperty=1,20|System.DateTime=DateTimeProperty=1996-12-31 23:00:00|System.String=StringProperty=\"TestA\"|TP_DL.RefenrecesModel.ClassB=ClassBProperty=1\n");
+            Assert.AreEqual(result, "TP_DL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null|TP_DL.RefenrecesModel.ClassB|1|System.DateTime=DateTimeProperty=31.01.1997 23:00:00|System.Decimal=DecimalProperty=2,20|System.String=StringProperty=\"testB\"|TP_DL.RefenrecesModel.ClassC=ClassCProperty=2\n"
+                                   + "TP_DL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null|TP_DL.RefenrecesModel.ClassC|2|System.DateTime=DateTimeProperty=28.02.1997 23:00:00|System.Decimal=DecimalProperty=3,20|System.String=StringProperty=\"testC\"|TP_DL.RefenrecesModel.ClassA=ClassAProperty=3\n"
+                                   + "TP_DL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null|TP_DL.RefenrecesModel.ClassA|3|System.DateTime=DateTimeProperty=31.12.1996 23:00:00|System.Decimal=DecimalProperty=1,20|System.String=StringProperty=\"TestA\"|TP_DL.RefenrecesModel.ClassB=ClassBProperty=1\n");
+            
             File.Delete("test.txt");
         }
 
         [TestMethod]
-        public void ClassCSerializationTest()
+        public void ClassADeserializationTest()
         {
-            ClassA classA = new ClassA(1.2m, new DateTime(1997, 1, 1, 0, 0, 0), "TestA", null);
-            ClassB classB = new ClassB(2.2m, new DateTime(1997, 2, 1, 0, 0, 0), "testB", null);
-            ClassC classC = new ClassC(3.2m, new DateTime(1997, 3, 1, 0, 0, 0), "testC", null);
+            ClassA classA = new ClassA(new DateTime(1997, 1, 1, 0, 0, 0), 1.2m, "TestA", null);
+            ClassB classB = new ClassB(new DateTime(1997, 2, 1, 0, 0, 0), 2.2m, "testB", null);
+            ClassC classC = new ClassC(new DateTime(1997, 3, 1, 0, 0, 0), 3.2m, "testC", null);
 
             classA.ClassBProperty = classB;
             classB.ClassCProperty = classC;
@@ -128,34 +168,10 @@ namespace TP_UnitTests
             using (FileStream s = new FileStream("test.txt", FileMode.Create))
             {
                 IFormatter f = new CustomFormatter();
-                f.Serialize(s, classC);
-            }
-
-            string result = File.ReadAllText("test.txt");
-            Assert.AreEqual(result, "TP_DL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null|TP_DL.RefenrecesModel.ClassC|1|System.Decimal=DecimalProperty=3,20|System.DateTime=DateTimeProperty=1997-02-28 23:00:00|System.String=StringProperty=\"testC\"|TP_DL.RefenrecesModel.ClassA=ClassAProperty=2\n"
-                                   +"TP_DL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null|TP_DL.RefenrecesModel.ClassA|2|System.Decimal=DecimalProperty=1,20|System.DateTime=DateTimeProperty=1996-12-31 23:00:00|System.String=StringProperty=\"TestA\"|TP_DL.RefenrecesModel.ClassB=ClassBProperty=3\n"
-                                   +"TP_DL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null|TP_DL.RefenrecesModel.ClassB|3|System.Decimal=DecimalProperty=2,20|System.DateTime=DateTimeProperty=1997-01-31 23:00:00|System.String=StringProperty=\"testB\"|TP_DL.RefenrecesModel.ClassC=ClassCProperty=1\n");
-            File.Delete("test.txt");
-        }
-
-        [TestMethod]
-        public void ClassADeserializationATest()
-        {
-            ClassA classA = new ClassA(1.2m, new DateTime(1997, 1, 1, 0, 0, 0), "TestA", null);
-            ClassB classB = new ClassB(2.2m, new DateTime(1997, 2, 1, 0, 0, 0), "testB", null);
-            ClassC classC = new ClassC(3.2m, new DateTime(1997, 3, 1, 0, 0, 0), "testC", null);
-
-            classA.ClassBProperty = classB;
-            classB.ClassCProperty = classC;
-            classC.ClassAProperty = classA;
-
-            using (FileStream s = new FileStream(@"C:\Users\Pawrob\Desktop\test.txt", FileMode.Create))
-            {
-                IFormatter f = new CustomFormatter();
                 f.Serialize(s, classA);
             }
 
-            using (FileStream s = new FileStream(@"C:\Users\Pawrob\Desktop\test.txt", FileMode.Open))
+            using (FileStream s = new FileStream("test.txt", FileMode.Open))
             {
                 IFormatter f = new CustomFormatter();
                 ClassA testClass = (ClassA)f.Deserialize(s);
@@ -168,9 +184,9 @@ namespace TP_UnitTests
         [TestMethod]
         public void ClassBDeserializationTest()
         {
-            ClassA classA = new ClassA(1.2m, new DateTime(1997, 1, 1, 0, 0, 0), "TestA", null);
-            ClassB classB = new ClassB(2.2m, new DateTime(1997, 2, 1, 0, 0, 0), "testB", null);
-            ClassC classC = new ClassC(3.2m, new DateTime(1997, 3, 1, 0, 0, 0), "testC", null);
+            ClassA classA = new ClassA(new DateTime(1997, 1, 1, 0, 0, 0), 1.2m, "TestA", null);
+            ClassB classB = new ClassB(new DateTime(1997, 2, 1, 0, 0, 0), 2.2m, "testB", null);
+            ClassC classC = new ClassC(new DateTime(1997, 3, 1, 0, 0, 0), 3.2m, "testC", null);
 
             classA.ClassBProperty = classB;
             classB.ClassCProperty = classC;
@@ -195,9 +211,9 @@ namespace TP_UnitTests
         [TestMethod]
         public void ClassCDeserializationTest()
         {
-            ClassA classA = new ClassA(1.2m, new DateTime(1997, 1, 1, 0, 0, 0), "TestA", null);
-            ClassB classB = new ClassB(2.2m, new DateTime(1997, 2, 1, 0, 0, 0), "testB", null);
-            ClassC classC = new ClassC(3.2m, new DateTime(1997, 3, 1, 0, 0, 0), "testC", null);
+            ClassA classA = new ClassA(new DateTime(1997, 1, 1, 0, 0, 0), 1.2m, "TestA", null);
+            ClassB classB = new ClassB(new DateTime(1997, 2, 1, 0, 0, 0), 2.2m, "testB", null);
+            ClassC classC = new ClassC(new DateTime(1997, 3, 1, 0, 0, 0), 3.2m, "testC", null);
 
             classA.ClassBProperty = classB;
             classB.ClassCProperty = classC;

@@ -8,14 +8,14 @@ namespace TP_Serializer
     {
         public override Type BindToType(string assemblyName, string typeName)
         {
-            Assembly asm = Assembly.Load(assemblyName);
-            return asm.GetType(typeName);
+            Assembly assembly = Assembly.Load(assemblyName);
+            return assembly.GetType(typeName);
         }
 
         public override void BindToName(Type serializedType, out string assemblyName, out string typeName)
         {
-            Assembly asm = serializedType.Assembly;
-            assemblyName = asm.FullName;
+            Assembly serializedTypeAssembly = serializedType.Assembly;
+            assemblyName = serializedTypeAssembly.FullName;
             typeName = serializedType.FullName;
 
         }
