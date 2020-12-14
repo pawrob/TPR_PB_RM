@@ -112,49 +112,6 @@ namespace TP_UnitTests
         }
 
         [TestMethod]
-
-        public void ClassASimpleSerializationTest()
-        {
-            ClassA classA = new ClassA(new DateTime(1997, 1, 1, 0, 0, 0), 1.2m, "TestA", null);
-
-            using (FileStream s = new FileStream("test.txt", FileMode.Create))
-            {
-                IFormatter f = new CustomFormatter();
-                f.Serialize(s, classA);
-            }
-
-            string result = File.ReadAllText("test.txt");
-            Assert.AreEqual(result, "TP_DL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null|TP_DL.RefenrecesModel.ClassA|1|System.DateTime=DateTimeProperty=31.12.1996 23:00:00|System.Decimal=DecimalProperty=1,20|System.String=StringProperty=\"TestA\"|null=ClassBProperty=-1\n");
-            
-            File.Delete("test.txt");
-        }
-
-        [TestMethod]
-        public void ClassAComplexSerializationTest()
-        {
-            ClassA classA = new ClassA(new DateTime(1997, 1, 1, 0, 0, 0), 1.2m, "TestA", null);
-            ClassB classB = new ClassB(new DateTime(1997, 2, 1, 0, 0, 0), 2.2m, "testB", null);
-            ClassC classC = new ClassC(new DateTime(1997, 3, 1, 0, 0, 0), 3.2m, "testC", null);
-
-            classA.ClassBProperty = classB;
-            classB.ClassCProperty = classC;
-            classC.ClassAProperty = classA;
-
-            using (FileStream s = new FileStream("test.txt", FileMode.Create))
-            {
-                IFormatter f = new CustomFormatter();
-                f.Serialize(s, classB);
-            }
-
-            string result = File.ReadAllText("test.txt");
-            Assert.AreEqual(result, "TP_DL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null|TP_DL.RefenrecesModel.ClassB|1|System.DateTime=DateTimeProperty=31.01.1997 23:00:00|System.Decimal=DecimalProperty=2,20|System.String=StringProperty=\"testB\"|TP_DL.RefenrecesModel.ClassC=ClassCProperty=2\n"
-                                   + "TP_DL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null|TP_DL.RefenrecesModel.ClassC|2|System.DateTime=DateTimeProperty=28.02.1997 23:00:00|System.Decimal=DecimalProperty=3,20|System.String=StringProperty=\"testC\"|TP_DL.RefenrecesModel.ClassA=ClassAProperty=3\n"
-                                   + "TP_DL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null|TP_DL.RefenrecesModel.ClassA|3|System.DateTime=DateTimeProperty=31.12.1996 23:00:00|System.Decimal=DecimalProperty=1,20|System.String=StringProperty=\"TestA\"|TP_DL.RefenrecesModel.ClassB=ClassBProperty=1\n");
-            
-            File.Delete("test.txt");
-        }
-
-        [TestMethod]
         public void ClassADeserializationTest()
         {
             ClassA classA = new ClassA(new DateTime(1997, 1, 1, 0, 0, 0), 1.2m, "TestA", null);
