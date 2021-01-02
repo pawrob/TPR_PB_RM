@@ -45,5 +45,36 @@ namespace TP_LINQ_TEST
             string v1 = DataService.GetProductVendorByProductName("Flat Washer 1");
             Assert.AreEqual(vendorName, v1);
         }
+
+        [TestMethod]
+        public void GetProductsWithNRecentReviewsTest()
+        {
+            List<Product> p1 = DataService.GetProductsWithNRecentReviews(3);
+            List<Product> p2 = DataService.GetProductsWithNRecentReviews(37);
+            Assert.AreEqual(2, p1.Count);
+            Assert.AreEqual(0, p2.Count);
+        }
+
+        [TestMethod]
+        public void GetNRecentlyReviewedProductsTest()
+        {
+            List<Product> p1 = DataService.GetNRecentlyReviewedProducts(2);
+            Assert.AreEqual(2, p1.Count);
+        }
+
+        [TestMethod]
+        public void GetNProductFromCategoryTest()
+        {
+            List<Product> p1 = DataService.GetNProductFromCategory("Components", 10);
+            Assert.AreEqual("Components", p1[0].ProductSubcategory.ProductCategory.Name);
+            Assert.AreEqual(10, p1.Count);
+        }
+
+        [TestMethod]
+        public void GetTotalStandardCostByCategoryTest()
+        {
+            decimal cost = DataService.GetTotalStandardCostByCategory("Components");
+            Assert.AreEqual(92092.8230m, cost);
+        }
     }
 }

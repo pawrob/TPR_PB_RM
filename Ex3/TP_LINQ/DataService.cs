@@ -51,6 +51,48 @@ namespace TP_LINQ
 
             return result;
         }
+
+        public static List<Product> GetProductsWithNRecentReviews(int howManyReviews)
+        {
+            Table<ProductReview> productReviews = dataContext.GetTable<ProductReview>();
+            List<Product> result = (from productReview in productReviews
+                                    orderby productReview.ReviewDate descending
+                                    select productReview.Product).Take(howManyReviews).ToList();
+
+            return result.Distinct().ToList();
+        }
+
+        public static List<Product> GetNRecentlyReviewedProducts(int howManyProducts)
+        {
+            Table<ProductReview> productReviews = dataContext.GetTable<ProductReview>();
+            List<Product> result = (from productReview in productReviews
+                                    orderby productReview.ReviewDate descending
+                                    group productReview.Product by productReview.ProductID into g
+                                    select g.First()).Take(howManyProducts).ToList();
+
+            return result;
+        }
+
+        public static List<Product> GetNProductFromCategory(string categoryName, int n)
+        {
+            Table<Product> products = dataContext.GetTable<Product>();
+            List<Product> result = (from product in products
+                                    orderby product.Name
+                                    where product.ProductSubcategory.ProductCategory.Name.Equals(categoryName)
+                                    select product).Take(n).ToList();
+
+            return result;
+        }
+
+        public static decimal GetTotalStandardCostByCategory(ProductCategory category)
+        {
+            Table<Product> products = dataContext.GetTable<Product>();
+            decimal result = (from product in products
+                              where product.ProductSubcategory.ProductCategory.Equals(category)
+                              select product.StandardCost).Sum();
+
+            return result;
+        }
     }
 
 
