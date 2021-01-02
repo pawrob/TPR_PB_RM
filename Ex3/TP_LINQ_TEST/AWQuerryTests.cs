@@ -1,7 +1,7 @@
 ﻿using TP_LINQ;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
-
+using System.Data.Linq;
 using System.Collections.Generic;
 
 
@@ -73,11 +73,64 @@ namespace TP_LINQ_TEST
 
         [TestMethod]
         public void GetTotalStandardCostByCategoryTest()
-
         {
             ProductCategory categoryName = DataService.getCategoryFromString("Components");
             decimal cost = DataService.GetTotalStandardCostByCategory(categoryName);
             Assert.AreEqual(35930.3944m, cost);
+        }
+
+
+        [TestMethod]
+        public void SplitProductsIntoPagesTest()
+        {
+            using (DataClassesDataContext dataContext = new DataClassesDataContext())
+            {
+                Table<Product> table = dataContext.GetTable<Product>();
+                List<Product> productsFromDB = table.ToList();
+                List<Product> productsSplited = productsFromDB.SplitProductsIntoPages(20, 1);
+                Assert.AreEqual(20, productsSplited.Count);
+                for (int i = 0; i < 20; i++)
+                {
+                    Assert.AreEqual(productsFromDB[i+20], productsSplited[i]);
+                }
+            }
+        }
+
+        [TestMethod]
+        public void GetProductNameAndSuppliers_QuerySyntaxTest()
+        {
+            List<Product> products = new List<Product>() { DataService.GetProductByName("LL Grip Tape") };
+            List<ProductVendor> productVendors = DataService.GetAllVendors();
+            string description = products.ListProductsWithVendors(productVendors);
+            Assert.AreEqual(description, "LL Grip Tape - Gardner Touring Cycles" + "\n"
+                                       + "LL Grip Tape - National Bike Association" + "\n");
+
+        }
+
+
+        public void QuerrySyntaxGetProductWithoutCategoryTest()
+        {
+            using (DataClassesDataContext dataContext = new DataClassesDataContext())
+            {
+                Table<Product> table = dataContext.GetTable<Product>();
+                List<Product> products = table.ToList();
+                products = products.GetProductsWithoutCategoryQS();
+                Assert.AreEqual(209, products.Count);
+            }
+
+        }
+
+        [TestMethod]
+        public void MethodSyntaxGetProductWithoutCategoryTest()
+        {
+            using (DataClassesDataContext dataContext = new DataClassesDataContext())
+            {
+                Table<Product> table = dataContext.GetTable<Product>();
+                List<Product> products = table.ToList();
+                products = products.GetProductsWithoutCategoryMS(); ;
+                Assert.AreEqual(209, products.Count);
+            }
+
         }
     }
 }

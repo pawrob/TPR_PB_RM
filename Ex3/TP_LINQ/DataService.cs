@@ -11,6 +11,15 @@ namespace TP_LINQ
     {
         private static DataClassesDataContext dataContext = new DataClassesDataContext();
 
+
+        public static Product GetProductByName(string productName)
+        {
+            Table<Product> products = dataContext.GetTable<Product>();
+            Product result = (from product in products
+                              where product.Name.Equals(productName)
+                              select product).First();
+            return result;
+        }
         public static List<Product> GetProductsByName(string namePart)
         {
             Table<Product> products = dataContext.GetTable<Product>();
@@ -18,6 +27,15 @@ namespace TP_LINQ
                                     where product.Name.Contains(namePart)
                                     select product).ToList();
 
+            return result;
+        }
+
+
+        public static List<ProductVendor> GetAllVendors()
+        {
+            Table<ProductVendor> vendors = dataContext.GetTable<ProductVendor>();
+            List<ProductVendor> result = (from vendor in vendors
+                                          select vendor).ToList();
             return result;
         }
 
@@ -103,7 +121,4 @@ namespace TP_LINQ
             return result;
         }
     }
-
-
-
 }
