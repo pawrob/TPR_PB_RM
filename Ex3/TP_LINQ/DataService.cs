@@ -93,6 +93,15 @@ namespace TP_LINQ
 
             return result;
         }
+
+        public static ProductCategory getCategoryFromString(String categoryName)
+        {
+            Table<ProductCategory> categories = dataContext.GetTable<ProductCategory>();
+            ProductCategory result = (from category in categories 
+                                      where category.Name.Equals(categoryName) 
+                                      select category).First();
+            return result;
+        }
     }
 
 

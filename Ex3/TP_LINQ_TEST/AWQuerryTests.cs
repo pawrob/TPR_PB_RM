@@ -1,6 +1,7 @@
 ﻿using TP_LINQ;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
+
 using System.Collections.Generic;
 
 
@@ -52,7 +53,7 @@ namespace TP_LINQ_TEST
             List<Product> p1 = DataService.GetProductsWithNRecentReviews(3);
             List<Product> p2 = DataService.GetProductsWithNRecentReviews(37);
             Assert.AreEqual(2, p1.Count);
-            Assert.AreEqual(0, p2.Count);
+            Assert.AreEqual(3, p2.Count);
         }
 
         [TestMethod]
@@ -72,9 +73,11 @@ namespace TP_LINQ_TEST
 
         [TestMethod]
         public void GetTotalStandardCostByCategoryTest()
+
         {
-            decimal cost = DataService.GetTotalStandardCostByCategory("Components");
-            Assert.AreEqual(92092.8230m, cost);
+            ProductCategory categoryName = DataService.getCategoryFromString("Components");
+            decimal cost = DataService.GetTotalStandardCostByCategory(categoryName);
+            Assert.AreEqual(35930.3944m, cost);
         }
     }
 }
