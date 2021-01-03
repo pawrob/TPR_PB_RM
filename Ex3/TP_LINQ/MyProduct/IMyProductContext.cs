@@ -9,5 +9,9 @@ namespace TP_LINQ.MyProduct
         void Add(List<MyProduct> listOfMyProducts);
 
         List<MyProduct> GetAll();
+
+        bool Update(MyProduct item);
+
+        bool Delete(int id);
     }
 }
