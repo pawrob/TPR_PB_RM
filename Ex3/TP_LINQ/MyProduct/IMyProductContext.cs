@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace TP_LINQ.MyProduct
 {
@@ -11,8 +7,6 @@ namespace TP_LINQ.MyProduct
         void Add(MyProduct myProduct);
 
         void Add(List<MyProduct> listOfMyProducts);
-
-        MyProduct GetMyProduct(int id);
 
         List<MyProduct> GetAll();
     }

@@ -1,8 +1,6 @@
-﻿using TP_LINQ;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Linq;
-using System.Data.Linq;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
+using TP_LINQ;
 
 
 namespace TP_LINQ_TEST

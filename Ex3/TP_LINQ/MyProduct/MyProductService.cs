@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Data.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TP_LINQ.MyProduct
 {
     public class MyProductService
     {
-        private IMyProductContext<MyProduct> MyProductContext { get; }
+        private IMyProductContext<MyProduct> MyProductContext { get; set; }
 
 
         public MyProductService(IMyProductContext<MyProduct> MyProductContext)
@@ -23,7 +19,6 @@ namespace TP_LINQ.MyProduct
             List<MyProduct> result = (from product in products
                                       where product.Name.Contains(namePart)
                                       select product).ToList();
-
             return result;
         }
 

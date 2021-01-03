@@ -53,7 +53,6 @@
       <DependentUpon>DataClasses.dbml</DependentUpon>
     </Compile>
     <Compile Include="DataService.cs" />
-    <Compile Include="ExtensionMethods.cs" />
     <Compile Include="MyProduct\IMyProductContext.cs" />
     <Compile Include="MyProduct\MyProduct.cs" />
     <Compile Include="MyProduct\MyProductContext.cs" />

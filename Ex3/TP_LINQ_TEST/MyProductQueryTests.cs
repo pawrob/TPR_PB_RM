@@ -1,42 +1,25 @@
-﻿using TP_LINQ;
-using TP_LINQ.MyProduct;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Linq;
-using System.Data.Linq;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
+using System.Linq;
+using TP_LINQ;
+using TP_LINQ.MyProduct;
 
 namespace TP_LINQ_TEST
 {
     [TestClass]
     public class MyProductQueryTests
     {
-        private List<MyProduct> insertProductsFromBase()
+        private List<MyProduct> getMyProducts()
         {
             return (from product in DataService.GetAllProducts()
                     select new MyProduct(product)).ToList();
         }
 
         [TestMethod]
-        public void DataContextAddTest()
-        {
-            MyProductContext myProductContext = new MyProductContext();
-            myProductContext.Add(new MyProduct(DataService.GetProductByName("Adjustable Race")));
-            Assert.AreEqual(myProductContext.GetAll().Count, 1);
-        }
-
-        [TestMethod]
-        public void DataContextAddRangeTest()
-        {
-            MyProductContext myProductContext = new MyProductContext();
-            myProductContext.Add(insertProductsFromBase());
-            Assert.AreEqual(myProductContext.GetAll().Count, 504);
-        }
-
-        [TestMethod]
         public void DataContextGetAllTest()
         {
             MyProductContext myProductContext = new MyProductContext();
-            myProductContext.Add(insertProductsFromBase());
+            myProductContext.Add(getMyProducts());
             Assert.AreEqual(myProductContext.GetAll().Count, 504);
         }
 
@@ -44,7 +27,7 @@ namespace TP_LINQ_TEST
         public void GetProductsByNameTest()
         {
             MyProductContext myProductContext = new MyProductContext();
-            myProductContext.Add(insertProductsFromBase());
+            myProductContext.Add(getMyProducts());
             MyProductService myProductService = new MyProductService(myProductContext);
             List<MyProduct> p1 = myProductService.GetProductsByName("Blade");
             List<MyProduct> p2 = myProductService.GetProductsByName("Flat Washer");
@@ -58,9 +41,8 @@ namespace TP_LINQ_TEST
         public void GetNMyProductFromCategoryTest()
         {
             MyProductContext myProductContext = new MyProductContext();
-            myProductContext.Add(insertProductsFromBase());
+            myProductContext.Add(getMyProducts());
             MyProductService myProductService = new MyProductService(myProductContext);
-
             List<MyProduct> list = myProductService.GetNMyProductFromCategory("Components", 4);
             Assert.AreEqual(list.Count, 4);
 
@@ -68,17 +50,14 @@ namespace TP_LINQ_TEST
             {
                 Assert.AreEqual(list[i].ProductSubcategory.ProductCategory.Name, "Components");
             }
-
         }
-
 
         [TestMethod]
         public void GetTotalStandardCostByCategoryTest()
         {
             MyProductContext myProductContext = new MyProductContext();
-            myProductContext.Add(insertProductsFromBase());
+            myProductContext.Add(getMyProducts());
             MyProductService myProductService = new MyProductService(myProductContext);
-
             ProductCategory categoryName = DataService.getCategoryFromString("Components");
             decimal cost = myProductService.GetTotalStandardCostByCategory(categoryName);
             Assert.AreEqual(35930.3944m, cost);

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace TP_LINQ.MyProduct
 {
@@ -28,14 +24,6 @@ namespace TP_LINQ.MyProduct
         public List<MyProduct> GetAll()
         {
             return MyProducts;
-        }
-
-        public MyProduct GetMyProduct(int id)
-        {
-            MyProduct myProduct = (from product in MyProducts
-                                   where product.ProductID.Equals(id)
-                                   select product).Single();
-            return myProduct;
         }
 
     }
