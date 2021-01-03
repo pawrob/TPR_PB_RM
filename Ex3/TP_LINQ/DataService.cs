@@ -31,6 +31,14 @@ namespace TP_LINQ
         }
 
 
+        public static List<Product> GetAllProducts()
+        {
+            Table<Product> products = dataContext.GetTable<Product>();
+            List<Product> result = (from product in products
+                                    select product).ToList();
+            return result;
+        }
+
         public static List<ProductVendor> GetAllVendors()
         {
             Table<ProductVendor> vendors = dataContext.GetTable<ProductVendor>();

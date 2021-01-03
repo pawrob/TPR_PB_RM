@@ -1,0 +1,44 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Data.Linq;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace TP_LINQ.MyProduct
+{
+    public class MyProduct
+    {
+        public int ProductID { get; set; }
+        public string Name { get; set; }
+        public string ProductNumber { get; set; }
+        public string Color { get; set; }
+        public int SafetyStockLevel { get; set; }
+        public decimal StandardCost { get; set; }
+        public decimal ListPrice { get; set; }
+        public string Size { get; set; }
+        public decimal? Weight { get; set; }
+        public int? ProductSubcategoryID { get; set; }
+        public ProductSubcategory ProductSubcategory { get; set; }
+        public EntitySet<ProductReview> ProductReview { get; set; }
+
+        public MyProduct(Product product)
+        {
+            this.ProductID = product.ProductID;
+            this.Name = product.Name;
+            this.ProductNumber = product.ProductNumber;
+            this.Color = product.Color;
+            this.SafetyStockLevel = product.SafetyStockLevel;
+            this.StandardCost = product.StandardCost;
+            this.ListPrice = product.ListPrice;
+            this.Size = product.Size;
+            this.Weight = product.Weight;
+            this.ProductSubcategoryID = product.ProductSubcategoryID;
+            this.ProductSubcategory = product.ProductSubcategory;
+            this.ProductReview = product.ProductReview;
+
+        }
+
+    }
+
+}
