@@ -13,9 +13,6 @@ namespace TP_LINQ.MyProduct
         public decimal ListPrice { get; set; }
         public string Size { get; set; }
         public decimal? Weight { get; set; }
-        public int? ProductSubcategoryID { get; set; }
-        public ProductSubcategory ProductSubcategory { get; set; }
-        public EntitySet<ProductReview> ProductReview { get; set; }
 
         public MyProduct(Product product)
         {
@@ -28,8 +25,6 @@ namespace TP_LINQ.MyProduct
             this.ListPrice = product.ListPrice;
             this.Size = product.Size;
             this.Weight = product.Weight;
-
-
         }
 
     }
