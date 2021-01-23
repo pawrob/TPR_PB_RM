@@ -9,7 +9,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace TP_LINQ
+namespace Data
 {
 	using System.Data.Linq;
 	using System.Data.Linq.Mapping;
@@ -117,7 +117,7 @@ namespace TP_LINQ
     #endregion
 		
 		public DataClassesDataContext() : 
-				base(global::TP_LINQ.Properties.Settings.Default.AdventureWorksConnectionString, mappingSource)
+				base(global::Data.Properties.Settings.Default.AdventureWorksConnectionString, mappingSource)
 		{
 			OnCreated();
 		}

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace TP_LINQ.MyProduct
+namespace Logic.MyProduct
 {
     public interface IMyProductContext<MyProduct>
     {

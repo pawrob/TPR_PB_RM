@@ -2,7 +2,7 @@
 using System.Data.Linq;
 using System.Linq;
 
-namespace TP_LINQ.MyProduct
+namespace Logic.MyProduct
 {
     public class MyProductContext : IMyProductContext<MyProduct>
     {

@@ -8,12 +8,24 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "TP_LINQ_TEST\Test.csproj", "{168ECCAE-1D50-4A60-B586-E199F0AC7E72}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "View", "View\View.csproj", "{4BA05571-9FE6-43BE-BE18-A5996B58984F}"
+	ProjectSection(ProjectDependencies) = postProject
+		{14B3C323-508E-490D-89E2-47220DE997D9} = {14B3C323-508E-490D-89E2-47220DE997D9}
+	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViewModel", "ViewModel\ViewModel.csproj", "{14B3C323-508E-490D-89E2-47220DE997D9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ViewModel", "ViewModel\ViewModel.csproj", "{14B3C323-508E-490D-89E2-47220DE997D9}"
+	ProjectSection(ProjectDependencies) = postProject
+		{27AF6E3F-B2B1-4937-82D2-3EC43E7E97E7} = {27AF6E3F-B2B1-4937-82D2-3EC43E7E97E7}
+	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Model", "Model\Model.csproj", "{27AF6E3F-B2B1-4937-82D2-3EC43E7E97E7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Model", "Model\Model.csproj", "{27AF6E3F-B2B1-4937-82D2-3EC43E7E97E7}"
+	ProjectSection(ProjectDependencies) = postProject
+		{4EF46D94-E250-43F4-8893-72DE0B283B34} = {4EF46D94-E250-43F4-8893-72DE0B283B34}
+	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logic", "Logic\Logic.csproj", "{4EF46D94-E250-43F4-8893-72DE0B283B34}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Logic", "Logic\Logic.csproj", "{4EF46D94-E250-43F4-8893-72DE0B283B34}"
+	ProjectSection(ProjectDependencies) = postProject
+		{7FA96156-44CA-4CB4-A333-4564B59A9E0D} = {7FA96156-44CA-4CB4-A333-4564B59A9E0D}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
