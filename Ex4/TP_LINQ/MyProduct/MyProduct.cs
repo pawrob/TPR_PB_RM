@@ -28,9 +28,7 @@ namespace TP_LINQ.MyProduct
             this.ListPrice = product.ListPrice;
             this.Size = product.Size;
             this.Weight = product.Weight;
-            this.ProductSubcategoryID = product.ProductSubcategoryID;
-            this.ProductSubcategory = product.ProductSubcategory;
-            this.ProductReview = product.ProductReview;
+
 
         }
 

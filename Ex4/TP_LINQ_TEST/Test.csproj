@@ -50,18 +50,15 @@
     <Reference Include="System.Data.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AWExtensionMethodsTests.cs" />
-    <Compile Include="AWQueryTests.cs" />
-    <Compile Include="MyProductQueryTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\TP_LINQ\Model.csproj">
+    <ProjectReference Include="..\TP_LINQ\Data.csproj">
       <Project>{7fa96156-44ca-4cb4-a333-4564b59a9e0d}</Project>
-      <Name>Model</Name>
+      <Name>Data</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />

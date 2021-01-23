@@ -54,7 +54,6 @@
     </Compile>
     <Compile Include="DataService.cs" />
     <Compile Include="MyProduct\IMyProductContext.cs" />
-    <Compile Include="MyProduct\MyProduct.cs" />
     <Compile Include="MyProduct\MyProductContext.cs" />
     <Compile Include="MyProduct\MyProductService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
