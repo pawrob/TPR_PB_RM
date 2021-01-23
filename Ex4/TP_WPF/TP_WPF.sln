@@ -5,11 +5,17 @@ VisualStudioVersion = 16.0.30804.86
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data", "Data\Data.csproj", "{D1922F90-F558-4928-A9E1-258D54EF58E6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Model", "Model\Model.csproj", "{22E4503B-DD1E-4269-8D59-112642DD1633}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Model", "Model\Model.csproj", "{22E4503B-DD1E-4269-8D59-112642DD1633}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViewModel", "ModelView\ViewModel.csproj", "{732EA94D-9535-462A-A748-B6D8ADE9351E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ViewModel", "ModelView\ViewModel.csproj", "{732EA94D-9535-462A-A748-B6D8ADE9351E}"
+	ProjectSection(ProjectDependencies) = postProject
+		{22E4503B-DD1E-4269-8D59-112642DD1633} = {22E4503B-DD1E-4269-8D59-112642DD1633}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "View", "View\View.csproj", "{522ABB76-0F6A-4EF1-A937-70CF639D568A}"
+	ProjectSection(ProjectDependencies) = postProject
+		{732EA94D-9535-462A-A748-B6D8ADE9351E} = {732EA94D-9535-462A-A748-B6D8ADE9351E}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logic", "Logic\Logic.csproj", "{3810487F-EA90-49DE-984F-92BB7245CF95}"
 EndProject
