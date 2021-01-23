@@ -24,7 +24,7 @@ namespace ViewModel
             m_CurrentProduct = m_Products[0];
             m_CurrentMessage = "Welcome";
             AddSampleProduct = new Command(() => { CurrentMessage = m_dataContext.addProduct(new MyProduct(21, "Product", "JP-2137", "Purple", 100, 2.04m, "big", 21.15m)); Products = m_dataContext.products; });
-            RemoveSampleProduct = new Command(() => { CurrentMessage = m_dataContext.removeProduct("test"); Products = m_dataContext.products; });
+            RemoveSampleProduct = new Command(() => { CurrentMessage = m_dataContext.removeProduct("Product"); Products = m_dataContext.products; });
             UpdateSampleProduct = new Command(() => { CurrentMessage = m_dataContext.updateProduct(CurrentProduct); Products = m_dataContext.products; });
         }
         public MainViewModel(DataContext myDataContext)
@@ -35,7 +35,7 @@ namespace ViewModel
             m_CurrentMessage = "Welcome";
 
             AddSampleProduct = new Command(() => { CurrentMessage = m_dataContext.addProduct(new MyProduct(21, "Product", "JP-2137", "Purple", 100, 2.04m, "big", 21.15m)); Products = m_dataContext.products; });
-            RemoveSampleProduct = new Command(() => { CurrentMessage = m_dataContext.removeProduct("test"); Products = m_dataContext.products; });
+            RemoveSampleProduct = new Command(() => { CurrentMessage = m_dataContext.removeProduct("Product"); Products = m_dataContext.products; });
             UpdateSampleProduct = new Command(() => { CurrentMessage = m_dataContext.updateProduct(CurrentProduct); Products = m_dataContext.products; });
         }
 

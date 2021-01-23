@@ -34,8 +34,9 @@ namespace Model
             ObservableCollection<MyProduct> converted = new ObservableCollection<MyProduct>();
             foreach (Dictionary<String, String> currentProduct in data)
             {
-                MyProduct p = new MyProduct(Int32.Parse(currentProduct["ProductID"]), currentProduct["Name"], currentProduct["ProductNumber"], 
-                    currentProduct["Color"], short.Parse(currentProduct["SafetyStockLevel"], CultureInfo.CurrentCulture), decimal.Parse(currentProduct["StandardCost"], CultureInfo.CurrentCulture), currentProduct["size"], decimal.Parse(currentProduct["weight"], CultureInfo.CurrentCulture));
+                /*int productID, string name, string productNumber, string color, short safetyStockLevel, decimal standardCost, string size, decimal? weight*/
+              // MyProduct p = new MyProduct(Int32.Parse(currentProduct["ProductID"]), currentProduct["Name"], currentProduct["ProductNumber"], currentProduct["Color"], short.Parse(currentProduct["SafetyStockLevel"], CultureInfo.CurrentCulture), decimal.Parse(currentProduct["StandardCost"], CultureInfo.CurrentCulture), currentProduct["Size"], decimal.Parse(currentProduct["Weight"], CultureInfo.CurrentCulture));
+                MyProduct p = new MyProduct(Int32.Parse(currentProduct["ProductID"]), currentProduct["Name"], currentProduct["ProductNumber"], currentProduct["Color"], short.Parse(currentProduct["SafetyStockLevel"]), decimal.Parse(currentProduct["StandardCost"]), currentProduct["Size"], decimal.Parse(currentProduct["Weight"]));
                 converted.Add(p);
             }
             return converted;
