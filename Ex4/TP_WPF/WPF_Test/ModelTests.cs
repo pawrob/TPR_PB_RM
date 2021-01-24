@@ -19,6 +19,13 @@ namespace WPF_Test
         }
 
         [TestMethod]
+        public void GetAllTest()
+        {
+            Assert.AreEqual(5, dataService.getAll().Count);
+        }
+
+
+        [TestMethod]
         public void AddProductTest()
         {
             Assert.AreEqual(5, dataService.getAll().Count);
@@ -46,5 +53,6 @@ namespace WPF_Test
             Assert.AreEqual(dataService.dataContext[4].Size, "small");
             Assert.AreEqual(dataService.dataContext[4].Weight, 47.3m);
         }
+        
     }
 }

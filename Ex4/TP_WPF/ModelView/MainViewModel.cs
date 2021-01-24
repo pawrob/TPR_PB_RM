@@ -27,8 +27,8 @@ namespace ViewModel
             m_Message = "Hello!";
 
             AddProduct = new Command(() => { Task.Run(_AddProduct); });
-            RemoveProduct = new Command(() => { Task.Run(_RemoveProduct); });
             UpdateProduct = new Command(() => { Task.Run(_UpdateProduct); });
+            RemoveProduct = new Command(() => { Task.Run(_RemoveProduct); });
         }
 
         public MainViewModel(DataService dataService)
@@ -39,8 +39,8 @@ namespace ViewModel
             m_Message = "Hello!";
 
             AddProduct = new Command(() => { Task.Run(_AddProduct); });
-            RemoveProduct = new Command(() => { Task.Run(_RemoveProduct); });
             UpdateProduct = new Command(() => { Task.Run(_UpdateProduct); });
+            RemoveProduct = new Command(() => { Task.Run(_RemoveProduct); });
         }
 
         #region getters, setters
@@ -89,17 +89,15 @@ namespace ViewModel
             Products = m_dataService.products;
         }
 
-        
-        public void _RemoveProduct()
+        public void _UpdateProduct()
         {
-            CurrentMessage = m_dataService.removeProduct("Product"); 
+            CurrentMessage = m_dataService.updateProduct(CurrentProduct);
             Products = m_dataService.products;
         }
 
-
-        public void _UpdateProduct()
+        public void _RemoveProduct()
         {
-            CurrentMessage = m_dataService.updateProduct(CurrentProduct); 
+            CurrentMessage = m_dataService.removeProduct("Product"); 
             Products = m_dataService.products;
         }
         #endregion
