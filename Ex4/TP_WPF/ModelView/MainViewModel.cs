@@ -11,20 +11,19 @@ namespace ViewModel
     public class MainViewModel : INotifyPropertyChanged
     {
 
-        private DataService m_dataService;
-        private ObservableCollection<MyProduct> m_Products;
-        private MyProduct m_CurrentProduct;
-        private string m_Message;
+        private DataService dataService;
+        private ObservableCollection<MyProduct> myProducts;
+        private MyProduct myProduct;
+        private string outputMessage;
         public Command AddProduct { get; private set; }
         public Command RemoveProduct { get; private set; }
         public Command UpdateProduct { get; private set; }
 
         public MainViewModel()
         {
-            m_dataService = new DataService();
-            m_Products = m_dataService.products;
-            m_CurrentProduct = m_Products[0];
-            m_Message = "Hello!";
+            dataService = new DataService();
+            myProducts = dataService.products;
+            myProduct = myProducts[0];
 
             AddProduct = new Command(() => { Task.Run(_AddProduct); });
             UpdateProduct = new Command(() => { Task.Run(_UpdateProduct); });
@@ -33,10 +32,9 @@ namespace ViewModel
 
         public MainViewModel(DataService dataService)
         {
-            m_dataService = dataService;
-            m_Products = m_dataService.products;
-            m_CurrentProduct = m_Products[0];
-            m_Message = "Hello!";
+            this.dataService = dataService;
+            myProducts = this.dataService.products;
+            myProduct = myProducts[0];
 
             AddProduct = new Command(() => { Task.Run(_AddProduct); });
             UpdateProduct = new Command(() => { Task.Run(_UpdateProduct); });
@@ -46,37 +44,37 @@ namespace ViewModel
         #region getters, setters
         public ObservableCollection<MyProduct> Products
         {
-            get => m_Products;
+            get => myProducts;
             set
             {
-                m_Products = value;
+                myProducts = value;
                 onPropertyChanged(nameof(Products));
             }
         }
         public MyProduct CurrentProduct
         {
-            get => m_CurrentProduct;
+            get => myProduct;
             set
             {
-                m_CurrentProduct = value;
+                myProduct = value;
                 onPropertyChanged(nameof(CurrentProduct));
             }
         }
         public string CurrentMessage
         {
-            get => m_Message;
+            get => outputMessage;
             set
             {
-                m_Message = value;
+                outputMessage = value;
                 onPropertyChanged(nameof(CurrentMessage));
             }
         }
         public DataService dataContext
         {
-            get => m_dataService;
+            get => dataService;
             set
             {
-                m_dataService = value;
+                dataService = value;
                 Products = new ObservableCollection<MyProduct>(value.products);
             }
         }
@@ -85,20 +83,20 @@ namespace ViewModel
         #region tasks
         private void _AddProduct()
         {
-            CurrentMessage = m_dataService.addProduct(new MyProduct(21, "Product", "JP-2137", "Purple", 100, 2.04m, "big", 21.15m)); 
-            Products = m_dataService.products;
+            CurrentMessage = dataService.addProduct(new MyProduct(21, "Product", "JP-2137", "Purple", 100, 2.04m, "big", 21.15m)); 
+            Products = dataService.products;
         }
 
         public void _UpdateProduct()
         {
-            CurrentMessage = m_dataService.updateProduct(CurrentProduct);
-            Products = m_dataService.products;
+            CurrentMessage = dataService.updateProduct(CurrentProduct);
+            Products = dataService.products;
         }
 
         public void _RemoveProduct()
         {
-            CurrentMessage = m_dataService.removeProduct("Product"); 
-            Products = m_dataService.products;
+            CurrentMessage = dataService.removeProduct("Product"); 
+            Products = dataService.products;
         }
         #endregion
 

@@ -44,7 +44,7 @@ namespace WPF_Test
         [TestMethod]
         public void UpdateProductTest()
         {
-            Assert.AreEqual(dataService.updateProduct(2137, "Motorbike Slow", "XY-7312", "Black", 13, 1220.2m, "small", 47.3m), "Product updated");
+            Assert.AreEqual(dataService.updateProduct(2137, "Motorbike Slow", "XY-7312", "Black", 13, 1220.2m, "small", 47.3m), "Update sucessful");
             Assert.AreEqual(dataService.dataContext[4].Name, "Motorbike Slow");
             Assert.AreEqual(dataService.dataContext[4].ProductNumber, "XY-7312");
             Assert.AreEqual(dataService.dataContext[4].Color, "Black");

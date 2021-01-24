@@ -7,6 +7,7 @@ namespace ViewModel
     public class Command : ICommand
     {
         public event EventHandler CanExecuteChanged;
+
         private Action m_action;
 
         public Command(Action action)

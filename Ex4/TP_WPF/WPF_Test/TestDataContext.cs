@@ -87,9 +87,9 @@ namespace WPF_Test
             }
             catch (Exception e)
             {
-                return "Product doesn't exists";
+                return "Update unsucessful";
             }
-            return "Product updated";
+            return "Update sucessful";
         }
     }
 }

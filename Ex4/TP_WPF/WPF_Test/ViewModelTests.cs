@@ -44,7 +44,7 @@ namespace WPF_Test
         {
             mvm.UpdateProduct.Execute(null);
             Thread.Sleep(100);
-            Assert.AreEqual("Product updated", mvm.CurrentMessage);
+            Assert.AreEqual("Update sucessful", mvm.CurrentMessage);
         }
 
         [TestMethod]

@@ -64,7 +64,7 @@ namespace Model
             }
             catch (NullReferenceException)
             {
-                return "Firstly add product";
+                return "There is not such product in database";
             }
             return message;
         }

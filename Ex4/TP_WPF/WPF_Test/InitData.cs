@@ -14,7 +14,6 @@ namespace WPF_Test
 
         public InitData()
         {
-            // myProducts.add((random.Next(10000), string name, string productNumber, string color, short safetyStockLevel, decimal standardCost, string size, System.Nullable<decimal> weight)
             myProducts = new List<MyProduct>();
             MyProduct p1 = new MyProduct(random.Next(10000), "Bike Fast", "XX-2115", "Red", 21, 210.2m, "standard", 8.2m);
             MyProduct p2 = new MyProduct(random.Next(10000), "Pedal", "AS-2138", "Gray", 5, 30.5m, "small", 2.4m);
