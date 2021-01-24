@@ -139,11 +139,11 @@
                 </Table>
             </FlowDocument>
         </FlowDocumentReader>
-        <Button Command="{Binding AddSampleProduct}" Content="Add Product"
+        <Button Command="{Binding AddProduct}" Content="Add Product"
                 HorizontalAlignment="center" Height="30" Margin="0,0,0,50" VerticalAlignment="Bottom" Width="100" Background="DodgerBlue" Foreground="White"/>
-        <Button Command="{Binding RemoveSampleProduct}" Content="Remove Product"
+        <Button Command="{Binding RemoveProduct}" Content="Remove Product"
                 HorizontalAlignment="center" Height="30" Margin="240,0,0,50" VerticalAlignment="Bottom" Width="100"  Background="DodgerBlue" Foreground="White"/>
-        <Button Command="{Binding UpdateSampleProduct}" Content="Update Product"
+        <Button Command="{Binding UpdateProduct}" Content="Update Product"
                 HorizontalAlignment="center" Height="30" Margin="-240,0,0,50" VerticalAlignment="Bottom" Width="100" Background="DodgerBlue" Foreground="White"/>
         <Label Content="{Binding CurrentMessage}" HorizontalAlignment="Center" Height="40" Margin="0,0,0,110" VerticalAlignment="Bottom" Width="400"/>
     </Grid>
