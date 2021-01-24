@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Logic
 {
-    public interface IMyProductContextCRUD
+    public interface IProductContext
     {
         string addProduct(string name, string productNumber, string color, short safetyStockLevel, decimal standardCost, string size, decimal? weight);
         string removeProduct(String name);

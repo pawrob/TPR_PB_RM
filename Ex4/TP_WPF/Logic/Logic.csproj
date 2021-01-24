@@ -42,9 +42,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataService.cs" />
-    <Compile Include="IMyProductContextCRUD.cs" />
-    <Compile Include="MyProductContextCRUD.cs" />
+    <Compile Include="QuerrySyntax.cs" />
+    <Compile Include="IProductContext.cs" />
+    <Compile Include="MyProductContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

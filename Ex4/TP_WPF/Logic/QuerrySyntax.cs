@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Logic
 {
-    public class DataService : IDisposable
+    public class QuerrySyntax : IDisposable
     {
         private static AdventureWorksDataContext dataContext = new AdventureWorksDataContext();
 

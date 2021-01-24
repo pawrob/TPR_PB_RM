@@ -131,7 +131,7 @@
 							</TableCell>
 							<TableCell TextAlignment="Center">
 								<Paragraph>
-									<TextBox x:Name="Weight" Text="{Binding  CurrentProduct.Weught}"/>
+									<TextBox x:Name="Weight" Text="{Binding  CurrentProduct.Weight}"/>
 								</Paragraph>
 							</TableCell>
                         </TableRow>

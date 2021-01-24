@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Logic
 {
-    public class MyProductContextCRUD : IMyProductContextCRUD , IDisposable
+    public class MyProductContext : IProductContext , IDisposable
     {
         private static AdventureWorksDataContext dataContext = new AdventureWorksDataContext();
         private  readonly Random random = new Random();
@@ -61,7 +61,7 @@ namespace Logic
 
         public List<Dictionary<string, string>> getAll()
         {
-            List<Product> products = DataService.GetAllProducts();
+            List<Product> products = QuerrySyntax.GetAllProducts();
             List<Dictionary<string, string>> outputData = new List<Dictionary<string, string>>();
             foreach (Product p in products)
             {

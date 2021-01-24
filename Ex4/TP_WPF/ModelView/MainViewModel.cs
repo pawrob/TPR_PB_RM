@@ -11,7 +11,7 @@ namespace ViewModel
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private DataContext m_dataContext;
+        private DataService m_dataContext;
         private ObservableCollection<MyProduct> m_Products;
         private MyProduct m_CurrentProduct;
         private string m_CurrentMessage;
@@ -19,7 +19,7 @@ namespace ViewModel
 
         public MainViewModel()
         {
-            m_dataContext = new DataContext();
+            m_dataContext = new DataService();
             m_Products = m_dataContext.products;
             m_CurrentProduct = m_Products[0];
             m_CurrentMessage = "Welcome";
@@ -27,7 +27,7 @@ namespace ViewModel
             RemoveSampleProduct = new Command(() => { CurrentMessage = m_dataContext.removeProduct("Product"); Products = m_dataContext.products; });
             UpdateSampleProduct = new Command(() => { CurrentMessage = m_dataContext.updateProduct(CurrentProduct); Products = m_dataContext.products; });
         }
-        public MainViewModel(DataContext myDataContext)
+        public MainViewModel(DataService myDataContext)
         {
             m_dataContext = myDataContext;
             m_Products = m_dataContext.products;
@@ -85,7 +85,7 @@ namespace ViewModel
             get; private set;
         }
 
-        public DataContext dataContext
+        public DataService dataContext
         {
             get => m_dataContext;
             set
