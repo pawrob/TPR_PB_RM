@@ -4,47 +4,46 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace ViewModel
 {
     public class MainViewModel : INotifyPropertyChanged
     {
-        public event PropertyChangedEventHandler PropertyChanged;
 
-        private DataService m_dataContext;
+        private DataService m_dataService;
         private ObservableCollection<MyProduct> m_Products;
         private MyProduct m_CurrentProduct;
-        private string m_CurrentMessage;
-
+        private string m_Message;
+        public Command AddProduct { get; private set; }
+        public Command RemoveProduct { get; private set; }
+        public Command UpdateProduct { get; private set; }
 
         public MainViewModel()
         {
-            m_dataContext = new DataService();
-            m_Products = m_dataContext.products;
+            m_dataService = new DataService();
+            m_Products = m_dataService.products;
             m_CurrentProduct = m_Products[0];
-            m_CurrentMessage = "Welcome";
-            AddSampleProduct = new Command(() => { CurrentMessage = m_dataContext.addProduct(new MyProduct(21, "Product", "JP-2137", "Purple", 100, 2.04m, "big", 21.15m)); Products = m_dataContext.products; });
-            RemoveSampleProduct = new Command(() => { CurrentMessage = m_dataContext.removeProduct("Product"); Products = m_dataContext.products; });
-            UpdateSampleProduct = new Command(() => { CurrentMessage = m_dataContext.updateProduct(CurrentProduct); Products = m_dataContext.products; });
+            m_Message = "Hello!";
+
+            AddProduct = new Command(() => { Task.Run(_AddProduct); });
+            RemoveProduct = new Command(() => { Task.Run(_RemoveProduct); });
+            UpdateProduct = new Command(() => { Task.Run(_UpdateProduct); });
         }
-        public MainViewModel(DataService myDataContext)
+
+        public MainViewModel(DataService dataService)
         {
-            m_dataContext = myDataContext;
-            m_Products = m_dataContext.products;
+            m_dataService = dataService;
+            m_Products = m_dataService.products;
             m_CurrentProduct = m_Products[0];
-            m_CurrentMessage = "Welcome";
+            m_Message = "Hello!";
 
-            AddSampleProduct = new Command(() => { CurrentMessage = m_dataContext.addProduct(new MyProduct(21, "Product", "JP-2137", "Purple", 100, 2.04m, "big", 21.15m)); Products = m_dataContext.products; });
-            RemoveSampleProduct = new Command(() => { CurrentMessage = m_dataContext.removeProduct("Product"); Products = m_dataContext.products; });
-            UpdateSampleProduct = new Command(() => { CurrentMessage = m_dataContext.updateProduct(CurrentProduct); Products = m_dataContext.products; });
+            AddProduct = new Command(() => { Task.Run(_AddProduct); });
+            RemoveProduct = new Command(() => { Task.Run(_RemoveProduct); });
+            UpdateProduct = new Command(() => { Task.Run(_UpdateProduct); });
         }
 
-
-        public MyProduct EditedProduct
-        {
-            get => m_CurrentProduct;
-        }
-
+        #region getters, setters
         public ObservableCollection<MyProduct> Products
         {
             get => m_Products;
@@ -65,35 +64,47 @@ namespace ViewModel
         }
         public string CurrentMessage
         {
-            get => m_CurrentMessage;
+            get => m_Message;
             set
             {
-                m_CurrentMessage = value;
+                m_Message = value;
                 onPropertyChanged(nameof(CurrentMessage));
             }
         }
-        public Command AddSampleProduct
-        {
-            get; private set;
-        }
-        public Command RemoveSampleProduct
-        {
-            get; private set;
-        }
-        public Command UpdateSampleProduct
-        {
-            get; private set;
-        }
-
         public DataService dataContext
         {
-            get => m_dataContext;
+            get => m_dataService;
             set
             {
-                m_dataContext = value;
+                m_dataService = value;
                 Products = new ObservableCollection<MyProduct>(value.products);
             }
         }
+        #endregion
+
+        #region tasks
+        private void _AddProduct()
+        {
+            CurrentMessage = m_dataService.addProduct(new MyProduct(21, "Product", "JP-2137", "Purple", 100, 2.04m, "big", 21.15m)); 
+            Products = m_dataService.products;
+        }
+
+        
+        public void _RemoveProduct()
+        {
+            CurrentMessage = m_dataService.removeProduct("Product"); 
+            Products = m_dataService.products;
+        }
+
+
+        public void _UpdateProduct()
+        {
+            CurrentMessage = m_dataService.updateProduct(CurrentProduct); 
+            Products = m_dataService.products;
+        }
+        #endregion
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
         private void onPropertyChanged(string propertName)
         {

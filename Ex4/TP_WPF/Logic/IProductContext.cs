@@ -11,7 +11,6 @@ namespace Logic
         string addProduct(string name, string productNumber, string color, short safetyStockLevel, decimal standardCost, string size, decimal? weight);
         string removeProduct(String name);
         string updateProduct(int productID, string name, string productNumber, string color, short safetyStockLevel, decimal standardCost, string size, decimal? weight);
-        Dictionary<String, String> getProduct(String name);
         List<Dictionary<String, String>> getAll();
     }
 }

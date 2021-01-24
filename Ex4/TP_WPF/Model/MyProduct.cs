@@ -13,7 +13,7 @@
         public System.Nullable<decimal>Weight { get; set; }
 
 
-        public MyProduct(int productID, string name, string productNumber, string color, short safetyStockLevel, decimal standardCost, string size, decimal weight)
+        public MyProduct(int productID, string name, string productNumber, string color, short safetyStockLevel, decimal standardCost, string size, System.Nullable<decimal> weight)
         {
             this.ProductID = productID;
             this.Name = name;

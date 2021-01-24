@@ -82,14 +82,6 @@ namespace Logic
             return outputData;
         }
 
-        public Dictionary<string, string> getProduct(string name)
-        {
-            /*            List<Product> products = DataService.GetProductsByName(name);
-                        Dictionary<String, String> product = new Dictionary<string, string>(, name);
-                        return */
-            throw new NotImplementedException();
-        }
-
         public string updateProduct(int productID, string name, string productNumber, string color, short safetyStockLevel, decimal standardCost, string size, decimal? weight)
         {
             var update = (from p in dataContext.Product
