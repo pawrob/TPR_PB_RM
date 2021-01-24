@@ -10,7 +10,7 @@
         public short SafetyStockLevel { get; set; }
         public decimal StandardCost { get; set; }
         public string Size { get; set; }
-        public decimal Weight { get; set; }
+        public System.Nullable<decimal>Weight { get; set; }
 
 
         public MyProduct(int productID, string name, string productNumber, string color, short safetyStockLevel, decimal standardCost, string size, decimal weight)
